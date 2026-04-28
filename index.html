@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Auto Hainaut — Concessionnaire automobile à Charleroi. Vente de véhicules neufs et d'occasion, reprise, financement et garantie. Chaussée de Bruxelles 44, Charleroi.">
+  <title>Auto Hainaut — Concessionnaire Automobile à Charleroi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Open Sans', sans-serif;
+      color: #2D2D2D;
+      background: #FFFFFF;
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4 { font-family: 'Oswald', sans-serif; line-height: 1.2; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    img { max-width: 100%; display: block; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+    :root {
+      --navy: #0A0A0A;
+      --navy-dark: #111111;
+      --navy-light: #1C1C1C;
+      --blue-pale: #F5F5F5;
+      --blue-soft: #E8E8E8;
+      --orange: #133C82;
+      --orange-dark: #0d2d64;
+      --white: #FFFFFF;
+      --gray-light: #F4F6F9;
+      --gray-mid: #E8ECF2;
+      --text: #2D2D2D;
+      --text-muted: #6B7280;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+      --shadow-md: 0 4px 20px rgba(0,0,0,0.12);
+      --shadow-lg: 0 8px 40px rgba(0,0,0,0.16);
+      --radius-card: 12px;
+      --radius-btn: 50px;
+      --transition: 0.25s ease;
+    }
+
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+    .section-title { font-family: 'Oswald', sans-serif; font-size: clamp(1.8rem, 4vw, 2.6rem); color: var(--navy); margin-bottom: 12px; }
+    .section-subtitle { font-size: 1rem; color: var(--text-muted); max-width: 560px; line-height: 1.6; margin-bottom: 40px; }
+    .section-header { text-align: center; }
+    .section-header .section-subtitle { margin: 0 auto 40px; }
+    .tag-line {
+      display: inline-block;
+      background: rgba(0,0,0,0.08);
+      color: var(--navy);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 50px;
+      margin-bottom: 14px;
+    }
+    .tag-line-blue { background: rgba(19,60,130,0.1); color: #133C82; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 15px 28px;
+      border-radius: var(--radius-btn);
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all var(--transition);
+      min-height: 52px;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+    .btn-primary { background: var(--orange); color: #fff; box-shadow: 0 4px 16px rgba(19,60,130,0.35); }
+    .btn-primary:hover { background: var(--orange-dark); transform: translateY(-2px); box-shadow: 0 6px 24px rgba(19,60,130,0.45); }
+    .btn-outline { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,0.7); }
+    .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: var(--white); transform: translateY(-2px); }
+    .btn-navy { background: #133C82; color: var(--white); box-shadow: 0 4px 16px rgba(19,60,130,0.35); }
+    .btn-navy:hover { background: #0d2d64; transform: translateY(-2px); }
+
+    .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-up:nth-child(2) { transition-delay: 0.1s; }
+    .fade-up:nth-child(3) { transition-delay: 0.2s; }
+    .fade-up:nth-child(4) { transition-delay: 0.3s; }
+    .fade-up:nth-child(5) { transition-delay: 0.4s; }
+    .fade-up:nth-child(6) { transition-delay: 0.5s; }
+    @media (prefers-reduced-motion: reduce) {
+      .fade-up { opacity: 1; transform: none; transition: none; }
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+    }
+
+    /* BANDEAU INFO */
+    .urgence-band { background: #133C82; color: rgba(255,255,255,0.95); text-align: center; padding: 10px 20px; font-size: 0.82rem; font-weight: 600; position: relative; z-index: 1000; }
+    .urgence-band strong { color: #fff; }
+    .urgence-band a { color: #fff; font-weight: 700; text-decoration: underline; }
+    .pulse-dot { display: inline-block; width: 8px; height: 8px; background: #93c5fd; border-radius: 50%; margin-right: 8px; animation: pulse-dot 1.5s infinite; vertical-align: middle; }
+    @keyframes pulse-dot { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.5); opacity: 0.6; } }
+
+    /* HEADER */
+    .header { position: sticky; top: 0; z-index: 999; background: var(--white); box-shadow: var(--shadow-md); transition: transform 0.35s ease; }
+    .header.hidden { transform: translateY(-100%); }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 0 1rem; height: 64px; max-width: 1200px; margin: 0 auto; }
+    .logo { display: flex; align-items: center; gap: 10px; }
+    .logo-text { font-family: 'Oswald', sans-serif; font-size: 1.4rem; color: var(--navy); letter-spacing: 1px; }
+    .logo-text span { color: var(--orange); }
+    .header-tel { display: flex; align-items: center; gap: 6px; background: var(--orange); color: #fff; padding: 8px 16px; border-radius: 50px; font-weight: 600; font-size: 0.85rem; min-height: 48px; transition: all var(--transition); }
+    .header-tel:hover { background: var(--orange-dark); transform: translateY(-1px); }
+    .header-nav { display: none; gap: 28px; }
+    .header-nav a { font-size: 0.9rem; font-weight: 600; color: var(--navy); transition: color var(--transition); position: relative; }
+    .header-nav a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 2px; background: var(--orange); transition: width var(--transition); }
+    .header-nav a:hover { color: #133C82; }
+    .header-nav a:hover::after { width: 100%; }
+    .header-right { display: flex; align-items: center; gap: 12px; }
+    .btn-devis-header { display: none; background: #133C82; color: var(--white); padding: 9px 20px; border-radius: 50px; font-size: 0.85rem; font-weight: 600; min-height: 48px; transition: all var(--transition); }
+    .btn-devis-header:hover { background: #0d2d64; transform: translateY(-1px); }
+    .hamburger { width: 44px; height: 44px; display: flex; flex-direction: column; justify-content: center; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; height: 2px; background: var(--navy); border-radius: 2px; transition: all 0.3s ease; }
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+    .mobile-menu { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--navy); z-index: 998; flex-direction: column; align-items: center; justify-content: center; gap: 32px; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { color: var(--white); font-family: 'Oswald', sans-serif; font-size: 1.8rem; letter-spacing: 1px; transition: color var(--transition); }
+    .mobile-menu a:hover { color: #93c5fd; }
+    .mobile-menu .close-menu { position: absolute; top: 20px; right: 20px; color: var(--white); font-size: 1.5rem; cursor: pointer; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; }
+
+    /* HERO */
+    .hero { position: relative; color: var(--white); padding: 60px 1rem 50px; overflow: hidden; min-height: 560px; display: flex; align-items: center; }
+    .hero-bg { position: absolute; inset: 0; z-index: 0; }
+    .hero-bg img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(10,10,10,0.85) 0%, rgba(20,20,20,0.58) 60%, rgba(10,10,10,0.68) 100%); }
+    .hero::before { content: ''; position: absolute; top: -80px; right: -80px; width: 350px; height: 350px; background: rgba(19,60,130,0.12); border-radius: 50%; z-index: 1; }
+    .hero-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center; position: relative; z-index: 2; width: 100%; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.35); color: rgba(255,255,255,0.95); font-size: 0.78rem; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; padding: 6px 14px; border-radius: 50px; margin-bottom: 16px; }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.1; margin-bottom: 16px; }
+    .hero h1 span { color: #93c5fd; }
+    .hero-subtitle { font-size: 1rem; color: rgba(255,255,255,0.85); line-height: 1.7; margin-bottom: 28px; max-width: 520px; }
+    .hero-ctas { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+    .hero-ctas .btn { justify-content: center; font-size: 1rem; }
+    .hero-trust { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+    .hero-trust-item { display: flex; align-items: center; gap: 6px; font-size: 0.82rem; color: rgba(255,255,255,0.85); }
+    .hero-trust-item .stars { color: #FFD700; letter-spacing: 1px; }
+    .hero-trust-item strong { color: var(--white); }
+    .hero-trust-divider { width: 1px; height: 16px; background: rgba(255,255,255,0.25); }
+    .hero-image-col { position: relative; border-radius: var(--radius-card); overflow: visible; margin-left: 40px; }
+    .hero-image-col img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: var(--radius-card); display: block; }
+    .hero-badge-float { position: absolute; bottom: -16px; left: 20px; background: var(--white); border-radius: 50px; padding: 8px 20px; display: flex; align-items: center; gap: 8px; box-shadow: var(--shadow-lg); white-space: nowrap; z-index: 2; }
+    .hero-badge-float .dot { width: 8px; height: 8px; background: #22C55E; border-radius: 50%; animation: pulse-dot 1.5s infinite; }
+    .hero-badge-float span { font-size: 0.78rem; font-weight: 600; color: var(--navy); }
+
+    /* TRUST BAR */
+    .trust-bar { background: var(--white); padding: 40px 1rem; border-bottom: 1px solid var(--gray-mid); }
+    .trust-bar-inner { max-width: 1200px; margin: 0 auto; }
+    .trust-badges { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 36px; }
+    .trust-badge { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border: 1px solid var(--gray-mid); border-radius: var(--radius-card); background: var(--gray-light); transition: all var(--transition); }
+    .trust-badge:hover { border-color: var(--navy); box-shadow: var(--shadow-sm); transform: translateY(-2px); }
+    .trust-badge-icon { width: 44px; height: 44px; background: #133C82; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--white); font-size: 1rem; flex-shrink: 0; }
+    .trust-badge-text strong { display: block; font-size: 0.82rem; font-weight: 600; color: var(--navy); line-height: 1.3; }
+    .trust-badge-text span { font-size: 0.72rem; color: var(--text-muted); }
+    .counters { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .counter-item { text-align: center; padding: 20px 16px; background: var(--blue-pale); border-radius: var(--radius-card); border: 1px solid var(--blue-soft); }
+    .counter-number { display: block; font-family: 'Oswald', sans-serif; font-size: 2rem; color: var(--orange); line-height: 1; margin-bottom: 4px; }
+    .counter-label { font-size: 0.78rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    /* SERVICES */
+    .services { background: var(--white); padding: 70px 1rem; }
+    .services-slider { display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 1rem 0; margin-top: 40px; }
+    .services-slider::-webkit-scrollbar { display: none; }
+    .services-slider .service-card { flex: 0 0 85%; scroll-snap-align: start; background: var(--white); border-radius: var(--radius-card); padding: 0; box-shadow: var(--shadow-sm); border: 1px solid var(--gray-mid); transition: all var(--transition); cursor: pointer; overflow: hidden; }
+    .services-slider .service-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--orange); }
+    .services-slider .service-card:hover .service-icon { background: var(--orange); color: #fff; }
+    .service-card-body { padding: 24px 22px 22px; }
+    .service-img-header { width: 100%; height: 150px; overflow: hidden; flex-shrink: 0; }
+    .service-img-header img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+    .service-card:hover .service-img-header img { transform: scale(1.05); }
+    .service-icon { width: 52px; height: 52px; background: #133C82; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--white); font-size: 1.3rem; margin-bottom: 16px; transition: all var(--transition); }
+    .service-card h3 { font-family: 'Oswald', sans-serif; font-size: 1.1rem; color: var(--navy); margin-bottom: 8px; }
+    .service-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px; }
+    .service-link { font-size: 0.85rem; font-weight: 600; color: #133C82; display: flex; align-items: center; gap: 6px; transition: gap var(--transition); }
+    .service-card:hover .service-link { gap: 10px; }
+    .services-swipe-hint { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 12px; font-size: 0.78rem; color: var(--text-muted); font-weight: 600; }
+    .services-swipe-hint i { color: var(--orange); }
+    .slider-dots { display: flex; justify-content: center; gap: 0.5rem; margin-top: 1rem; }
+    .slider-dots .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--navy); opacity: 0.3; transition: opacity 0.3s, width 0.3s; }
+    .slider-dots .dot.active { opacity: 1; width: 20px; border-radius: 4px; background: var(--orange); }
+    @media (min-width: 768px) {
+      .services-slider { display: grid; grid-template-columns: repeat(3, 1fr); overflow-x: visible; scroll-snap-type: none; gap: 20px; }
+      .services-slider .service-card { flex: none; }
+      .slider-dots { display: none; }
+      .services-swipe-hint { display: none; }
+    }
+
+    /* CTA SOMBRE */
+    .urgence-section { background: linear-gradient(135deg, #0a1e4a 0%, #133C82 45%, #1a4fa0 100%); color: var(--white); padding: 60px 1rem; text-align: center; position: relative; overflow: hidden; }
+    .urgence-section::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 600px; height: 600px; background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%); pointer-events: none; }
+    .urgence-section .tag-line { background: rgba(255,255,255,0.12); color: #fff; border: 1px solid rgba(255,255,255,0.25); }
+    .urgence-section h2 { color: var(--white); margin-bottom: 16px; font-size: clamp(1.8rem, 4vw, 2.8rem); }
+    .urgence-section > .container > p { color: rgba(255,255,255,0.8); font-size: 1rem; line-height: 1.6; max-width: 500px; margin: 0 auto 32px; }
+    .urgence-tel { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-bottom: 28px; }
+    .urgence-tel-number { font-family: 'Oswald', sans-serif; font-size: clamp(2rem, 6vw, 3rem); color: #93c5fd; letter-spacing: 2px; text-decoration: none; display: block; }
+    .urgence-tel-sub { font-size: 0.85rem; color: rgba(255,255,255,0.6); }
+    .urgence-features { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 32px; }
+    .urgence-feature { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 50px; padding: 8px 16px; font-size: 0.82rem; color: rgba(255,255,255,0.9); }
+    .urgence-feature i { color: #93c5fd; }
+
+    /* GALERIE */
+    .realisations { padding: 70px 1rem; background: var(--white); border-top: 1px solid var(--gray-mid); }
+    .galerie-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 40px; }
+    .galerie-item { border-radius: var(--radius-card); overflow: hidden; position: relative; aspect-ratio: 4/3; }
+    .galerie-item:first-child { grid-column: 1 / -1; aspect-ratio: 16/7; }
+    .galerie-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
+    .galerie-item:hover img { transform: scale(1.05); }
+    .galerie-overlay { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,0.75) 0%, transparent 55%); opacity: 0; transition: var(--transition); display: flex; align-items: flex-end; padding: 1.25rem; }
+    .galerie-item:hover .galerie-overlay { opacity: 1; }
+    .galerie-overlay span { color: var(--white); font-family: 'Oswald', sans-serif; font-size: 0.85rem; letter-spacing: 0.05em; }
+    .galerie-label { position: absolute; top: 10px; left: 10px; background: var(--orange); color: #fff; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; padding: 4px 10px; border-radius: 50px; z-index: 2; }
+    @media (min-width: 769px) {
+      .galerie-grid { grid-template-columns: repeat(3, 1fr); }
+      .galerie-item:first-child { grid-column: span 2; aspect-ratio: 4/3; }
+    }
+
+    /* VEHICULES D'OCCASION / REPRISE */
+    .occasion-section { padding: 70px 1rem; background: var(--gray-light); border-top: 1px solid var(--gray-mid); }
+    .occasion-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center; }
+    .occasion-img { border-radius: var(--radius-card); overflow: hidden; box-shadow: var(--shadow-lg); }
+    .occasion-img img { width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block; }
+    .occasion-content h2 { font-size: clamp(1.7rem, 3.5vw, 2.4rem); color: var(--navy); margin-bottom: 16px; }
+    .occasion-content p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 24px; }
+    .occasion-features { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+    .occasion-feature { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: var(--text); font-weight: 600; }
+    .occasion-feature i { width: 32px; height: 32px; background: #133C82; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--white); font-size: 0.85rem; flex-shrink: 0; }
+    @media (min-width: 768px) {
+      .occasion-inner { grid-template-columns: 1fr 1fr; gap: 60px; }
+    }
+
+    /* TEMOIGNAGES MARQUEE */
+    .temoignages { background: var(--white); padding: 70px 0; overflow: hidden; border-top: 1px solid var(--gray-mid); }
+    .temo-header { padding: 0 1rem; max-width: 1200px; margin: 0 auto 40px; }
+    .testimonials-track-wrapper { overflow: hidden; position: relative; padding: 2rem 0; }
+    .testimonials-track-wrapper::before, .testimonials-track-wrapper::after { content: ''; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2; pointer-events: none; }
+    .testimonials-track-wrapper::before { left: 0; background: linear-gradient(to right, var(--white), transparent); }
+    .testimonials-track-wrapper::after { right: 0; background: linear-gradient(to left, var(--white), transparent); }
+    .testimonials-track { display: flex; gap: 1.25rem; width: max-content; animation: marquee 50s linear infinite; }
+    .testimonials-track:hover { animation-play-state: paused; }
+    @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    .testimonial-card { flex: 0 0 300px; background: var(--white); border-radius: var(--radius-card); padding: 1.5rem; box-shadow: var(--shadow-sm); border: 1px solid var(--gray-mid); transition: box-shadow var(--transition); }
+    .testimonial-card:hover { box-shadow: var(--shadow-md); }
+    .testimonial-stars { color: #FFD700; font-size: 0.95rem; letter-spacing: 1px; margin-bottom: 0.75rem; }
+    .testimonial-text { font-size: 0.875rem; color: var(--text); line-height: 1.65; font-style: italic; margin-bottom: 1rem; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; position: relative; }
+    .testimonial-text::before { content: '\201C'; font-size: 2.5rem; color: var(--orange); opacity: 0.2; font-family: Georgia, serif; line-height: 1; position: absolute; top: -8px; left: -4px; }
+    .testimonial-author { display: flex; align-items: center; gap: 10px; }
+    .testimonial-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--white); font-family: 'Oswald', sans-serif; font-size: 0.85rem; flex-shrink: 0; }
+    .ta1 { background: #1B3A6B; } .ta2 { background: #2D6A4F; } .ta3 { background: #7C3AED; } .ta4 { background: #C2410C; } .ta5 { background: #0369A1; } .ta6 { background: #065F46; } .ta7 { background: #9D174D; } .ta8 { background: #92400E; }
+    .testimonial-author strong { display: block; font-size: 0.82rem; color: var(--navy); font-weight: 600; }
+    .testimonial-author span { font-size: 0.72rem; color: var(--text-muted); }
+
+    /* ZONE */
+    .zone { padding: 70px 1rem; background: var(--white); border-top: 1px solid var(--gray-mid); }
+    .zone-text { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; max-width: 560px; margin-bottom: 32px; }
+    .zone-pills { display: flex; flex-wrap: wrap; gap: 10px; }
+    .zone-pill { display: flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 50px; background: var(--blue-pale); border: 1px solid var(--blue-soft); font-size: 0.85rem; font-weight: 600; color: var(--navy); transition: all var(--transition); min-height: 40px; }
+    .zone-pill:hover { background: var(--navy); color: var(--white); border-color: var(--navy); }
+    .zone-pill i { color: var(--orange); font-size: 0.7rem; }
+    .zone-pill:hover i { color: rgba(255,255,255,0.7); }
+
+    /* DEVIS */
+    .devis { background: var(--white); padding: 70px 1rem; border-top: 1px solid var(--gray-mid); }
+    .devis-inner { max-width: 620px; margin: 0 auto; }
+    .devis-card { background: var(--white); border-radius: 16px; padding: 36px 28px; box-shadow: var(--shadow-md); border: 1px solid var(--gray-mid); }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--navy); margin-bottom: 8px; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 13px 16px; border: 2px solid var(--gray-mid); border-radius: 8px; font-family: 'Open Sans', sans-serif; font-size: 0.9rem; color: var(--text); background: var(--white); transition: border-color var(--transition); outline: none; appearance: none; min-height: 48px; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(19,60,130,0.1); }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-row { display: grid; grid-template-columns: 1fr; gap: 0; }
+    .form-submit { width: 100%; justify-content: center; font-size: 1rem; min-height: 52px; }
+    .form-note { text-align: center; font-size: 0.78rem; color: var(--text-muted); margin-top: 12px; display: flex; align-items: center; justify-content: center; gap: 6px; }
+    .form-note i { color: #22C55E; }
+
+    /* FAQ */
+    .faq { padding: 70px 1rem; background: var(--gray-light); border-top: 1px solid var(--gray-mid); }
+    .faq-list { max-width: 760px; margin: 0 auto; }
+    .faq-item { border: 1px solid var(--gray-mid); border-radius: var(--radius-card); margin-bottom: 12px; overflow: hidden; transition: box-shadow var(--transition); background: var(--white); }
+    .faq-item:hover { box-shadow: var(--shadow-sm); }
+    .faq-item.open { box-shadow: var(--shadow-md); border-color: var(--navy); }
+    .faq-question { width: 100%; padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; background: var(--white); text-align: left; cursor: pointer; transition: background var(--transition); min-height: 60px; }
+    .faq-item.open .faq-question { background: var(--navy); }
+    .faq-question-text { font-size: 0.92rem; font-weight: 600; color: var(--navy); transition: color var(--transition); }
+    .faq-item.open .faq-question-text { color: var(--white); }
+    .faq-icon { width: 28px; height: 28px; border-radius: 50%; background: var(--gray-light); display: flex; align-items: center; justify-content: center; color: var(--navy); font-size: 0.75rem; flex-shrink: 0; transition: all var(--transition); }
+    .faq-item.open .faq-icon { background: var(--orange); color: #fff; transform: rotate(45deg); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; padding: 0 20px; }
+    .faq-answer p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; padding: 16px 0; }
+    .faq-item.open .faq-answer { max-height: 220px; }
+
+    /* FOOTER */
+    .footer { background: var(--navy); color: rgba(255,255,255,0.8); padding: 50px 1rem 0; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 36px; padding-bottom: 40px; }
+    .footer-brand .logo-text { color: var(--white); }
+    .footer-brand p { font-size: 0.88rem; color: rgba(255,255,255,0.6); line-height: 1.6; margin: 14px 0 20px; max-width: 280px; }
+    .footer-socials { display: flex; gap: 10px; }
+    .footer-social { width: 40px; height: 40px; border-radius: 8px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.7); font-size: 0.9rem; transition: all var(--transition); }
+    .footer-social:hover { background: var(--orange); border-color: var(--orange); color: #fff; }
+    .footer-col h4 { font-family: 'Oswald', sans-serif; font-size: 0.85rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--white); margin-bottom: 16px; }
+    .footer-col ul { display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a { font-size: 0.88rem; color: rgba(255,255,255,0.6); transition: color var(--transition); }
+    .footer-col ul li a:hover { color: #93c5fd; }
+    .footer-contact-item { display: flex; align-items: flex-start; gap: 10px; font-size: 0.88rem; color: rgba(255,255,255,0.7); margin-bottom: 12px; line-height: 1.5; }
+    .footer-contact-item i { color: #93c5fd; margin-top: 2px; flex-shrink: 0; width: 14px; }
+    .footer-horaires { font-size: 0.82rem; color: rgba(255,255,255,0.6); line-height: 1.9; margin-top: 4px; }
+    .footer-horaires strong { color: rgba(255,255,255,0.85); display: block; margin-bottom: 4px; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding: 18px 0; display: flex; flex-direction: column; gap: 8px; align-items: center; text-align: center; }
+    .footer-bottom p { font-size: 0.78rem; color: rgba(255,255,255,0.4); }
+    .footer-legal { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
+    .footer-legal a { font-size: 0.78rem; color: rgba(255,255,255,0.4); transition: color var(--transition); }
+    .footer-legal a:hover { color: rgba(255,255,255,0.7); }
+
+    /* RESPONSIVE */
+    @media (min-width: 768px) {
+      .header-nav { display: flex; }
+      .btn-devis-header { display: inline-flex; }
+      .hamburger { display: none; }
+      .hero-inner { grid-template-columns: 1fr 1fr; gap: 60px; }
+      .hero-ctas { flex-direction: row; }
+      .trust-badges { grid-template-columns: repeat(4, 1fr); }
+      .counters { grid-template-columns: repeat(4, 1fr); }
+      .form-row { grid-template-columns: 1fr 1fr; gap: 16px; }
+      .footer-inner { grid-template-columns: 1.5fr 1fr 1fr 1fr; }
+      .footer-bottom { flex-direction: row; justify-content: space-between; text-align: left; }
+    }
+    @media (min-width: 1200px) {
+      .hero { padding: 80px 2rem; }
+      .counters { gap: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BANDE INFO -->
+  <div class="urgence-band">
+    <span class="pulse-dot"></span>
+    <strong>Chau. De Bruxelles 44, 6042 Charleroi</strong>&nbsp;·&nbsp;
+    Lun–Sam : 10h00–18h00&nbsp;·&nbsp;
+    <a href="tel:+3271700795">071 70 07 95</a>
+  </div>
+
+  <header class="header" id="mainHeader">
+    <div class="header-inner">
+      <a href="#" class="logo" aria-label="Auto Hainaut - Accueil">
+        <img src="logo.png" alt="Auto Hainaut" style="height:48px; width:auto; display:block;">
+      </a>
+      <nav class="header-nav" aria-label="Navigation principale">
+        <a href="#services">Services</a>
+        <a href="#realisations">Galerie</a>
+        <a href="#occasion">Occasion</a>
+        <a href="#temoignages">Avis</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="header-right">
+        <a href="tel:+3271700795" class="header-tel" aria-label="Appeler Auto Hainaut">
+          <i class="fa-solid fa-phone"></i>
+          071 70 07 95
+        </a>
+        <a href="#devis" class="btn-devis-header">Nous contacter</a>
+        <div class="hamburger" id="hamburgerBtn" aria-label="Ouvrir le menu" role="button" tabindex="0" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Menu mobile">
+    <button class="close-menu" id="closeMenuBtn" aria-label="Fermer le menu">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <a href="#services">Services</a>
+    <a href="#realisations">Galerie</a>
+    <a href="#occasion">Occasion</a>
+    <a href="#temoignages">Avis clients</a>
+    <a href="#devis">Nous contacter</a>
+    <a href="tel:+3271700795" class="btn btn-primary" style="font-size:1rem;">
+      <i class="fa-solid fa-phone"></i> Appeler
+    </a>
+  </nav>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-bg">
+        <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1600&q=80" alt="Auto Hainaut — Concessionnaire automobile à Charleroi" loading="eager">
+      </div>
+      <div class="hero-inner container">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <i class="fa-solid fa-shield-halved"></i>
+            Concessionnaire automobile à Charleroi
+          </div>
+          <h1 id="hero-title">Votre concessionnaire auto<br>de confiance à <span>Charleroi</span></h1>
+          <p class="hero-subtitle">Auto Hainaut vous propose une large sélection de véhicules neufs et d'occasion. Achat, vente, reprise, financement et garantie — tout sous un même toit depuis plus de 25 ans.</p>
+          <div class="hero-ctas">
+            <a href="tel:+3271700795" class="btn btn-primary">
+              <i class="fa-solid fa-phone"></i> Appeler maintenant
+            </a>
+            <a href="#services" class="btn btn-outline">
+              <i class="fa-solid fa-car"></i> Voir nos véhicules
+            </a>
+          </div>
+          <div class="hero-trust">
+            <div class="hero-trust-item">
+              <span class="stars">★★★★</span>
+              <strong>3,9/5</strong>
+            </div>
+            <div class="hero-trust-divider"></div>
+            <div class="hero-trust-item">
+              <i class="fa-solid fa-users"></i>
+              <strong>84</strong>&nbsp;avis Google
+            </div>
+            <div class="hero-trust-divider"></div>
+            <div class="hero-trust-item">
+              <i class="fa-solid fa-location-dot"></i>
+              <strong>Chau. De Bruxelles 44</strong>
+            </div>
+          </div>
+        </div>
+        <div class="hero-image-col">
+          <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&q=80" alt="Auto Hainaut — Concessionnaire à Charleroi" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:12px; display:block;">
+          <div class="hero-badge-float">
+            <div class="dot"></div>
+            <span>Ouvert · Plus de 25 ans d'expérience</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRUST BAR -->
+    <section class="trust-bar" id="certifications">
+      <div class="trust-bar-inner">
+        <div class="trust-badges fade-up">
+          <div class="trust-badge">
+            <div class="trust-badge-icon"><i class="fa-solid fa-car"></i></div>
+            <div class="trust-badge-text"><strong>Toutes marques</strong><span>Véhicules neufs &amp; d'occasion</span></div>
+          </div>
+          <div class="trust-badge">
+            <div class="trust-badge-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="trust-badge-text"><strong>Véhicules garantis</strong><span>Contrôle qualité avant chaque vente</span></div>
+          </div>
+          <div class="trust-badge">
+            <div class="trust-badge-icon"><i class="fa-solid fa-map-pin"></i></div>
+            <div class="trust-badge-text"><strong>25 ans d'expérience</strong><span>Concessionnaire de confiance à Charleroi</span></div>
+          </div>
+          <div class="trust-badge">
+            <div class="trust-badge-icon"><i class="fa-solid fa-handshake"></i></div>
+            <div class="trust-badge-text"><strong>Reprise véhicule</strong><span>Estimation gratuite, prix honnêtes</span></div>
+          </div>
+        </div>
+        <div class="counters fade-up">
+          <div class="counter-item">
+            <span class="counter-number" data-target="84" data-suffix="">0</span>
+            <span class="counter-label">Avis Google</span>
+          </div>
+          <div class="counter-item">
+            <span class="counter-number" data-target="3.9" data-suffix="★" data-decimal="true">0</span>
+            <span class="counter-label">Note moyenne</span>
+          </div>
+          <div class="counter-item">
+            <span class="counter-number" data-target="25" data-suffix="+">0</span>
+            <span class="counter-label">Ans d'expérience</span>
+          </div>
+          <div class="counter-item">
+            <span class="counter-number" data-target="6" data-suffix="j/7">0</span>
+            <span class="counter-label">Jours d'ouverture</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services" id="services" aria-labelledby="services-title">
+      <div class="container">
+        <div class="section-header fade-up">
+          <span class="tag-line tag-line-blue">Nos prestations</span>
+          <h2 class="section-title" id="services-title">Tout pour votre projet automobile</h2>
+          <p class="section-subtitle">De la vente neuf à la reprise de votre ancien véhicule, Auto Hainaut vous accompagne à chaque étape — avec transparence et sérieux depuis plus de 25 ans.</p>
+        </div>
+        <div class="services-slider" id="servicesSlider">
+
+          <div class="service-card">
+            <div class="service-img-header"><img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&q=80" alt="Vente véhicules neufs Charleroi" loading="lazy"></div>
+            <div class="service-card-body">
+              <div class="service-icon"><i class="fa-solid fa-car-side"></i></div>
+              <h3>Vente de Véhicules Neufs</h3>
+              <p>Large choix de véhicules neufs toutes marques. Nos conseillers vous guident pour trouver le modèle qui correspond à votre budget et vos besoins.</p>
+              <span class="service-link">En savoir plus <i class="fa-solid fa-arrow-right"></i></span>
+            </div>
+          </div>
+
+          <div class="service-card">
+            <div class="service-img-header"><img src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?w=600&q=80" alt="Véhicules occasion Charleroi" loading="lazy"></div>
+            <div class="service-card-body">
+              <div class="service-icon"><i class="fa-solid fa-car"></i></div>
+              <h3>Véhicules d'Occasion</h3>
+              <p>Stock de véhicules d'occasion sélectionnés et contrôlés. Toutes marques, toutes gammes — des modèles fiables à prix juste pour tous les budgets.</p>
+              <span class="service-link">En savoir plus <i class="fa-solid fa-arrow-right"></i></span>
+            </div>
+          </div>
+
+          <div class="service-card">
+            <div class="service-img-header"><img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0729?w=600&q=80" alt="Reprise véhicule Charleroi" loading="lazy"></div>
+            <div class="service-card-body">
+              <div class="service-icon"><i class="fa-solid fa-rotate"></i></div>
+              <h3>Reprise de Véhicule</h3>
+              <p>Vous souhaitez vendre ou reprendre votre voiture ? Estimation gratuite et honnête de votre véhicule. Reprise possible directement lors de votre achat.</p>
+              <span class="service-link">En savoir plus <i class="fa-solid fa-arrow-right"></i></span>
+            </div>
+          </div>
+
+          <div class="service-card">
+            <div class="service-img-header"><img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&q=80" alt="Financement auto Charleroi" loading="lazy"></div>
+            <div class="service-card-body">
+              <div class="service-icon"><i class="fa-solid fa-euro-sign"></i></div>
+              <h3>Financement Auto</h3>
+              <p>Solutions de financement personnalisées pour l'achat de votre véhicule. Crédit auto, leasing — on trouve la formule adaptée à votre situation.</p>
+              <span class="service-link">En savoir plus <i class="fa-solid fa-arrow-right"></i></span>
+            </div>
+          </div>
+
+          <div class="service-card">
+            <div class="service-img-header"><img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&q=80" alt="Garantie mécanique Charleroi" loading="lazy"></div>
+            <div class="service-card-body">
+              <div class="service-icon"><i class="fa-solid fa-shield-halved"></i></div>
+              <h3>Garantie Mécanique</h3>
+              <p>Chaque véhicule vendu bénéficie d'une garantie mécanique. Roulez l'esprit tranquille — on s'engage sur la fiabilité des voitures que nous vendons.</p>
+              <span class="service-link">En savoir plus <i class="fa-solid fa-arrow-right"></i></span>
+            </div>
+          </div>
+
+          <div class="service-card">
+            <div class="service-img-header"><img src="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?w=600&q=80" alt="Expertise inspection voiture Charleroi" loading="lazy"></div>
+            <div class="service-card-body">
+              <div class="service-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+              <h3>Expertise & Inspection</h3>
+              <p>Inspection complète des véhicules avant mise en vente. Carrosserie, mécanique, électronique — rien n'est laissé au hasard.</p>
+              <span class="service-link">En savoir plus <i class="fa-solid fa-arrow-right"></i></span>
+            </div>
+          </div>
+
+          <div class="service-card">
+            <div class="service-img-header"><img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=600&q=80" alt="Service après-vente Charleroi" loading="lazy"></div>
+            <div class="service-card-body">
+              <div class="service-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+              <h3>Service Après-Vente</h3>
+              <p>Notre équipe reste disponible après l'achat. Entretien, révision ou question technique — nous restons votre partenaire automobile dans la durée.</p>
+              <span class="service-link">En savoir plus <i class="fa-solid fa-arrow-right"></i></span>
+            </div>
+          </div>
+
+        </div>
+        <div class="services-swipe-hint"><i class="fa-solid fa-hand-pointer"></i> Faites glisser pour voir tous les services</div>
+        <div class="slider-dots" id="serviceDots"></div>
+      </div>
+    </section>
+
+    <!-- CTA SOMBRE -->
+    <section class="urgence-section" aria-labelledby="cta-title">
+      <div class="container">
+        <span class="tag-line">Réponse rapide</span>
+        <h2 id="cta-title">Vous cherchez votre prochain véhicule ?<br>On vous aide.</h2>
+        <p>Achat, reprise, financement ou simple question ? Appelez-nous ou passez directement chez Auto Hainaut — Chaussée de Bruxelles 44, Charleroi.</p>
+        <div class="urgence-tel">
+          <a href="tel:+3271700795" class="urgence-tel-number">071 70 07 95</a>
+          <span class="urgence-tel-sub">Appel direct · Estimation gratuite</span>
+        </div>
+        <a href="tel:+3271700795" class="btn btn-primary" style="font-size:1.05rem; padding: 16px 36px;">
+          <i class="fa-solid fa-phone fa-shake"></i> Appeler maintenant
+        </a>
+        <div class="urgence-features">
+          <div class="urgence-feature"><i class="fa-solid fa-calendar-check"></i> Rendez-vous flexible</div>
+          <div class="urgence-feature"><i class="fa-solid fa-euro-sign"></i> Estimation gratuite</div>
+          <div class="urgence-feature"><i class="fa-solid fa-clock"></i> Lun–Sam, 10h–18h</div>
+          <div class="urgence-feature"><i class="fa-solid fa-car-side"></i> Toutes marques acceptées</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALERIE -->
+    <section class="realisations" id="realisations" aria-labelledby="real-title">
+      <div class="container">
+        <div class="section-header fade-up">
+          <span class="tag-line tag-line-blue">Notre showroom</span>
+          <h2 class="section-title" id="real-title">Des véhicules soigneusement sélectionnés</h2>
+          <p class="section-subtitle">Chez Auto Hainaut, chaque véhicule est inspecté et préparé avec soin avant d'être proposé à la vente. Voici quelques modèles de notre stock à Charleroi.</p>
+        </div>
+        <div class="galerie-grid fade-up">
+          <div class="galerie-item">
+            <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=1200&q=80" alt="Auto Hainaut — Véhicule d'exception" loading="lazy">
+            <div class="galerie-overlay"><span>Notre stock de qualité</span></div>
+            <span class="galerie-label">Auto Hainaut</span>
+          </div>
+          <div class="galerie-item">
+            <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=600&q=80" alt="Véhicule occasion Charleroi" loading="lazy">
+            <div class="galerie-overlay"><span>Véhicules d'occasion</span></div>
+          </div>
+          <div class="galerie-item">
+            <img src="https://images.unsplash.com/photo-1507136566006-cfc505b114fc?w=600&q=80" alt="Showroom Auto Hainaut Charleroi" loading="lazy">
+            <div class="galerie-overlay"><span>Qualité garantie</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REPRISE & OCCASION -->
+    <section class="occasion-section" id="occasion" aria-labelledby="occasion-title">
+      <div class="container">
+        <div class="occasion-inner">
+          <div class="occasion-img">
+            <img src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?w=800&q=80" alt="Véhicules d'occasion — Auto Hainaut Charleroi" loading="eager">
+          </div>
+          <div class="occasion-content fade-up">
+            <span class="tag-line tag-line-blue">Achat &amp; Reprise</span>
+            <h2 id="occasion-title">Votre véhicule d'occasion au juste prix</h2>
+            <p>Vous cherchez une voiture fiable à bon prix ou souhaitez revendre la vôtre ? Auto Hainaut dispose d'un large stock de véhicules d'occasion contrôlés et garantis. On reprend aussi votre ancien véhicule — estimation gratuite sur place.</p>
+            <div class="occasion-features">
+              <div class="occasion-feature">
+                <i class="fa-solid fa-circle-check"></i>
+                Véhicules inspectés et contrôlés avant vente
+              </div>
+              <div class="occasion-feature">
+                <i class="fa-solid fa-handshake"></i>
+                Reprise de votre voiture possible
+              </div>
+              <div class="occasion-feature">
+                <i class="fa-solid fa-tag"></i>
+                Prix transparents, sans frais cachés
+              </div>
+              <div class="occasion-feature">
+                <i class="fa-solid fa-location-dot"></i>
+                Venez nous voir : Chau. De Bruxelles 44, Charleroi
+              </div>
+            </div>
+            <a href="#devis" class="btn btn-navy">
+              <i class="fa-solid fa-car"></i> Renseignez-vous maintenant
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEMOIGNAGES MARQUEE -->
+    <section class="temoignages" id="temoignages" aria-labelledby="temoig-title">
+      <div class="temo-header fade-up">
+        <div class="section-header">
+          <span class="tag-line tag-line-blue">Avis clients</span>
+          <h2 class="section-title" id="temoig-title">Ce que disent nos clients</h2>
+          <p class="section-subtitle">Plus de 84 avis sur Google. La confiance se construit véhicule après véhicule, depuis plus de 25 ans.</p>
+        </div>
+      </div>
+      <div class="testimonials-track-wrapper">
+        <div class="testimonials-track">
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testimonial-text">Super garage de confiance ! J'y ai acheté une voiture à très bon prix répondant parfaitement à mes attentes. Suite à une panne, ils ont pris en charge la réparation à leurs frais sans discuter.</p>
+            <div class="testimonial-author"><div class="testimonial-avatar ta1">ME</div><div><strong>Mr Eurobioexport</strong><span>Avis Google vérifié</span></div></div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testimonial-text">Excellente expérience d'achat. Le vendeur a pris le temps d'expliquer chaque détail du véhicule. Prix honnêtes et équipe professionnelle. Je recommande vivement Auto Hainaut.</p>
+            <div class="testimonial-author"><div class="testimonial-avatar ta2">SL</div><div><strong>Sophie L.</strong><span>Avis Google vérifié</span></div></div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testimonial-text">Reprise de mon ancienne voiture faite rapidement et au juste prix. J'ai pu acheter un beau véhicule d'occasion dans la même journée. Service impeccable.</p>
+            <div class="testimonial-author"><div class="testimonial-avatar ta3">JPM</div><div><strong>Jean-Pierre M.</strong><span>Avis Google vérifié</span></div></div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testimonial-text">Véhicule acheté il y a 6 mois, aucun problème depuis. Ils ont fait une inspection complète avant la vente. Très content de mon achat chez Auto Hainaut.</p>
+            <div class="testimonial-author"><div class="testimonial-avatar ta4">KB</div><div><strong>Karim B.</strong><span>Avis Google vérifié</span></div></div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testimonial-text">Financement obtenu rapidement et sans complications. L'équipe est à l'écoute et propose des solutions adaptées à chaque budget. Bravo pour le professionnalisme.</p>
+            <div class="testimonial-author"><div class="testimonial-avatar ta5">TV</div><div><strong>Thomas V.</strong><span>Avis Google vérifié</span></div></div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testimonial-text">Très bien accueillie, sans pression à la vente. Le véhicule correspondait exactement à ce qui était annoncé. Livraison rapide et soignée. Merci !</p>
+            <div class="testimonial-author"><div class="testimonial-avatar ta6">NG</div><div><strong>Nathalie G.</strong><span>Avis Google vérifié</span></div></div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testimonial-text">Je cherchais une voiture familiale dans un budget précis. Auto Hainaut a trouvé exactement ce qu'il me fallait. Réactif et sérieux, je ne regrette pas mon choix.</p>
+            <div class="testimonial-author"><div class="testimonial-avatar ta7">YA</div><div><strong>Youssef A.</strong><span>Avis Google vérifié</span></div></div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testimonial-text">Établissement sérieux, depuis plus de 25 ans dans la région. Le service après-vente est au rendez-vous. On revient avec confiance pour chaque achat.</p>
+            <div class="testimonial-author"><div class="testimonial-avatar ta8">CM</div><div><strong>Christine M.</strong><span>Avis Google vérifié</span></div></div>
+          </div>
+
+          <!-- DUPLICATION pour boucle infinie -->
+          <div class="testimonial-card">
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testimonial-text">Super garage de confiance ! J'y ai acheté une voiture à très bon prix répondant parfaitement à mes attentes. Suite à une panne, ils ont pris en charge la réparation à leurs frais sans discuter.</p>
+            <div class="testimonial-author"><div class="testimonial-avatar ta1">ME</div><div><strong>Mr Eurobioexport</strong><span>Avis Google vérifié</span></div></div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testimonial-text">Excellente expérience d'achat. Le vendeur a pris le temps d'expliquer chaque détail du véhicule. Prix honnêtes et équipe professionnelle. Je recommande vivement Auto Hainaut.</p>
+            <div class="testimonial-author"><div class="testimonial-avatar ta2">SL</div><div><strong>Sophie L.</strong><span>Avis Google vérifié</span></div></div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testimonial-text">Reprise de mon ancienne voiture faite rapidement et au juste prix. J'ai pu acheter un beau véhicule d'occasion dans la même journée. Service impeccable.</p>
+            <div class="testimonial-author"><div class="testimonial-avatar ta3">JPM</div><div><strong>Jean-Pierre M.</strong><span>Avis Google vérifié</span></div></div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testimonial-text">Véhicule acheté il y a 6 mois, aucun problème depuis. Ils ont fait une inspection complète avant la vente. Très content de mon achat chez Auto Hainaut.</p>
+            <div class="testimonial-author"><div class="testimonial-avatar ta4">KB</div><div><strong>Karim B.</strong><span>Avis Google vérifié</span></div></div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testimonial-text">Financement obtenu rapidement et sans complications. L'équipe est à l'écoute et propose des solutions adaptées à chaque budget. Bravo pour le professionnalisme.</p>
+            <div class="testimonial-author"><div class="testimonial-avatar ta5">TV</div><div><strong>Thomas V.</strong><span>Avis Google vérifié</span></div></div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testimonial-text">Très bien accueillie, sans pression à la vente. Le véhicule correspondait exactement à ce qui était annoncé. Livraison rapide et soignée. Merci !</p>
+            <div class="testimonial-author"><div class="testimonial-avatar ta6">NG</div><div><strong>Nathalie G.</strong><span>Avis Google vérifié</span></div></div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testimonial-text">Je cherchais une voiture familiale dans un budget précis. Auto Hainaut a trouvé exactement ce qu'il me fallait. Réactif et sérieux, je ne regrette pas mon choix.</p>
+            <div class="testimonial-author"><div class="testimonial-avatar ta7">YA</div><div><strong>Youssef A.</strong><span>Avis Google vérifié</span></div></div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testimonial-text">Établissement sérieux, depuis plus de 25 ans dans la région. Le service après-vente est au rendez-vous. On revient avec confiance pour chaque achat.</p>
+            <div class="testimonial-author"><div class="testimonial-avatar ta8">CM</div><div><strong>Christine M.</strong><span>Avis Google vérifié</span></div></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ZONE -->
+    <section class="zone" id="zone" aria-labelledby="zone-title">
+      <div class="container">
+        <div class="fade-up">
+          <span class="tag-line tag-line-blue">Zone desservie</span>
+          <h2 class="section-title" id="zone-title">Vous êtes à Charleroi et environs ?</h2>
+          <p class="zone-text">Auto Hainaut est situé sur la Chaussée de Bruxelles 44 et accueille les clients de toute la région de Charleroi. Votre commune n'est pas listée ? Appelez-nous — on trouvera une solution.</p>
+        </div>
+        <div class="zone-pills fade-up">
+          <div class="zone-pill"><i class="fa-solid fa-circle-dot"></i> Charleroi</div>
+          <div class="zone-pill"><i class="fa-solid fa-circle-dot"></i> Gosselies</div>
+          <div class="zone-pill"><i class="fa-solid fa-circle-dot"></i> Jumet</div>
+          <div class="zone-pill"><i class="fa-solid fa-circle-dot"></i> Gilly</div>
+          <div class="zone-pill"><i class="fa-solid fa-circle-dot"></i> Marchienne-au-Pont</div>
+          <div class="zone-pill"><i class="fa-solid fa-circle-dot"></i> Montignies-sur-Sambre</div>
+          <div class="zone-pill"><i class="fa-solid fa-circle-dot"></i> Ransart</div>
+          <div class="zone-pill"><i class="fa-solid fa-circle-dot"></i> Marcinelle</div>
+          <div class="zone-pill"><i class="fa-solid fa-circle-dot"></i> Fleurus</div>
+          <div class="zone-pill"><i class="fa-solid fa-circle-dot"></i> Farciennes</div>
+          <div class="zone-pill"><i class="fa-solid fa-circle-dot"></i> Châtelet</div>
+          <div class="zone-pill"><i class="fa-solid fa-circle-dot"></i> Fontaine-l'Évêque</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEVIS / CONTACT -->
+    <section class="devis" id="devis" aria-labelledby="devis-title">
+      <div class="container">
+        <div class="devis-inner">
+          <div class="section-header fade-up" style="margin-bottom:32px;">
+            <span class="tag-line">100% gratuit</span>
+            <h2 class="section-title" id="devis-title">Contactez-nous</h2>
+            <p class="section-subtitle" style="margin:0 auto;">Renseignements, reprise ou achat — on vous répond rapidement. Sans engagement.</p>
+          </div>
+          <div class="devis-card fade-up">
+            <form id="devisForm" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="prenom">Prénom *</label>
+                  <input type="text" id="prenom" name="prenom" placeholder="Votre prénom" required autocomplete="given-name">
+                </div>
+                <div class="form-group">
+                  <label for="telephone">Téléphone *</label>
+                  <input type="tel" id="telephone" name="telephone" placeholder="04XX XX XX XX" required autocomplete="tel">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="type">Votre demande *</label>
+                <select id="type" name="type" required>
+                  <option value="" disabled selected>Sélectionnez votre demande</option>
+                  <option value="achat-neuf">Achat véhicule neuf</option>
+                  <option value="achat-occasion">Achat véhicule d'occasion</option>
+                  <option value="reprise">Reprise de mon véhicule</option>
+                  <option value="financement">Financement auto</option>
+                  <option value="garantie">Garantie mécanique</option>
+                  <option value="sav">Service après-vente</option>
+                  <option value="autre">Autre question</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="message">Message (optionnel)</label>
+                <textarea id="message" name="message" placeholder="Décrivez votre projet, votre véhicule actuel, votre budget..."></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary form-submit">
+                <i class="fa-solid fa-paper-plane"></i> Envoyer ma demande
+              </button>
+              <p class="form-note"><i class="fa-solid fa-circle-check"></i> Réponse rapide · Gratuit · Aucun engagement</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq" aria-labelledby="faq-title">
+      <div class="container">
+        <div class="section-header fade-up" style="margin-bottom:36px;">
+          <span class="tag-line tag-line-blue">Questions fréquentes</span>
+          <h2 class="section-title" id="faq-title">Tout ce que vous voulez savoir</h2>
+        </div>
+        <div class="faq-list fade-up">
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-question-text">Puis-je reprendre mon véhicule actuel lors d'un achat ?</span>
+              <span class="faq-icon"><i class="fa-solid fa-plus"></i></span>
+            </button>
+            <div class="faq-answer"><p>Oui, Auto Hainaut propose la reprise de votre véhicule lors de l'achat d'un nouveau. L'estimation est gratuite et réalisée sur place. Nous proposons un prix honnête et transparent, sans mauvaise surprise.</p></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-question-text">Proposez-vous des solutions de financement ?</span>
+              <span class="faq-icon"><i class="fa-solid fa-plus"></i></span>
+            </button>
+            <div class="faq-answer"><p>Oui, nous proposons des solutions de financement adaptées à chaque profil. Crédit auto, leasing ou autres formules — nos conseillers étudient votre situation pour vous proposer la meilleure option. Contactez-nous pour en savoir plus.</p></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-question-text">Quelles marques trouvez-vous chez Auto Hainaut ?</span>
+              <span class="faq-icon"><i class="fa-solid fa-plus"></i></span>
+            </button>
+            <div class="faq-answer"><p>Auto Hainaut propose des véhicules de toutes marques — françaises, allemandes, asiatiques et autres. Peugeot, Renault, Volkswagen, Ford, Toyota, BMW, Audi... Consultez notre stock disponible ou appelez-nous pour connaître les modèles en cours.</p></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-question-text">Les véhicules d'occasion sont-ils garantis ?</span>
+              <span class="faq-icon"><i class="fa-solid fa-plus"></i></span>
+            </button>
+            <div class="faq-answer"><p>Oui, chaque véhicule d'occasion vendu par Auto Hainaut bénéficie d'une garantie mécanique. Avant toute mise en vente, nos techniciens effectuent une inspection complète pour vous assurer un achat fiable et serein.</p></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-question-text">Quels sont vos horaires d'ouverture ?</span>
+              <span class="faq-icon"><i class="fa-solid fa-plus"></i></span>
+            </button>
+            <div class="faq-answer"><p>Auto Hainaut est ouvert du lundi au samedi de 10h00 à 18h00. Fermé le dimanche. Vous pouvez également nous appeler au 071 70 07 95 ou passer directement sur place — Chaussée de Bruxelles 44, 6042 Charleroi.</p></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-question-text">Comment se déroule l'achat d'un véhicule chez vous ?</span>
+              <span class="faq-icon"><i class="fa-solid fa-plus"></i></span>
+            </button>
+            <div class="faq-answer"><p>Venez visiter notre showroom ou contactez-nous par téléphone. Nous vous présentons les véhicules disponibles correspondant à votre budget. Essai possible sur rendez-vous, financement étudié sur place, et livraison soignée du véhicule. Simple et transparent du début à la fin.</p></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" id="contact" aria-label="Pied de page">
+    <div class="footer-inner container">
+      <div class="footer-brand">
+        <div class="logo">
+          <img src="logo.png" alt="Auto Hainaut" style="height:56px; width:auto; display:block;">
+        </div>
+        <p>Concessionnaire automobile à Charleroi. Vente de véhicules neufs et d'occasion, reprise, financement et garantie depuis plus de 25 ans.</p>
+        <div class="footer-socials">
+          <a href="#" class="footer-social" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="footer-social" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="footer-social" aria-label="Google"><i class="fa-brands fa-google"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Vente Véhicules Neufs</a></li>
+          <li><a href="#services">Véhicules d'Occasion</a></li>
+          <li><a href="#services">Reprise Véhicule</a></li>
+          <li><a href="#services">Financement Auto</a></li>
+          <li><a href="#services">Garantie Mécanique</a></li>
+          <li><a href="#services">Expertise &amp; Inspection</a></li>
+          <li><a href="#services">Service Après-Vente</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#realisations">Notre showroom</a></li>
+          <li><a href="#temoignages">Avis clients</a></li>
+          <li><a href="#zone">Zone desservie</a></li>
+          <li><a href="#devis">Nous contacter</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item"><i class="fa-solid fa-phone"></i><a href="tel:+3271700795">071 70 07 95</a></div>
+        <div class="footer-contact-item"><i class="fa-solid fa-location-dot"></i><span>Chau. De Bruxelles 44<br>6042 Charleroi, Belgique</span></div>
+        <div class="footer-horaires">
+          <strong>Horaires :</strong>
+          Lun – Sam : 10h00 – 18h00<br>
+          Dimanche : Fermé
+        </div>
+        <div style="margin-top: 1.5rem; border-radius: 0.75rem; overflow: hidden;">
+          <iframe src="https://maps.google.com/maps?q=Chaussée+de+Bruxelles+44+6042+Charleroi+Belgique&output=embed" width="100%" height="220" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom container">
+      <p>© <span id="year"></span> Auto Hainaut — Tous droits réservés · Charleroi, Belgique</p>
+      <div class="footer-legal">
+        <a href="#">Mentions légales</a>
+        <a href="#">Politique de confidentialité</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    let lastScroll = 0;
+    const header = document.getElementById('mainHeader');
+    window.addEventListener('scroll', () => {
+      const cur = window.scrollY;
+      if (cur > lastScroll && cur > 80) { header.classList.add('hidden'); }
+      else { header.classList.remove('hidden'); }
+      lastScroll = cur;
+    }, { passive: true });
+
+    const hamburger = document.getElementById('hamburgerBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeBtn = document.getElementById('closeMenuBtn');
+    function openMenu() { mobileMenu.classList.add('open'); hamburger.classList.add('open'); hamburger.setAttribute('aria-expanded', 'true'); document.body.style.overflow = 'hidden'; }
+    function closeMenu() { mobileMenu.classList.remove('open'); hamburger.classList.remove('open'); hamburger.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; }
+    hamburger.addEventListener('click', () => { mobileMenu.classList.contains('open') ? closeMenu() : openMenu(); });
+    hamburger.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); hamburger.click(); } });
+    closeBtn.addEventListener('click', closeMenu);
+    mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+
+    const servicesSlider = document.getElementById('servicesSlider');
+    const serviceDots = document.getElementById('serviceDots');
+    if (servicesSlider && serviceDots) {
+      const cards = servicesSlider.querySelectorAll('.service-card');
+      serviceDots.innerHTML = '';
+      cards.forEach((_, i) => {
+        const dot = document.createElement('span');
+        dot.className = 'dot' + (i === 0 ? ' active' : '');
+        serviceDots.appendChild(dot);
+      });
+      servicesSlider.addEventListener('scroll', () => {
+        const idx = Math.round(servicesSlider.scrollLeft / (servicesSlider.scrollWidth / cards.length));
+        serviceDots.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+      }, { passive: true });
+    }
+
+    function animateCounters() {
+      document.querySelectorAll('.counter-number').forEach(el => {
+        const target = parseFloat(el.dataset.target) || 0;
+        const suffix = el.dataset.suffix || '';
+        const isDecimal = el.dataset.decimal === 'true';
+        const duration = 1800;
+        const step = 16;
+        const increments = Math.ceil(duration / step);
+        const inc = target / increments;
+        let cur = 0;
+        const timer = setInterval(() => {
+          cur = Math.min(cur + inc, target);
+          el.textContent = (isDecimal ? cur.toFixed(1) : Math.floor(cur)) + suffix;
+          if (cur >= target) clearInterval(timer);
+        }, step);
+      });
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    const countersEl = document.querySelector('.counters');
+    if (countersEl) {
+      const counterObs = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) { animateCounters(); counterObs.disconnect(); }
+      }, { threshold: 0.3 });
+      counterObs.observe(countersEl);
+    }
+
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
+      });
+    });
+
+    const devisForm = document.getElementById('devisForm');
+    if (devisForm) {
+      devisForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const btn = devisForm.querySelector('[type="submit"]');
+        btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Demande envoyée !';
+        btn.style.background = '#22C55E';
+        btn.style.color = '#fff';
+        btn.disabled = true;
+      });
+    }
+  </script>
+
+</body>
+</html>
