@@ -99,14 +99,14 @@
     }
 
     /* BANDEAU INFO */
-    .urgence-band { background: #4DA8E8; color: #fff; text-align: center; padding: 10px 20px; font-size: 0.82rem; font-weight: 600; position: relative; z-index: 1000; }
-    .urgence-band strong { color: #fff; }
-    .urgence-band a { color: #fff; font-weight: 700; text-decoration: underline; }
+    .urgence-band { background: #B7D2EA; color: #123B82; text-align: center; padding: 10px 20px; font-size: 0.82rem; font-weight: 600; position: relative; z-index: 1000; }
+    .urgence-band strong { color: #123B82; }
+    .urgence-band a { color: #123B82; font-weight: 700; text-decoration: underline; }
     .pulse-dot { display: inline-block; width: 8px; height: 8px; background: #fff; border-radius: 50%; margin-right: 8px; animation: pulse-dot 1.5s infinite; vertical-align: middle; }
     @keyframes pulse-dot { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.5); opacity: 0.6; } }
 
     /* HEADER */
-    .header { position: sticky; top: 0; z-index: 999; background: #133C82; box-shadow: 0 4px 20px rgba(19,60,130,0.4); transition: transform 0.35s ease; }
+    .header { position: sticky; top: 0; z-index: 999; background: #123B82; box-shadow: 0 4px 20px rgba(19,60,130,0.4); transition: transform 0.35s ease; }
     .header.hidden { transform: translateY(-100%); }
     .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 0 1.5rem; height: 96px; max-width: 1200px; margin: 0 auto; }
     .logo { display: flex; align-items: center; gap: 10px; }
@@ -212,20 +212,23 @@
     .urgence-feature { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 50px; padding: 8px 16px; font-size: 0.82rem; color: rgba(255,255,255,0.9); }
     .urgence-feature i { color: #93c5fd; }
 
-    /* GALERIE */
+    /* GALERIE SLIDER */
     .realisations { padding: 70px 1rem; background: var(--white); border-top: 1px solid var(--gray-mid); }
-    .galerie-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 40px; }
-    .galerie-item { border-radius: var(--radius-card); overflow: hidden; position: relative; aspect-ratio: 4/3; }
-    .galerie-item:first-child { grid-column: 1 / -1; aspect-ratio: 16/7; }
-    .galerie-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
-    .galerie-item:hover img { transform: scale(1.05); }
-    .galerie-overlay { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,0.75) 0%, transparent 55%); opacity: 0; transition: var(--transition); display: flex; align-items: flex-end; padding: 1.25rem; }
-    .galerie-item:hover .galerie-overlay { opacity: 1; }
-    .galerie-overlay span { color: var(--white); font-family: 'Oswald', sans-serif; font-size: 0.85rem; letter-spacing: 0.05em; }
-    .galerie-label { position: absolute; top: 10px; left: 10px; background: var(--orange); color: #fff; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; padding: 4px 10px; border-radius: 50px; z-index: 2; }
+    .photo-slider-wrap { position: relative; margin-top: 40px; border-radius: var(--radius-card); overflow: hidden; user-select: none; }
+    .photo-slider { display: flex; transition: transform 0.45s cubic-bezier(.4,0,.2,1); will-change: transform; }
+    .photo-slide { flex: 0 0 100%; position: relative; aspect-ratio: 16/9; overflow: hidden; }
+    .photo-slide img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
+    .galerie-overlay { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,0.65) 0%, transparent 50%); display: flex; align-items: flex-end; padding: 1.25rem; }
+    .galerie-overlay span { color: var(--white); font-family: 'Oswald', sans-serif; font-size: 1rem; letter-spacing: 0.05em; }
+    .slider-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.85); border: none; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1rem; color: var(--navy); z-index: 10; box-shadow: 0 2px 8px rgba(0,0,0,0.2); transition: background 0.2s; }
+    .slider-arrow:hover { background: #fff; }
+    .slider-arrow.left { left: 12px; }
+    .slider-arrow.right { right: 12px; }
+    .slider-dots { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 10; }
+    .slider-dots .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.5); transition: all 0.3s; cursor: pointer; }
+    .slider-dots .dot.active { background: #fff; width: 22px; border-radius: 4px; }
     @media (min-width: 769px) {
-      .galerie-grid { grid-template-columns: repeat(3, 1fr); }
-      .galerie-item:first-child { grid-column: span 2; aspect-ratio: 4/3; }
+      .photo-slide { aspect-ratio: 21/9; }
     }
 
     /* VEHICULES D'OCCASION / REPRISE */
@@ -370,10 +373,9 @@
         <img src="logo.png" alt="Auto Hainaut" style="height:85px; width:auto; display:block;">
       </a>
       <nav class="header-nav" aria-label="Navigation principale">
-        <a href="#services">Services</a>
-        <a href="#realisations">Galerie</a>
-        <a href="#occasion">Occasion</a>
-        <a href="#temoignages">Avis</a>
+        <a href="index.html" class="active">Accueil</a>
+        <a href="pieces-detachees.html">Pièces détachées</a>
+        <a href="voitures.html">Voitures</a>
         <a href="#contact">Contact</a>
       </nav>
       <div class="header-right">
@@ -393,11 +395,10 @@
     <button class="close-menu" id="closeMenuBtn" aria-label="Fermer le menu">
       <i class="fa-solid fa-xmark"></i>
     </button>
-    <a href="#services">Services</a>
-    <a href="#realisations">Galerie</a>
-    <a href="#occasion">Occasion</a>
-    <a href="#temoignages">Avis clients</a>
-    <a href="#devis">Nous contacter</a>
+    <a href="index.html">Accueil</a>
+    <a href="pieces-detachees.html">Pièces détachées</a>
+    <a href="voitures.html">Voitures</a>
+    <a href="#contact">Contact</a>
     <a href="tel:+3271700795" class="btn btn-primary" style="font-size:1rem;">
       <i class="fa-solid fa-phone"></i> Appeler
     </a>
@@ -444,7 +445,7 @@
           </div>
         </div>
         <div class="hero-image-col">
-          <img src="https://images.unsplash.com/photo-1601621877531-bf602330a601?w=800&q=80" alt="Auto Hainaut — Mini Cooper bleu foncé" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:12px; display:block;">
+          <img src="garage.png" alt="Auto Hainaut — Garage Charleroi" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:12px; display:block;">
           <div class="hero-badge-float">
             <div class="dot"></div>
             <span>Ouvert · Plus de 25 ans d'expérience</span>
@@ -506,7 +507,7 @@
         <div class="services-slider" id="servicesSlider">
 
           <div class="service-card">
-            <div class="service-img-header"><img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=600&q=80" alt="Vente véhicules neufs Charleroi" loading="lazy"></div>
+            <div class="service-img-header"><img src="service-neufs.png" alt="Vente véhicules neufs Charleroi" loading="lazy"></div>
             <div class="service-card-body">
               <div class="service-icon"><i class="fa-solid fa-car-side"></i></div>
               <h3>Vente de Véhicules Neufs</h3>
@@ -516,7 +517,7 @@
           </div>
 
           <div class="service-card">
-            <div class="service-img-header"><img src="https://images.unsplash.com/photo-1596832323822-b6b383a0967b?w=600&q=80" alt="Véhicules occasion Charleroi" loading="lazy"></div>
+            <div class="service-img-header"><img src="service-occasion.png" alt="Véhicules occasion Charleroi" loading="lazy"></div>
             <div class="service-card-body">
               <div class="service-icon"><i class="fa-solid fa-car"></i></div>
               <h3>Véhicules d'Occasion</h3>
@@ -526,7 +527,7 @@
           </div>
 
           <div class="service-card">
-            <div class="service-img-header"><img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=600&q=80" alt="Reprise véhicule Charleroi" loading="lazy"></div>
+            <div class="service-img-header"><img src="service-reprise.png" alt="Reprise véhicule Charleroi" loading="lazy"></div>
             <div class="service-card-body">
               <div class="service-icon"><i class="fa-solid fa-rotate"></i></div>
               <h3>Reprise de Véhicule</h3>
@@ -611,19 +612,17 @@
           <h2 class="section-title" id="real-title">Des véhicules soigneusement sélectionnés</h2>
           <p class="section-subtitle">Chez Auto Hainaut, chaque véhicule est inspecté et préparé avec soin avant d'être proposé à la vente. Voici quelques modèles de notre stock à Charleroi.</p>
         </div>
-        <div class="galerie-grid fade-up">
-          <div class="galerie-item">
-            <img src="https://images.unsplash.com/photo-1582639510494-c80b5de9f148?w=1200&q=80" alt="Auto Hainaut — Stock de véhicules" loading="lazy">
-            <div class="galerie-overlay"><span>Notre stock de qualité</span></div>
-            <span class="galerie-label">Auto Hainaut</span>
+        <div class="photo-slider-wrap fade-up">
+          <div class="photo-slider" id="photoSlider">
+            <div class="photo-slide"><img src="slide1.png" alt="Showroom intérieur Auto Hainaut" loading="lazy"><div class="galerie-overlay"><span>Notre showroom intérieur</span></div></div>
+            <div class="photo-slide"><img src="slide2.png" alt="Stock véhicules occasion Charleroi" loading="lazy"><div class="galerie-overlay"><span>Large stock de véhicules d'occasion</span></div></div>
+            <div class="photo-slide"><img src="slide3.png" alt="Véhicules sélectionnés Auto Hainaut" loading="lazy"><div class="galerie-overlay"><span>Véhicules soigneusement sélectionnés</span></div></div>
+            <div class="photo-slide"><img src="slide4.png" alt="Entrée garage Auto Hainaut Charleroi" loading="lazy"><div class="galerie-overlay"><span>Chaussée de Bruxelles 44, Charleroi</span></div></div>
           </div>
-          <div class="galerie-item">
-            <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=600&q=80" alt="Véhicule occasion Charleroi" loading="lazy">
-            <div class="galerie-overlay"><span>Véhicules d'occasion</span></div>
-          </div>
-          <div class="galerie-item">
-            <img src="https://images.unsplash.com/photo-1663852408695-f57f4d75a536?w=600&q=80" alt="Showroom Auto Hainaut Charleroi" loading="lazy">
-            <div class="galerie-overlay"><span>Qualité garantie</span></div>
+          <button class="slider-arrow left" id="sliderPrev" aria-label="Photo précédente"><i class="fa-solid fa-chevron-left"></i></button>
+          <button class="slider-arrow right" id="sliderNext" aria-label="Photo suivante"><i class="fa-solid fa-chevron-right"></i></button>
+          <div class="slider-dots" id="sliderDots">
+            <span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
           </div>
         </div>
       </div>
@@ -1022,6 +1021,42 @@
         }, step);
       });
     }
+
+    // PHOTO SLIDER
+    (function(){
+      const slider = document.getElementById('photoSlider');
+      if(!slider) return;
+      const slides = slider.querySelectorAll('.photo-slide');
+      const dots = document.querySelectorAll('#sliderDots .dot');
+      const total = slides.length;
+      let cur = 0, startX = 0, isDragging = false, dragDelta = 0;
+
+      function goTo(n) {
+        cur = (n + total) % total;
+        slider.style.transform = 'translateX(-' + (cur * 100) + '%)';
+        dots.forEach((d,i) => d.classList.toggle('active', i === cur));
+      }
+
+      document.getElementById('sliderPrev').addEventListener('click', () => goTo(cur - 1));
+      document.getElementById('sliderNext').addEventListener('click', () => goTo(cur + 1));
+      dots.forEach((d,i) => d.addEventListener('click', () => goTo(i)));
+
+      // Touch / mouse swipe
+      const wrap = slider.parentElement;
+      function onStart(x){ startX = x; isDragging = true; slider.style.transition = 'none'; }
+      function onMove(x){ if(!isDragging) return; dragDelta = x - startX; slider.style.transform = 'translateX(calc(-'+(cur*100)+'% + '+dragDelta+'px))'; }
+      function onEnd(){ if(!isDragging) return; isDragging = false; slider.style.transition = ''; if(dragDelta < -50) goTo(cur+1); else if(dragDelta > 50) goTo(cur-1); else goTo(cur); dragDelta=0; }
+      wrap.addEventListener('touchstart', e => onStart(e.touches[0].clientX), {passive:true});
+      wrap.addEventListener('touchmove', e => onMove(e.touches[0].clientX), {passive:true});
+      wrap.addEventListener('touchend', onEnd);
+      wrap.addEventListener('mousedown', e => onStart(e.clientX));
+      wrap.addEventListener('mousemove', e => onMove(e.clientX));
+      wrap.addEventListener('mouseup', onEnd);
+      wrap.addEventListener('mouseleave', onEnd);
+
+      // Auto-play
+      setInterval(() => goTo(cur + 1), 5000);
+    })();
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {

@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Voitures d'occasion à vendre à Charleroi — Auto Hainaut. Consultez nos annonces de véhicules disponibles. Chaussée de Bruxelles 44, 6042 Charleroi.">
+  <title>Voitures en Vente — Auto Hainaut Charleroi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: 'Open Sans', sans-serif; color: #2D2D2D; background: #F4F6F9; max-width: 100vw; overflow-x: hidden; }
+    h1, h2, h3, h4 { font-family: 'Oswald', sans-serif; line-height: 1.2; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    img { max-width: 100%; display: block; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+    :root {
+      --navy: #0A0A0A;
+      --navy-dark: #111111;
+      --navy-light: #1C1C1C;
+      --blue-pale: #F5F5F5;
+      --orange: #133C82;
+      --orange-dark: #0d2d64;
+      --white: #FFFFFF;
+      --gray-light: #F4F6F9;
+      --gray-mid: #E8ECF2;
+      --text: #2D2D2D;
+      --text-muted: #6B7280;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+      --shadow-md: 0 4px 20px rgba(0,0,0,0.12);
+      --shadow-lg: 0 8px 40px rgba(0,0,0,0.16);
+      --radius-card: 12px;
+      --radius-btn: 50px;
+      --transition: 0.25s ease;
+    }
+
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 26px; border-radius: var(--radius-btn);
+      font-family: 'Open Sans', sans-serif; font-weight: 600;
+      font-size: 0.92rem; transition: all var(--transition);
+      min-height: 48px; white-space: nowrap;
+    }
+    .btn-primary { background: var(--orange); color: #fff; box-shadow: 0 4px 16px rgba(19,60,130,0.35); }
+    .btn-primary:hover { background: var(--orange-dark); transform: translateY(-2px); }
+    .btn-outline-white { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.6); }
+    .btn-outline-white:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+    .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-up.visible { opacity: 1; transform: none; }
+
+    /* TOPBAR */
+    .urgence-band { background: #B7D2EA; color: #123B82; text-align: center; padding: 10px 20px; font-size: 0.82rem; font-weight: 600; position: relative; z-index: 1000; }
+    .urgence-band a { color: #123B82; font-weight: 700; text-decoration: underline; }
+    .pulse-dot { display: inline-block; width: 8px; height: 8px; background: #fff; border-radius: 50%; margin-right: 8px; animation: pulse-dot 1.5s infinite; vertical-align: middle; }
+    @keyframes pulse-dot { 0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.6} }
+
+    /* HEADER */
+    .header { position: sticky; top: 0; z-index: 999; background: #123B82; box-shadow: 0 4px 20px rgba(19,60,130,0.4); transition: transform 0.35s ease; }
+    .header.hidden { transform: translateY(-100%); }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 0 1.5rem; height: 96px; max-width: 1200px; margin: 0 auto; }
+    .logo { display: flex; align-items: center; gap: 10px; }
+    .logo img { height: 85px; width: auto; display: block; }
+    .logo-text { font-family: 'Oswald', sans-serif; font-size: 1.4rem; color: #fff; letter-spacing: 1px; }
+    .logo-text span { color: #93c5fd; }
+    .header-nav { display: none; gap: 28px; }
+    .header-nav a { font-size: 0.9rem; font-weight: 600; color: rgba(255,255,255,0.9); transition: color var(--transition); position: relative; }
+    .header-nav a::after { content:''; position:absolute; bottom:-3px; left:0; width:0; height:2px; background:#fff; transition:width var(--transition); }
+    .header-nav a:hover { color: #fff; }
+    .header-nav a:hover::after { width: 100%; }
+    .header-nav a.active { color: #93c5fd; }
+    .header-nav a.active::after { width: 100%; background: #93c5fd; }
+    .header-right { display: flex; align-items: center; gap: 12px; }
+    .header-tel { display: flex; align-items: center; gap: 6px; background: #fff; color: #133C82; padding: 8px 18px; border-radius: 50px; font-weight: 700; font-size: 0.85rem; min-height: 48px; transition: all var(--transition); }
+    .header-tel:hover { background: #e8f0ff; transform: translateY(-1px); }
+    .btn-devis-header { display: none; background: rgba(255,255,255,0.15); color: #fff; border: 1.5px solid rgba(255,255,255,0.45); padding: 9px 20px; border-radius: 50px; font-size: 0.85rem; font-weight: 600; min-height: 48px; transition: all var(--transition); }
+    .btn-devis-header:hover { background: rgba(255,255,255,0.25); transform: translateY(-1px); }
+    .hamburger { width: 44px; height: 44px; display: flex; flex-direction: column; justify-content: center; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; height: 2px; background: #fff; border-radius: 2px; transition: all 0.3s ease; }
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+    .mobile-menu { display: none; position: fixed; top:0; left:0; right:0; bottom:0; background: var(--navy); z-index: 998; flex-direction: column; align-items: center; justify-content: center; gap: 32px; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { color: #fff; font-family: 'Oswald', sans-serif; font-size: 1.8rem; letter-spacing: 1px; transition: color var(--transition); }
+    .mobile-menu a:hover { color: #93c5fd; }
+    .mobile-menu .close-menu { position: absolute; top: 20px; right: 20px; color: #fff; font-size: 1.5rem; cursor: pointer; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; }
+
+    @media(min-width:900px){
+      .header-nav { display: flex; }
+      .btn-devis-header { display: inline-flex; }
+      .hamburger { display: none; }
+    }
+
+    /* HERO */
+    .hero { background: linear-gradient(135deg, #0A0A0A 0%, #1a2744 60%, #0A0A0A 100%); color: #fff; padding: 70px 1rem 60px; position: relative; overflow: hidden; }
+    .hero::before { content:''; position:absolute; top:-100px; right:-100px; width:400px; height:400px; background:rgba(19,60,130,0.15); border-radius:50%; }
+    .hero::after { content:''; position:absolute; bottom:-80px; left:-80px; width:300px; height:300px; background:rgba(147,197,253,0.06); border-radius:50%; }
+    .hero-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; text-align: center; }
+    .hero-badge { display:inline-flex; align-items:center; gap:6px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.3); color:rgba(255,255,255,0.9); font-size:0.76rem; font-weight:600; letter-spacing:1.2px; text-transform:uppercase; padding:6px 14px; border-radius:50px; margin-bottom:18px; }
+    .hero h1 { font-size: clamp(2rem,5vw,3rem); margin-bottom: 14px; }
+    .hero h1 span { color: #93c5fd; }
+    .hero-sub { color: rgba(255,255,255,0.8); font-size: 1rem; line-height: 1.7; max-width: 560px; margin: 0 auto 32px; }
+    .hero-stats { display: flex; justify-content: center; flex-wrap: wrap; gap: 32px; }
+    .hero-stat strong { font-family:'Oswald',sans-serif; font-size:1.8rem; color:#93c5fd; display:block; }
+    .hero-stat span { font-size:0.8rem; color:rgba(255,255,255,0.65); }
+
+    /* FILTRES */
+    .filters-bar { background: #fff; box-shadow: var(--shadow-md); padding: 20px 1.5rem; position: sticky; top: 96px; z-index: 90; }
+    .filters-inner { max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .filter-select { flex: 1; min-width: 140px; padding: 10px 14px; border: 1.5px solid var(--gray-mid); border-radius: 8px; font-family: 'Open Sans', sans-serif; font-size: 0.88rem; color: var(--text); background: #fff; cursor: pointer; transition: border-color var(--transition); }
+    .filter-select:focus { outline: none; border-color: #133C82; }
+    .filter-search { flex: 2; min-width: 200px; padding: 10px 14px 10px 38px; border: 1.5px solid var(--gray-mid); border-radius: 8px; font-family: 'Open Sans', sans-serif; font-size: 0.88rem; color: var(--text); background: #fff; transition: border-color var(--transition); }
+    .filter-search:focus { outline: none; border-color: #133C82; }
+    .filter-search-wrap { position: relative; flex: 2; min-width: 200px; }
+    .filter-search-wrap i { position:absolute; left:12px; top:50%; transform:translateY(-50%); color:#9ca3af; font-size:0.85rem; pointer-events:none; }
+    .filter-count { font-size: 0.85rem; color: var(--text-muted); white-space: nowrap; margin-left: auto; }
+
+    /* GRID ANNONCES */
+    .listings-section { padding: 48px 1rem 80px; }
+    .listings-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+    .empty-state { max-width:1200px; margin:0 auto; text-align:center; padding:80px 20px; }
+    .empty-state i { font-size:3rem; color:#d1d5db; margin-bottom:16px; }
+    .empty-state h3 { font-family:'Oswald',sans-serif; font-size:1.4rem; color:#6b7280; margin-bottom:8px; }
+    .empty-state p { color:#9ca3af; font-size:0.9rem; }
+
+    /* CARD */
+    .car-card { background: #fff; border-radius: 14px; overflow: hidden; box-shadow: var(--shadow-sm); transition: box-shadow var(--transition), transform var(--transition); cursor: pointer; }
+    .car-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+    .card-photo { position: relative; height: 220px; overflow: hidden; background: #e5e7eb; }
+    .card-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+    .car-card:hover .card-photo img { transform: scale(1.05); }
+    .card-photo-placeholder { width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#9ca3af; gap:8px; }
+    .card-photo-placeholder i { font-size:2.5rem; }
+    .card-photo-placeholder span { font-size:0.8rem; }
+    .card-badge-new { position:absolute; top:12px; left:12px; background:#133C82; color:#fff; font-size:0.72rem; font-weight:700; letter-spacing:1px; padding:4px 10px; border-radius:50px; text-transform:uppercase; }
+    .card-photo-count { position:absolute; bottom:10px; right:10px; background:rgba(0,0,0,0.55); color:#fff; font-size:0.75rem; padding:3px 9px; border-radius:50px; display:flex; align-items:center; gap:4px; }
+    .card-body { padding: 18px 20px 20px; }
+    .card-brand { font-size:0.75rem; font-weight:600; color:#133C82; text-transform:uppercase; letter-spacing:1px; margin-bottom:4px; }
+    .card-title { font-family:'Oswald',sans-serif; font-size:1.15rem; color:var(--navy); margin-bottom:10px; line-height:1.3; }
+    .card-specs { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px; }
+    .card-spec { display:flex; align-items:center; gap:5px; font-size:0.78rem; color:var(--text-muted); }
+    .card-spec i { color:#133C82; font-size:0.75rem; }
+    .card-footer { display:flex; align-items:center; justify-content:space-between; padding-top:14px; border-top:1px solid var(--gray-mid); }
+    .card-price { font-family:'Oswald',sans-serif; font-size:1.4rem; color:#133C82; }
+    .card-price small { font-family:'Open Sans',sans-serif; font-size:0.7rem; color:#9ca3af; font-weight:400; display:block; line-height:1; }
+    .card-cta { display:flex; align-items:center; gap:6px; background:#133C82; color:#fff; padding:8px 16px; border-radius:50px; font-size:0.82rem; font-weight:600; transition:background var(--transition); }
+    .card-cta:hover { background:#0d2d64; }
+
+    /* CTA BAND */
+    .cta-band { background: linear-gradient(135deg,#133C82,#0d2d64); color:#fff; padding:60px 1rem; text-align:center; }
+    .cta-band h2 { font-size:clamp(1.6rem,4vw,2.2rem); margin-bottom:10px; }
+    .cta-band p { color:rgba(255,255,255,0.8); margin-bottom:28px; }
+    .cta-phones { display:flex; justify-content:center; flex-wrap:wrap; gap:16px; }
+    .cta-phone { display:flex; align-items:center; gap:8px; background:rgba(255,255,255,0.12); border:1.5px solid rgba(255,255,255,0.35); color:#fff; padding:12px 24px; border-radius:50px; font-weight:700; font-size:1rem; transition:all var(--transition); }
+    .cta-phone:hover { background:rgba(255,255,255,0.22); transform:translateY(-2px); }
+
+    /* FOOTER */
+    footer { background: var(--navy); color: rgba(255,255,255,0.7); padding: 48px 1rem 28px; }
+    .footer-grid { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:32px; padding-bottom:32px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:24px; }
+    .footer-brand .logo-text { font-size:1.2rem; margin-bottom:10px; display:block; }
+    .footer-brand p { font-size:0.82rem; line-height:1.6; }
+    .footer-col h4 { font-family:'Oswald',sans-serif; font-size:0.95rem; color:#fff; margin-bottom:14px; letter-spacing:0.5px; }
+    .footer-col li { margin-bottom:8px; }
+    .footer-col a { font-size:0.82rem; transition:color var(--transition); }
+    .footer-col a:hover { color:#93c5fd; }
+    .footer-bottom { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; }
+    .footer-bottom p { font-size:0.78rem; }
+    .admin-trigger { font-size:0.72rem; color:rgba(255,255,255,0.2); cursor:pointer; user-select:none; transition:color 0.3s; }
+    .admin-trigger:hover { color:rgba(255,255,255,0.4); }
+
+    /* MODAL DETAIL */
+    .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:2000; align-items:flex-start; justify-content:center; padding:20px; overflow-y:auto; backdrop-filter:blur(4px); }
+    .modal-overlay.open { display:flex; }
+    .modal-box { background:#fff; border-radius:16px; width:100%; max-width:860px; overflow:hidden; position:relative; margin:auto; }
+    .modal-close { position:absolute; top:14px; right:14px; width:36px; height:36px; background:rgba(0,0,0,0.12); border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-size:1rem; cursor:pointer; z-index:10; transition:background var(--transition); }
+    .modal-close:hover { background:rgba(0,0,0,0.28); }
+
+    /* Gallery */
+    .gallery-main { position:relative; height:340px; background:#111; overflow:hidden; }
+    .gallery-main img { width:100%; height:100%; object-fit:cover; }
+    .gallery-nav { position:absolute; top:50%; transform:translateY(-50%); width:100%; display:flex; justify-content:space-between; padding:0 12px; pointer-events:none; }
+    .gallery-btn { pointer-events:all; width:38px; height:38px; background:rgba(0,0,0,0.45); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:background var(--transition); font-size:0.9rem; }
+    .gallery-btn:hover { background:rgba(0,0,0,0.7); }
+    .gallery-counter { position:absolute; bottom:12px; right:14px; background:rgba(0,0,0,0.5); color:#fff; font-size:0.75rem; padding:3px 10px; border-radius:50px; }
+    .gallery-thumbs { display:flex; gap:6px; padding:10px 14px; overflow-x:auto; background:#f9f9f9; }
+    .gallery-thumbs::-webkit-scrollbar { height:4px; }
+    .gallery-thumbs::-webkit-scrollbar-thumb { background:#ddd; border-radius:2px; }
+    .gallery-thumb { width:60px; height:50px; object-fit:cover; border-radius:6px; cursor:pointer; opacity:0.6; border:2px solid transparent; flex-shrink:0; transition:all var(--transition); }
+    .gallery-thumb.active { opacity:1; border-color:#133C82; }
+
+    .modal-content { padding:24px 28px 32px; }
+    .modal-brand { font-size:0.75rem; font-weight:600; color:#133C82; text-transform:uppercase; letter-spacing:1px; margin-bottom:4px; }
+    .modal-title { font-family:'Oswald',sans-serif; font-size:1.6rem; color:var(--navy); margin-bottom:16px; }
+    .modal-specs-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-bottom:20px; }
+    @media(min-width:600px){ .modal-specs-grid { grid-template-columns:repeat(3,1fr); } }
+    .modal-spec { background:#f4f6f9; border-radius:8px; padding:10px 14px; }
+    .modal-spec label { font-size:0.7rem; color:#9ca3af; font-weight:600; text-transform:uppercase; letter-spacing:0.8px; display:block; margin-bottom:2px; }
+    .modal-spec span { font-size:0.92rem; font-weight:600; color:var(--navy); }
+    .modal-desc h4 { font-family:'Oswald',sans-serif; font-size:1rem; color:var(--navy); margin-bottom:8px; }
+    .modal-desc p { font-size:0.88rem; color:#555; line-height:1.7; }
+    .modal-price-row { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-top:20px; padding-top:20px; border-top:1px solid #e5e7eb; }
+    .modal-price { font-family:'Oswald',sans-serif; font-size:2rem; color:#133C82; }
+    .modal-price small { font-family:'Open Sans',sans-serif; font-size:0.72rem; color:#9ca3af; font-weight:400; display:block; }
+    .modal-tel-btn { display:flex; align-items:center; gap:8px; background:#133C82; color:#fff; padding:12px 24px; border-radius:50px; font-weight:700; font-size:0.95rem; transition:background var(--transition); }
+    .modal-tel-btn:hover { background:#0d2d64; }
+
+    /* ADMIN LOGIN MODAL */
+    .admin-modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.75); z-index:3000; align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(6px); }
+    .admin-modal.open { display:flex; }
+    .admin-box { background:#fff; border-radius:16px; width:100%; max-width:400px; padding:36px 32px; position:relative; }
+    .admin-box h3 { font-family:'Oswald',sans-serif; font-size:1.4rem; color:var(--navy); margin-bottom:6px; }
+    .admin-box p { font-size:0.85rem; color:#9ca3af; margin-bottom:24px; }
+    .admin-close { position:absolute; top:14px; right:14px; width:32px; height:32px; background:#f4f6f9; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.9rem; color:#6b7280; transition:background var(--transition); }
+    .admin-close:hover { background:#e5e7eb; }
+    .form-group { margin-bottom:16px; }
+    .form-group label { display:block; font-size:0.82rem; font-weight:600; color:var(--navy); margin-bottom:6px; }
+    .form-group input, .form-group textarea, .form-group select { width:100%; padding:10px 14px; border:1.5px solid #e5e7eb; border-radius:8px; font-family:'Open Sans',sans-serif; font-size:0.88rem; color:var(--text); transition:border-color var(--transition); }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline:none; border-color:#133C82; }
+    .form-group textarea { resize:vertical; min-height:90px; }
+    .form-error { font-size:0.78rem; color:#ef4444; margin-top:4px; display:none; }
+    .form-error.show { display:block; }
+    .btn-full { width:100%; justify-content:center; }
+
+    /* ADMIN PANEL */
+    .admin-panel { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.8); z-index:3000; overflow-y:auto; padding:20px; backdrop-filter:blur(6px); }
+    .admin-panel.open { display:block; }
+    .panel-box { background:#fff; border-radius:16px; max-width:900px; margin:0 auto; overflow:hidden; }
+    .panel-header { background:#133C82; color:#fff; padding:20px 28px; display:flex; align-items:center; justify-content:space-between; }
+    .panel-header h3 { font-family:'Oswald',sans-serif; font-size:1.3rem; }
+    .panel-header-btns { display:flex; gap:10px; }
+    .panel-body { padding:28px; }
+    .panel-tabs { display:flex; gap:8px; margin-bottom:24px; border-bottom:1px solid #e5e7eb; padding-bottom:0; }
+    .panel-tab { padding:10px 20px; border-radius:8px 8px 0 0; font-weight:600; font-size:0.88rem; color:#6b7280; cursor:pointer; border-bottom:2px solid transparent; margin-bottom:-1px; transition:all var(--transition); }
+    .panel-tab.active { color:#133C82; border-bottom-color:#133C82; background:#f0f4ff; }
+    .panel-tab-content { display:none; }
+    .panel-tab-content.active { display:block; }
+
+    /* ADD FORM */
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    @media(max-width:600px){ .form-row { grid-template-columns:1fr; } }
+    .photo-upload-area { border:2px dashed #d1d5db; border-radius:10px; padding:24px; text-align:center; cursor:pointer; transition:border-color var(--transition); background:#fafafa; position:relative; }
+    .photo-upload-area:hover { border-color:#133C82; background:#f0f4ff; }
+    .photo-upload-area i { font-size:2rem; color:#d1d5db; margin-bottom:8px; }
+    .photo-upload-area p { font-size:0.85rem; color:#9ca3af; }
+    .photo-upload-area small { font-size:0.75rem; color:#c4c4c4; }
+    .photo-upload-area input[type="file"] { position:absolute; inset:0; opacity:0; cursor:pointer; }
+    .photos-preview { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+    .photo-preview-item { position:relative; width:80px; height:65px; }
+    .photo-preview-item img { width:100%; height:100%; object-fit:cover; border-radius:6px; }
+    .photo-preview-item .remove-photo { position:absolute; top:-6px; right:-6px; width:20px; height:20px; background:#ef4444; color:#fff; border-radius:50%; font-size:0.6rem; display:flex; align-items:center; justify-content:center; cursor:pointer; }
+
+    /* LISTINGS TABLE */
+    .listings-table { width:100%; border-collapse:collapse; }
+    .listings-table th { text-align:left; font-size:0.75rem; color:#9ca3af; font-weight:600; text-transform:uppercase; letter-spacing:0.8px; padding:8px 12px; border-bottom:1px solid #e5e7eb; }
+    .listings-table td { padding:12px; border-bottom:1px solid #f3f4f6; font-size:0.85rem; vertical-align:middle; }
+    .listings-table tr:hover td { background:#f9fafb; }
+    .table-thumb { width:54px; height:42px; object-fit:cover; border-radius:6px; }
+    .table-thumb-placeholder { width:54px; height:42px; background:#e5e7eb; border-radius:6px; display:flex; align-items:center; justify-content:center; color:#9ca3af; font-size:0.8rem; }
+    .badge-active { display:inline-block; background:#dcfce7; color:#16a34a; font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:50px; }
+    .badge-draft { display:inline-block; background:#fef9c3; color:#ca8a04; font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:50px; }
+    .table-actions { display:flex; gap:6px; }
+    .table-btn { padding:5px 12px; border-radius:50px; font-size:0.75rem; font-weight:600; cursor:pointer; border:none; transition:all var(--transition); }
+    .table-btn-edit { background:#eff6ff; color:#133C82; }
+    .table-btn-edit:hover { background:#dbeafe; }
+    .table-btn-del { background:#fef2f2; color:#ef4444; }
+    .table-btn-del:hover { background:#fee2e2; }
+    .table-btn-toggle { background:#f0fdf4; color:#16a34a; }
+    .table-btn-toggle.inactive { background:#fff7ed; color:#ea580c; }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="urgence-band">
+  <span class="pulse-dot"></span>
+  Garage ouvert du lundi au samedi — <a href="tel:0717007950">071.700.795</a> &nbsp;|&nbsp; <a href="tel:0477680867">0477.680.867</a>
+</div>
+
+<!-- HEADER -->
+<header class="header" id="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <img src="logo.png" alt="Auto Hainaut" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span class="logo-text" style="display:none">AUTO <span>HAINAUT</span></span>
+    </a>
+    <nav class="header-nav">
+      <a href="index.html">Accueil</a>
+      <a href="pieces-detachees.html">Pièces détachées</a>
+      <a href="voitures.html" class="active">Voitures</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <div class="header-right">
+      <a href="tel:0717007950" class="header-tel"><i class="fa-solid fa-phone"></i> 071.700.795</a>
+      <a href="index.html#contact" class="btn-devis-header">Devis gratuit</a>
+      <div class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="close-menu" id="closeMenu"><i class="fa-solid fa-xmark"></i></div>
+  <a href="index.html">Accueil</a>
+  <a href="pieces-detachees.html">Pièces détachées</a>
+  <a href="voitures.html">Voitures</a>
+  <a href="index.html#contact">Contact</a>
+  <a href="tel:0717007950"><i class="fa-solid fa-phone"></i> 071.700.795</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge"><i class="fa-solid fa-car"></i> Voitures en vente</div>
+    <h1>Nos véhicules<br><span>disponibles à Charleroi</span></h1>
+    <p class="hero-sub">Consultez notre sélection de voitures d'occasion soigneusement préparées. Toutes garanties, toutes vérifiées — passage direct au garage pour voir le véhicule.</p>
+    <div class="hero-stats">
+      <div class="hero-stat" id="statCount"><strong>—</strong><span>véhicules dispo</span></div>
+      <div class="hero-stat"><strong>25+</strong><span>ans d'expérience</span></div>
+      <div class="hero-stat"><strong>100%</strong><span>contrôlés</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FILTRES -->
+<div class="filters-bar" id="filtersBar">
+  <div class="filters-inner">
+    <div class="filter-search-wrap">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" class="filter-search" id="searchInput" placeholder="Rechercher marque, modèle…">
+    </div>
+    <select class="filter-select" id="filterBrand">
+      <option value="">Toutes marques</option>
+    </select>
+    <select class="filter-select" id="filterFuel">
+      <option value="">Carburant</option>
+      <option value="Essence">Essence</option>
+      <option value="Diesel">Diesel</option>
+      <option value="Hybride">Hybride</option>
+      <option value="Électrique">Électrique</option>
+      <option value="GPL">GPL</option>
+    </select>
+    <select class="filter-select" id="filterPrice">
+      <option value="">Prix max</option>
+      <option value="5000">5 000 €</option>
+      <option value="8000">8 000 €</option>
+      <option value="12000">12 000 €</option>
+      <option value="18000">18 000 €</option>
+      <option value="25000">25 000 €</option>
+    </select>
+    <span class="filter-count" id="filterCount"></span>
+  </div>
+</div>
+
+<!-- LISTINGS -->
+<section class="listings-section">
+  <div class="listings-grid" id="listingsGrid"></div>
+  <div class="empty-state" id="emptyState" style="display:none">
+    <i class="fa-solid fa-car-side"></i>
+    <h3>Aucun véhicule trouvé</h3>
+    <p>Modifiez vos filtres ou appelez-nous directement au 071.700.795</p>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band">
+  <div class="container">
+    <h2>Un véhicule vous intéresse ?</h2>
+    <p>Passez directement au garage pour le voir — Chaussée de Bruxelles 44, 6042 Charleroi</p>
+    <div class="cta-phones">
+      <a href="tel:0717007950" class="cta-phone"><i class="fa-solid fa-phone"></i> 071.700.795</a>
+      <a href="tel:0477680867" class="cta-phone"><i class="fa-solid fa-mobile-screen-button"></i> 0477.680.867</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo-text">AUTO <span style="color:#93c5fd">HAINAUT</span></span>
+      <p>Votre garage de confiance à Charleroi depuis plus de 25 ans. Vente, entretien, pièces détachées.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Pages</h4>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="voitures.html">Voitures en vente</a></li>
+        <li><a href="pieces-detachees.html">Pièces détachées</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:0717007950">071.700.795</a></li>
+        <li><a href="tel:0477680867">0477.680.867</a></li>
+        <li>Chaussée de Bruxelles 44<br>6042 Charleroi</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Horaires</h4>
+      <ul>
+        <li>Lun – Ven : 8h – 18h</li>
+        <li>Samedi : 9h – 16h</li>
+        <li>Dimanche : Fermé</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Auto Hainaut — Tous droits réservés</p>
+    <span class="admin-trigger" id="adminTrigger" title="Admin">⚙</span>
+  </div>
+</footer>
+
+<!-- MODAL DETAIL VOITURE -->
+<div class="modal-overlay" id="detailModal">
+  <div class="modal-box">
+    <div class="modal-close" id="detailClose"><i class="fa-solid fa-xmark"></i></div>
+    <div class="gallery-main">
+      <img id="galleryMainImg" src="" alt="">
+      <div class="gallery-nav">
+        <div class="gallery-btn" id="galleryPrev"><i class="fa-solid fa-chevron-left"></i></div>
+        <div class="gallery-btn" id="galleryNext"><i class="fa-solid fa-chevron-right"></i></div>
+      </div>
+      <div class="gallery-counter" id="galleryCounter">1 / 1</div>
+    </div>
+    <div class="gallery-thumbs" id="galleryThumbs"></div>
+    <div class="modal-content">
+      <div class="modal-brand" id="modalBrand"></div>
+      <div class="modal-title" id="modalTitle"></div>
+      <div class="modal-specs-grid" id="modalSpecs"></div>
+      <div class="modal-desc"><h4>Description</h4><p id="modalDesc"></p></div>
+      <div class="modal-price-row">
+        <div class="modal-price"><div id="modalPrice"></div><small>Prix affiché hors frais</small></div>
+        <a href="tel:0717007950" class="modal-tel-btn"><i class="fa-solid fa-phone"></i> 071.700.795</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN LOGIN MODAL -->
+<div class="admin-modal" id="adminLoginModal">
+  <div class="admin-box">
+    <div class="admin-close" id="adminLoginClose"><i class="fa-solid fa-xmark"></i></div>
+    <h3>Espace Admin</h3>
+    <p>Accès réservé au gestionnaire du site</p>
+    <div class="form-group">
+      <label>Mot de passe</label>
+      <input type="password" id="adminPassInput" placeholder="••••••••">
+      <div class="form-error" id="adminPassError">Mot de passe incorrect</div>
+    </div>
+    <button class="btn btn-primary btn-full" id="adminLoginBtn"><i class="fa-solid fa-lock-open"></i> Accéder</button>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="admin-panel" id="adminPanel">
+  <div class="panel-box">
+    <div class="panel-header">
+      <h3><i class="fa-solid fa-gauge-high"></i> Gestion des annonces</h3>
+      <div class="panel-header-btns">
+        <button class="btn btn-outline-white" id="adminLogout" style="padding:8px 16px;font-size:0.82rem"><i class="fa-solid fa-right-from-bracket"></i> Déconnecter</button>
+        <button class="btn btn-outline-white" id="adminPanelClose" style="padding:8px 14px;font-size:0.82rem"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="panel-tabs">
+        <div class="panel-tab active" data-tab="list">Mes annonces (<span id="tabCount">0</span>)</div>
+        <div class="panel-tab" data-tab="add" id="addTabBtn">+ Nouvelle annonce</div>
+      </div>
+
+      <!-- TAB: LIST -->
+      <div class="panel-tab-content active" id="tabList">
+        <table class="listings-table" id="adminTable">
+          <thead>
+            <tr>
+              <th>Photo</th>
+              <th>Véhicule</th>
+              <th>Prix</th>
+              <th>Statut</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="adminTableBody"></tbody>
+        </table>
+        <div id="adminEmptyMsg" style="text-align:center;padding:40px;color:#9ca3af;display:none">
+          <i class="fa-solid fa-car" style="font-size:2rem;margin-bottom:12px"></i>
+          <p>Aucune annonce — ajoutez votre première voiture</p>
+        </div>
+      </div>
+
+      <!-- TAB: ADD/EDIT -->
+      <div class="panel-tab-content" id="tabAdd">
+        <input type="hidden" id="editId">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Marque *</label>
+            <input type="text" id="fBrand" placeholder="Toyota, Peugeot…">
+          </div>
+          <div class="form-group">
+            <label>Modèle *</label>
+            <input type="text" id="fModel" placeholder="Corolla, 208…">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Année *</label>
+            <input type="number" id="fYear" placeholder="2018" min="1990" max="2025">
+          </div>
+          <div class="form-group">
+            <label>Kilométrage</label>
+            <input type="text" id="fKm" placeholder="85 000 km">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Carburant</label>
+            <select id="fFuel">
+              <option value="Diesel">Diesel</option>
+              <option value="Essence">Essence</option>
+              <option value="Hybride">Hybride</option>
+              <option value="Électrique">Électrique</option>
+              <option value="GPL">GPL</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Boîte de vitesses</label>
+            <select id="fGear">
+              <option value="Manuelle">Manuelle</option>
+              <option value="Automatique">Automatique</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Puissance (ch)</label>
+            <input type="text" id="fPower" placeholder="110 ch">
+          </div>
+          <div class="form-group">
+            <label>Couleur</label>
+            <input type="text" id="fColor" placeholder="Blanc, Gris…">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Prix (€) *</label>
+          <input type="number" id="fPrice" placeholder="9500" min="0">
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea id="fDesc" placeholder="Décrivez le véhicule : état, options, historique entretien…"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Photos (max 15)</label>
+          <div class="photo-upload-area" id="photoUploadArea">
+            <i class="fa-solid fa-camera"></i>
+            <p>Cliquez ou glissez vos photos ici</p>
+            <small>JPG, PNG — max 15 photos</small>
+            <input type="file" id="photoInput" multiple accept="image/*">
+          </div>
+          <div class="photos-preview" id="photosPreview"></div>
+        </div>
+        <div style="display:flex;gap:12px;margin-top:8px">
+          <button class="btn btn-primary" id="saveAdBtn" style="flex:1;justify-content:center"><i class="fa-solid fa-floppy-disk"></i> Enregistrer l'annonce</button>
+          <button class="btn" style="background:#f4f6f9;color:#6b7280;padding:13px 20px" id="cancelEditBtn"><i class="fa-solid fa-xmark"></i> Annuler</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// DATA LAYER
+// ============================================================
+const STORAGE_KEY = 'ah_listings';
+const ADMIN_PASS = 'autohainaut44';
+
+function getListings() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; } catch { return []; }
+}
+function saveListings(arr) { localStorage.setItem(STORAGE_KEY, JSON.stringify(arr)); }
+function genId() { return Date.now().toString(36) + Math.random().toString(36).slice(2); }
+
+// DEMO DATA — loaded if localStorage is empty
+const DEMO = [
+  { id:'d1', brand:'Toyota', model:'Yaris 1.5 Hybrid', year:2020, km:'52 000 km', fuel:'Hybride', gear:'Automatique', power:'100 ch', color:'Blanc nacré', price:13900, desc:"Toyota Yaris hybride en excellent état. Carnet entretien complet Toyota. Climatisation auto, caméra de recul, Apple CarPlay. Garantie 6 mois.", photos:[], active:true },
+  { id:'d2', brand:'Peugeot', model:'308 1.6 BlueHDi', year:2018, km:'87 000 km', fuel:'Diesel', gear:'Manuelle', power:'120 ch', color:'Gris Artense', price:9800, desc:"Peugeot 308 diesel très bien entretenue. Révisée à jour. GPS, régulateur de vitesse, sièges chauffants. Première main.", photos:[], active:true },
+  { id:'d3', brand:'Volkswagen', model:'Golf 1.6 TDI', year:2017, km:'112 000 km', fuel:'Diesel', gear:'Manuelle', power:'115 ch', color:'Noir', price:8500, desc:"Volkswagen Golf TDI en bon état général. Moteur révisé. Équipements : climatisation, Bluetooth, jantes alliage.", photos:[], active:true },
+  { id:'d4', brand:'Renault', model:'Clio 1.2 TCe', year:2019, km:'61 000 km', fuel:'Essence', gear:'Manuelle', power:'120 ch', color:'Rouge flamme', price:10500, desc:"Renault Clio IV en parfait état. Garantie 6 mois. Faible kilométrage, entretien constructeur.", photos:[], active:true },
+  { id:'d5', brand:'Ford', model:'Focus 1.5 EcoBoost', year:2018, km:'94 000 km', fuel:'Essence', gear:'Manuelle', power:'150 ch', color:'Bleu', price:8900, desc:"Ford Focus en très bon état. Moteur EcoBoost puissant. GPS intégré, caméra de recul, Bluetooth.", photos:[], active:true },
+  { id:'d6', brand:'Opel', model:'Astra 1.6 CDTI', year:2016, km:'130 000 km', fuel:'Diesel', gear:'Manuelle', power:'110 ch', color:'Blanc', price:6200, desc:"Opel Astra diesel économique. Entretien régulier. Bon état général, idéal premier véhicule ou usage quotidien.", photos:[], active:true },
+  { id:'d7', brand:'BMW', model:'Série 1 118d', year:2019, km:'78 000 km', fuel:'Diesel', gear:'Automatique', power:'150 ch', color:'Noir saphir', price:18500, desc:"BMW Série 1 automatique, finition Sport. Toit ouvrant, sieges cuir, LED, GPS iDrive. État irréprochable.", photos:[], active:true },
+  { id:'d8', brand:'Mercedes', model:'Classe A 180d', year:2020, km:'55 000 km', fuel:'Diesel', gear:'Automatique', power:'116 ch', color:'Gris montagne', price:21900, desc:"Mercedes Classe A récente, faible kilométrage. MBUX, caméra 360°, aide au stationnement, pack AMG Line.", photos:[], active:true },
+  { id:'d9', brand:'Hyundai', model:'i30 1.4 T-GDI', year:2018, km:'69 000 km', fuel:'Essence', gear:'Manuelle', power:'140 ch', color:'Rouge', price:9200, desc:"Hyundai i30 essence très bien équipée. Garantie constructeur restante. Climatisation, Android Auto/CarPlay.", photos:[], active:true },
+  { id:'d10', brand:'Kia', model:'Sportage 1.6 GDI', year:2019, km:'83 000 km', fuel:'Essence', gear:'Automatique', power:'132 ch', color:'Blanc arctique', price:14800, desc:"Kia Sportage SUV en excellent état. Garantie constructeur 7 ans. Toit panoramique, cuir, GPS.", photos:[], active:true },
+  { id:'d11', brand:'Seat', model:'Leon 1.6 TDI FR', year:2017, km:'98 000 km', fuel:'Diesel', gear:'Manuelle', power:'110 ch', color:'Gris magnétique', price:8100, desc:"SEAT Leon FR diesel sportif. Jantes 17\", sièges baquets, finition FR soignée. Bon état général.", photos:[], active:true },
+  { id:'d12', brand:'Skoda', model:'Octavia 2.0 TDI', year:2018, km:'105 000 km', fuel:'Diesel', gear:'Manuelle', power:'150 ch', color:'Vert forêt', price:11200, desc:"Skoda Octavia robuste et spacieuse. Diesel puissant, idéal grandes distances. GPS, attelage, coffre XXL.", photos:[], active:true },
+];
+
+function initDemo() {
+  const existing = getListings();
+  if (existing.length === 0) { saveListings(DEMO); }
+}
+initDemo();
+
+// ============================================================
+// PUBLIC GALLERY
+// ============================================================
+let currentPhotos = [];
+let currentPhotoIndex = 0;
+
+function formatPrice(p) {
+  return Number(p).toLocaleString('fr-BE') + ' €';
+}
+
+function renderCard(car) {
+  const div = document.createElement('div');
+  div.className = 'car-card fade-up';
+  const hasPhoto = car.photos && car.photos.length > 0;
+  const photoHTML = hasPhoto
+    ? `<img src="${car.photos[0]}" alt="${car.brand} ${car.model}" loading="lazy">`
+    : `<div class="card-photo-placeholder"><i class="fa-solid fa-car-side"></i><span>Photo bientôt</span></div>`;
+  const countBadge = hasPhoto && car.photos.length > 1
+    ? `<div class="card-photo-count"><i class="fa-solid fa-camera"></i> ${car.photos.length}</div>` : '';
+  div.innerHTML = `
+    <div class="card-photo">
+      ${photoHTML}
+      <div class="card-badge-new">Disponible</div>
+      ${countBadge}
+    </div>
+    <div class="card-body">
+      <div class="card-brand">${car.brand}</div>
+      <div class="card-title">${car.model} — ${car.year}</div>
+      <div class="card-specs">
+        ${car.km ? `<div class="card-spec"><i class="fa-solid fa-gauge-high"></i>${car.km}</div>` : ''}
+        ${car.fuel ? `<div class="card-spec"><i class="fa-solid fa-gas-pump"></i>${car.fuel}</div>` : ''}
+        ${car.gear ? `<div class="card-spec"><i class="fa-solid fa-gears"></i>${car.gear}</div>` : ''}
+        ${car.power ? `<div class="card-spec"><i class="fa-solid fa-bolt"></i>${car.power}</div>` : ''}
+      </div>
+      <div class="card-footer">
+        <div class="card-price">${formatPrice(car.price)}<small>Voir détails</small></div>
+        <div class="card-cta"><i class="fa-solid fa-eye"></i> Voir</div>
+      </div>
+    </div>`;
+  div.addEventListener('click', () => openDetail(car));
+  return div;
+}
+
+function renderListings() {
+  const grid = document.getElementById('listingsGrid');
+  const empty = document.getElementById('emptyState');
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  const brand = document.getElementById('filterBrand').value;
+  const fuel = document.getElementById('filterFuel').value;
+  const maxPrice = document.getElementById('filterPrice').value;
+  const countEl = document.getElementById('filterCount');
+  const statCount = document.getElementById('statCount').querySelector('strong');
+
+  const all = getListings().filter(c => c.active);
+  const filtered = all.filter(c => {
+    const q = `${c.brand} ${c.model}`.toLowerCase();
+    if (search && !q.includes(search)) return false;
+    if (brand && c.brand !== brand) return false;
+    if (fuel && c.fuel !== fuel) return false;
+    if (maxPrice && Number(c.price) > Number(maxPrice)) return false;
+    return true;
+  });
+
+  grid.innerHTML = '';
+  if (filtered.length === 0) { empty.style.display = 'block'; }
+  else { empty.style.display = 'none'; filtered.forEach(c => grid.appendChild(renderCard(c))); }
+
+  countEl.textContent = `${filtered.length} véhicule${filtered.length > 1 ? 's' : ''}`;
+  statCount.textContent = all.length;
+
+  // Update brand filter
+  const brandSel = document.getElementById('filterBrand');
+  const current = brandSel.value;
+  const brands = [...new Set(all.map(c => c.brand))].sort();
+  brandSel.innerHTML = '<option value="">Toutes marques</option>' +
+    brands.map(b => `<option value="${b}"${b === current ? ' selected' : ''}>${b}</option>`).join('');
+
+  // Fade-up observer
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+}
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.1 });
+
+// Filter events
+['searchInput','filterBrand','filterFuel','filterPrice'].forEach(id => {
+  document.getElementById(id).addEventListener('input', renderListings);
+});
+
+// ============================================================
+// DETAIL MODAL
+// ============================================================
+function openDetail(car) {
+  currentPhotos = car.photos || [];
+  currentPhotoIndex = 0;
+  document.getElementById('modalBrand').textContent = car.brand;
+  document.getElementById('modalTitle').textContent = `${car.model} — ${car.year}`;
+  document.getElementById('modalPrice').textContent = formatPrice(car.price);
+  document.getElementById('modalDesc').textContent = car.desc || 'Contactez-nous pour plus d\'informations.';
+
+  const specs = [
+    { label:'Kilométrage', val:car.km }, { label:'Carburant', val:car.fuel },
+    { label:'Boîte', val:car.gear }, { label:'Puissance', val:car.power },
+    { label:'Couleur', val:car.color }, { label:'Année', val:car.year }
+  ].filter(s => s.val);
+  document.getElementById('modalSpecs').innerHTML = specs.map(s =>
+    `<div class="modal-spec"><label>${s.label}</label><span>${s.val}</span></div>`).join('');
+
+  updateGallery();
+  document.getElementById('detailModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function updateGallery() {
+  const mainImg = document.getElementById('galleryMainImg');
+  const thumbsEl = document.getElementById('galleryThumbs');
+  const counter = document.getElementById('galleryCounter');
+
+  if (currentPhotos.length === 0) {
+    mainImg.src = '';
+    mainImg.alt = 'Pas de photo';
+    mainImg.style.display = 'none';
+    thumbsEl.innerHTML = '';
+    counter.textContent = '';
+    return;
+  }
+  mainImg.style.display = 'block';
+  mainImg.src = currentPhotos[currentPhotoIndex];
+  counter.textContent = `${currentPhotoIndex + 1} / ${currentPhotos.length}`;
+  thumbsEl.innerHTML = currentPhotos.map((p, i) =>
+    `<img class="gallery-thumb${i === currentPhotoIndex ? ' active' : ''}" src="${p}" data-i="${i}" alt="photo ${i+1}">`
+  ).join('');
+  thumbsEl.querySelectorAll('.gallery-thumb').forEach(t =>
+    t.addEventListener('click', () => { currentPhotoIndex = +t.dataset.i; updateGallery(); }));
+}
+
+document.getElementById('galleryPrev').addEventListener('click', () => {
+  if (!currentPhotos.length) return;
+  currentPhotoIndex = (currentPhotoIndex - 1 + currentPhotos.length) % currentPhotos.length;
+  updateGallery();
+});
+document.getElementById('galleryNext').addEventListener('click', () => {
+  if (!currentPhotos.length) return;
+  currentPhotoIndex = (currentPhotoIndex + 1) % currentPhotos.length;
+  updateGallery();
+});
+document.getElementById('detailClose').addEventListener('click', closeDetail);
+document.getElementById('detailModal').addEventListener('click', e => { if (e.target === document.getElementById('detailModal')) closeDetail(); });
+function closeDetail() { document.getElementById('detailModal').classList.remove('open'); document.body.style.overflow = ''; }
+
+// ============================================================
+// ADMIN LOGIN
+// ============================================================
+let adminLoggedIn = false;
+
+document.getElementById('adminTrigger').addEventListener('click', () => {
+  if (adminLoggedIn) { openAdminPanel(); }
+  else { document.getElementById('adminLoginModal').classList.add('open'); document.getElementById('adminPassInput').value = ''; document.getElementById('adminPassError').classList.remove('show'); }
+});
+document.getElementById('adminLoginClose').addEventListener('click', () => document.getElementById('adminLoginModal').classList.remove('open'));
+document.getElementById('adminLoginBtn').addEventListener('click', attemptLogin);
+document.getElementById('adminPassInput').addEventListener('keydown', e => { if (e.key === 'Enter') attemptLogin(); });
+
+function attemptLogin() {
+  if (document.getElementById('adminPassInput').value === ADMIN_PASS) {
+    adminLoggedIn = true;
+    document.getElementById('adminLoginModal').classList.remove('open');
+    openAdminPanel();
+  } else {
+    document.getElementById('adminPassError').classList.add('show');
+    document.getElementById('adminPassInput').value = '';
+  }
+}
+
+// ============================================================
+// ADMIN PANEL
+// ============================================================
+let editingPhotos = [];
+
+function openAdminPanel() {
+  document.getElementById('adminPanel').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  renderAdminTable();
+  switchTab('list');
+}
+function closeAdminPanel() { document.getElementById('adminPanel').classList.remove('open'); document.body.style.overflow = ''; }
+
+document.getElementById('adminPanelClose').addEventListener('click', closeAdminPanel);
+document.getElementById('adminLogout').addEventListener('click', () => { adminLoggedIn = false; closeAdminPanel(); });
+
+// Tabs
+document.querySelectorAll('.panel-tab').forEach(tab => {
+  tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+});
+function switchTab(name) {
+  document.querySelectorAll('.panel-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === name));
+  document.querySelectorAll('.panel-tab-content').forEach(c => c.classList.toggle('active', c.id === 'tab' + name.charAt(0).toUpperCase() + name.slice(1)));
+  if (name === 'add' && !document.getElementById('editId').value) resetAddForm();
+}
+
+function renderAdminTable() {
+  const listings = getListings();
+  const tbody = document.getElementById('adminTableBody');
+  const emptyMsg = document.getElementById('adminEmptyMsg');
+  document.getElementById('tabCount').textContent = listings.length;
+
+  if (listings.length === 0) { tbody.innerHTML = ''; emptyMsg.style.display = 'block'; return; }
+  emptyMsg.style.display = 'none';
+
+  tbody.innerHTML = listings.map(c => {
+    const thumb = c.photos && c.photos.length
+      ? `<img class="table-thumb" src="${c.photos[0]}" alt="">`
+      : `<div class="table-thumb-placeholder"><i class="fa-solid fa-car"></i></div>`;
+    const badge = c.active
+      ? '<span class="badge-active">En ligne</span>'
+      : '<span class="badge-draft">Masquée</span>';
+    const toggleLabel = c.active ? 'Masquer' : 'Publier';
+    const toggleClass = c.active ? '' : 'inactive';
+    return `<tr>
+      <td>${thumb}</td>
+      <td><strong>${c.brand} ${c.model}</strong><br><small style="color:#9ca3af">${c.year}${c.km ? ' — ' + c.km : ''}</small></td>
+      <td><strong>${formatPrice(c.price)}</strong></td>
+      <td>${badge}</td>
+      <td><div class="table-actions">
+        <button class="table-btn table-btn-edit" onclick="editListing('${c.id}')">Modifier</button>
+        <button class="table-btn table-btn-toggle ${toggleClass}" onclick="toggleListing('${c.id}')">${toggleLabel}</button>
+        <button class="table-btn table-btn-del" onclick="deleteListing('${c.id}')">Suppr.</button>
+      </div></td>
+    </tr>`;
+  }).join('');
+}
+
+function toggleListing(id) {
+  const arr = getListings();
+  const idx = arr.findIndex(c => c.id === id);
+  if (idx === -1) return;
+  arr[idx].active = !arr[idx].active;
+  saveListings(arr);
+  renderAdminTable();
+  renderListings();
+}
+
+function deleteListing(id) {
+  if (!confirm('Supprimer cette annonce définitivement ?')) return;
+  const arr = getListings().filter(c => c.id !== id);
+  saveListings(arr);
+  renderAdminTable();
+  renderListings();
+}
+
+function editListing(id) {
+  const car = getListings().find(c => c.id === id);
+  if (!car) return;
+  switchTab('add');
+  document.getElementById('editId').value = id;
+  document.getElementById('fBrand').value = car.brand || '';
+  document.getElementById('fModel').value = car.model || '';
+  document.getElementById('fYear').value = car.year || '';
+  document.getElementById('fKm').value = car.km || '';
+  document.getElementById('fFuel').value = car.fuel || 'Diesel';
+  document.getElementById('fGear').value = car.gear || 'Manuelle';
+  document.getElementById('fPower').value = car.power || '';
+  document.getElementById('fColor').value = car.color || '';
+  document.getElementById('fPrice').value = car.price || '';
+  document.getElementById('fDesc').value = car.desc || '';
+  editingPhotos = car.photos ? [...car.photos] : [];
+  renderPhotoPreviews();
+  document.getElementById('addTabBtn').textContent = '✏️ Modifier';
+}
+
+document.getElementById('cancelEditBtn').addEventListener('click', () => { resetAddForm(); switchTab('list'); });
+
+function resetAddForm() {
+  document.getElementById('editId').value = '';
+  ['fBrand','fModel','fYear','fKm','fPower','fColor','fPrice','fDesc'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('fFuel').value = 'Diesel';
+  document.getElementById('fGear').value = 'Manuelle';
+  editingPhotos = [];
+  renderPhotoPreviews();
+  document.getElementById('addTabBtn').textContent = '+ Nouvelle annonce';
+}
+
+// Photo upload
+document.getElementById('photoInput').addEventListener('change', function() {
+  const files = Array.from(this.files);
+  const remaining = 15 - editingPhotos.length;
+  const toAdd = files.slice(0, remaining);
+  toAdd.forEach(file => {
+    const reader = new FileReader();
+    reader.onload = e => { editingPhotos.push(e.target.result); renderPhotoPreviews(); };
+    reader.readAsDataURL(file);
+  });
+  this.value = '';
+});
+
+function renderPhotoPreviews() {
+  const preview = document.getElementById('photosPreview');
+  preview.innerHTML = editingPhotos.map((src, i) =>
+    `<div class="photo-preview-item">
+      <img src="${src}" alt="photo ${i+1}">
+      <div class="remove-photo" onclick="removePhoto(${i})"><i class="fa-solid fa-xmark"></i></div>
+    </div>`).join('');
+  const uploadArea = document.getElementById('photoUploadArea');
+  uploadArea.style.display = editingPhotos.length >= 15 ? 'none' : 'block';
+}
+
+function removePhoto(i) { editingPhotos.splice(i, 1); renderPhotoPreviews(); }
+
+// SAVE
+document.getElementById('saveAdBtn').addEventListener('click', () => {
+  const brand = document.getElementById('fBrand').value.trim();
+  const model = document.getElementById('fModel').value.trim();
+  const year = document.getElementById('fYear').value.trim();
+  const price = document.getElementById('fPrice').value.trim();
+
+  if (!brand || !model || !year || !price) { alert('Remplissez les champs obligatoires : Marque, Modèle, Année, Prix.'); return; }
+
+  const arr = getListings();
+  const editId = document.getElementById('editId').value;
+  const car = {
+    id: editId || genId(),
+    brand, model,
+    year: Number(year),
+    km: document.getElementById('fKm').value.trim(),
+    fuel: document.getElementById('fFuel').value,
+    gear: document.getElementById('fGear').value,
+    power: document.getElementById('fPower').value.trim(),
+    color: document.getElementById('fColor').value.trim(),
+    price: Number(price),
+    desc: document.getElementById('fDesc').value.trim(),
+    photos: [...editingPhotos],
+    active: true,
+    createdAt: editId ? (arr.find(c => c.id === editId)?.createdAt || Date.now()) : Date.now()
+  };
+
+  if (editId) {
+    const idx = arr.findIndex(c => c.id === editId);
+    if (idx !== -1) arr[idx] = car; else arr.unshift(car);
+  } else {
+    arr.unshift(car);
+  }
+
+  saveListings(arr);
+  renderAdminTable();
+  renderListings();
+  resetAddForm();
+  switchTab('list');
+});
+
+// ============================================================
+// HEADER / NAV
+// ============================================================
+const header = document.getElementById('header');
+let lastY = 0;
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  header.classList.toggle('hidden', y > lastY && y > 200);
+  lastY = y;
+}, { passive: true });
+
+document.getElementById('hamburger').addEventListener('click', function() {
+  this.classList.toggle('open');
+  document.getElementById('mobileMenu').classList.toggle('open');
+});
+document.getElementById('closeMenu').addEventListener('click', () => {
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('mobileMenu').classList.remove('open');
+});
+
+// ============================================================
+// INIT
+// ============================================================
+renderListings();
+</script>
+</body>
+</html>
