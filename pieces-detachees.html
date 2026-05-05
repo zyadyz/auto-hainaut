@@ -103,23 +103,35 @@
     .piece-card-icon{width:50px;height:50px;border-radius:12px;background:rgba(147,197,253,.1);display:flex;align-items:center;justify-content:center;color:var(--blue-deeper);font-size:1.2rem;margin-bottom:14px}
     .piece-card h3{font-family:'Oswald',sans-serif;font-size:1rem;color:var(--navy);margin-bottom:6px}.piece-card p{font-size:.8rem;color:var(--text-muted);line-height:1.55}
     .piece-card-tag{display:inline-block;margin-top:10px;background:rgba(147,197,253,.12);color:var(--blue-deeper);font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:50px}
-    .brands-section{padding:70px 0;background:#0c0c0c}
+    .brands-section{padding:70px 0 80px;background:#0d0d0d}
     .brands-section .section-header{padding:0 1.5rem}
     .brands-section .section-title{color:#fff}
-    .brands-section .section-subtitle{color:rgba(255,255,255,.55)}
+    .brands-section .section-subtitle{color:rgba(255,255,255,.5)}
     .brands-section .section-tag{background:rgba(147,197,253,.12);border-color:rgba(147,197,253,.25);color:#93c5fd}
-    .brands-marquee-outer{overflow:hidden;position:relative;margin-top:40px}
-    .brands-marquee-outer::before,.brands-marquee-outer::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none}
-    .brands-marquee-outer::before{left:0;background:linear-gradient(to right,#0c0c0c,transparent)}
-    .brands-marquee-outer::after{right:0;background:linear-gradient(to left,#0c0c0c,transparent)}
-    .brands-track{display:flex;gap:0;align-items:center;width:max-content;animation:marquee-go 35s linear infinite}
-    .brands-track:hover{animation-play-state:paused}
-    @keyframes marquee-go{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-    .brand-logo-item{display:flex;flex-direction:column;align-items:center;gap:10px;padding:0 36px;cursor:default}
-    .brand-logo-item img{width:44px;height:44px;object-fit:contain;filter:brightness(0) invert(1);opacity:.6;transition:opacity .25s}
-    .brand-logo-item:hover img{opacity:1}
-    .brand-logo-item span{font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);transition:color .25s}
-    .brand-logo-item:hover span{color:#fff}
+    .brands-slider-outer{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:40px 1.5rem 8px;margin-top:0}
+    .brands-slider-outer::-webkit-scrollbar{display:none}
+    .brands-slider-inner{display:flex;gap:14px;width:max-content}
+    .brand-card{background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:22px 20px 20px;width:200px;flex-shrink:0;display:flex;flex-direction:column;gap:14px;transition:border-color .25s,transform .25s;cursor:default;scroll-snap-align:start}
+    .brand-card:hover{border-color:rgba(147,197,253,.35);transform:translateY(-3px)}
+    .brand-card-top{display:flex;align-items:center;gap:14px}
+    .brand-icon-wrap{width:52px;height:52px;background:rgba(255,255,255,.05);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .brand-icon-wrap img{width:32px;height:32px;object-fit:contain;filter:brightness(0) invert(1)}
+    .brand-card-name{font-family:'Oswald',sans-serif;font-size:1.05rem;color:#fff;line-height:1.2}
+    .brand-card-badge{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:50px;display:inline-block;margin-top:4px}
+    .badge-japan{background:rgba(147,197,253,.15);color:#93c5fd;border:1px solid rgba(147,197,253,.25)}
+    .badge-euro{background:rgba(255,255,255,.06);color:rgba(255,255,255,.45);border:1px solid rgba(255,255,255,.1)}
+    .badge-korea{background:rgba(251,146,60,.12);color:#fb923c;border:1px solid rgba(251,146,60,.2)}
+    .brand-card-models{font-size:.75rem;color:rgba(255,255,255,.4);line-height:1.6;border-top:1px solid rgba(255,255,255,.07);padding-top:12px}
+    .brand-card-models strong{color:rgba(255,255,255,.65);display:block;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
+    .brands-swipe-hint{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:14px;font-size:.75rem;color:rgba(255,255,255,.3);font-weight:600;padding:0 1.5rem}
+    .brands-swipe-hint i{color:#93c5fd;font-size:.7rem}
+    @media(min-width:768px){
+      .brands-slider-outer{overflow-x:visible;padding:40px 1.5rem 0}
+      .brands-slider-inner{display:grid;grid-template-columns:repeat(4,1fr);width:100%;max-width:1200px;margin:0 auto}
+      .brand-card{width:auto}
+      .brands-swipe-hint{display:none}
+    }
+    @media(min-width:1024px){.brands-slider-inner{grid-template-columns:repeat(5,1fr)}}
     .how-section{padding:80px 1.5rem;background:var(--gray-light)}.steps-grid{display:grid;grid-template-columns:1fr;gap:24px}
     .step-card{background:var(--white);border-radius:16px;padding:32px 28px;position:relative;border:1px solid var(--gray-mid);transition:all var(--transition)}
     .step-card:hover{box-shadow:var(--shadow-md);transform:translateY(-3px);border-color:rgba(147,197,253,.4)}
@@ -323,59 +335,204 @@
     <h2 class="section-title">Pièces disponibles<br>pour <span>toutes marques</span></h2>
     <p class="section-subtitle">Japonaises, européennes, coréennes — notre stock couvre la quasi-totalité des marques du marché.</p>
   </div>
-  <div class="brands-marquee-outer">
-    <div class="brands-track">
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/toyota/ffffff" alt="Toyota"><span>Toyota</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/honda/ffffff" alt="Honda"><span>Honda</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/nissan/ffffff" alt="Nissan"><span>Nissan</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/mazda/ffffff" alt="Mazda"><span>Mazda</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/mitsubishi/ffffff" alt="Mitsubishi"><span>Mitsubishi</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/lexus/ffffff" alt="Lexus"><span>Lexus</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/suzuki/ffffff" alt="Suzuki"><span>Suzuki</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/subaru/ffffff" alt="Subaru"><span>Subaru</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/volkswagen/ffffff" alt="Volkswagen"><span>Volkswagen</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/peugeot/ffffff" alt="Peugeot"><span>Peugeot</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/renault/ffffff" alt="Renault"><span>Renault</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/citroen/ffffff" alt="Citroën"><span>Citroën</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/ford/ffffff" alt="Ford"><span>Ford</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/opel/ffffff" alt="Opel"><span>Opel</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/bmw/ffffff" alt="BMW"><span>BMW</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/mercedesbenz/ffffff" alt="Mercedes"><span>Mercedes</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/audi/ffffff" alt="Audi"><span>Audi</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/seat/ffffff" alt="Seat"><span>Seat</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/skoda/ffffff" alt="Skoda"><span>Skoda</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/fiat/ffffff" alt="Fiat"><span>Fiat</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/hyundai/ffffff" alt="Hyundai"><span>Hyundai</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/kia/ffffff" alt="Kia"><span>Kia</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/volvo/ffffff" alt="Volvo"><span>Volvo</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/alfaromeo/ffffff" alt="Alfa Romeo"><span>Alfa Romeo</span></div>
-      <!-- duplicate for seamless loop -->
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/toyota/ffffff" alt="Toyota"><span>Toyota</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/honda/ffffff" alt="Honda"><span>Honda</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/nissan/ffffff" alt="Nissan"><span>Nissan</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/mazda/ffffff" alt="Mazda"><span>Mazda</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/mitsubishi/ffffff" alt="Mitsubishi"><span>Mitsubishi</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/lexus/ffffff" alt="Lexus"><span>Lexus</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/suzuki/ffffff" alt="Suzuki"><span>Suzuki</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/subaru/ffffff" alt="Subaru"><span>Subaru</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/volkswagen/ffffff" alt="Volkswagen"><span>Volkswagen</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/peugeot/ffffff" alt="Peugeot"><span>Peugeot</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/renault/ffffff" alt="Renault"><span>Renault</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/citroen/ffffff" alt="Citroën"><span>Citroën</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/ford/ffffff" alt="Ford"><span>Ford</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/opel/ffffff" alt="Opel"><span>Opel</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/bmw/ffffff" alt="BMW"><span>BMW</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/mercedesbenz/ffffff" alt="Mercedes"><span>Mercedes</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/audi/ffffff" alt="Audi"><span>Audi</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/seat/ffffff" alt="Seat"><span>Seat</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/skoda/ffffff" alt="Skoda"><span>Skoda</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/fiat/ffffff" alt="Fiat"><span>Fiat</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/hyundai/ffffff" alt="Hyundai"><span>Hyundai</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/kia/ffffff" alt="Kia"><span>Kia</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/volvo/ffffff" alt="Volvo"><span>Volvo</span></div>
-      <div class="brand-logo-item"><img src="https://cdn.simpleicons.org/alfaromeo/ffffff" alt="Alfa Romeo"><span>Alfa Romeo</span></div>
+  <div class="brands-slider-outer fade-up">
+    <div class="brands-slider-inner">
+
+      <div class="brand-card">
+        <div class="brand-card-top">
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/toyota/ffffff" alt="Toyota"></div>
+          <div><div class="brand-card-name">Toyota</div><span class="brand-card-badge badge-japan">Spécialité</span></div>
+        </div>
+        <div class="brand-card-models"><strong>Modèles</strong>Yaris · Corolla · RAV4 · Prius · Aygo · Hilux</div>
+      </div>
+
+      <div class="brand-card">
+        <div class="brand-card-top">
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/honda/ffffff" alt="Honda"></div>
+          <div><div class="brand-card-name">Honda</div><span class="brand-card-badge badge-japan">Spécialité</span></div>
+        </div>
+        <div class="brand-card-models"><strong>Modèles</strong>Civic · Jazz · CR-V · HR-V · Accord</div>
+      </div>
+
+      <div class="brand-card">
+        <div class="brand-card-top">
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/nissan/ffffff" alt="Nissan"></div>
+          <div><div class="brand-card-name">Nissan</div><span class="brand-card-badge badge-japan">Spécialité</span></div>
+        </div>
+        <div class="brand-card-models"><strong>Modèles</strong>Micra · Qashqai · Juke · Note · Navara</div>
+      </div>
+
+      <div class="brand-card">
+        <div class="brand-card-top">
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/mazda/ffffff" alt="Mazda"></div>
+          <div><div class="brand-card-name">Mazda</div><span class="brand-card-badge badge-japan">Spécialité</span></div>
+        </div>
+        <div class="brand-card-models"><strong>Modèles</strong>Mazda2 · Mazda3 · CX-3 · CX-5 · MX-5</div>
+      </div>
+
+      <div class="brand-card">
+        <div class="brand-card-top">
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/mitsubishi/ffffff" alt="Mitsubishi"></div>
+          <div><div class="brand-card-name">Mitsubishi</div><span class="brand-card-badge badge-japan">Spécialité</span></div>
+        </div>
+        <div class="brand-card-models"><strong>Modèles</strong>Colt · ASX · Outlander · L200 · Eclipse</div>
+      </div>
+
+      <div class="brand-card">
+        <div class="brand-card-top">
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/lexus/ffffff" alt="Lexus"></div>
+          <div><div class="brand-card-name">Lexus</div><span class="brand-card-badge badge-japan">Spécialité</span></div>
+        </div>
+        <div class="brand-card-models"><strong>Modèles</strong>IS · ES · NX · RX · CT200h · UX</div>
+      </div>
+
+      <div class="brand-card">
+        <div class="brand-card-top">
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/suzuki/ffffff" alt="Suzuki"></div>
+          <div><div class="brand-card-name">Suzuki</div><span class="brand-card-badge badge-japan">Spécialité</span></div>
+        </div>
+        <div class="brand-card-models"><strong>Modèles</strong>Swift · Vitara · Jimny · SX4 · Ignis</div>
+      </div>
+
+      <div class="brand-card">
+        <div class="brand-card-top">
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/subaru/ffffff" alt="Subaru"></div>
+          <div><div class="brand-card-name">Subaru</div><span class="brand-card-badge badge-japan">Spécialité</span></div>
+        </div>
+        <div class="brand-card-models"><strong>Modèles</strong>Impreza · Forester · Outback · XV · BRZ</div>
+      </div>
+
+      <div class="brand-card">
+        <div class="brand-card-top">
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/volkswagen/ffffff" alt="Volkswagen"></div>
+          <div><div class="brand-card-name">Volkswagen</div><span class="brand-card-badge badge-euro">Européenne</span></div>
+        </div>
+        <div class="brand-card-models"><strong>Modèles</strong>Golf · Polo · Passat · Tiguan · T-Roc</div>
+      </div>
+
+      <div class="brand-card">
+        <div class="brand-card-top">
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/peugeot/ffffff" alt="Peugeot"></div>
+          <div><div class="brand-card-name">Peugeot</div><span class="brand-card-badge badge-euro">Européenne</span></div>
+        </div>
+        <div class="brand-card-models"><strong>Modèles</strong>208 · 308 · 3008 · 5008 · 508</div>
+      </div>
+
+      <div class="brand-card">
+        <div class="brand-card-top">
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/renault/ffffff" alt="Renault"></div>
+          <div><div class="brand-card-name">Renault</div><span class="brand-card-badge badge-euro">Européenne</span></div>
+        </div>
+        <div class="brand-card-models"><strong>Modèles</strong>Clio · Mégane · Kadjar · Captur · Trafic</div>
+      </div>
+
+      <div class="brand-card">
+        <div class="brand-card-top">
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/citroen/ffffff" alt="Citroën"></div>
+          <div><div class="brand-card-name">Citroën</div><span class="brand-card-badge badge-euro">Européenne</span></div>
+        </div>
+        <div class="brand-card-models"><strong>Modèles</strong>C3 · C4 · C5 · Berlingo · Jumper</div>
+      </div>
+
+      <div class="brand-card">
+        <div class="brand-card-top">
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/ford/ffffff" alt="Ford"></div>
+          <div><div class="brand-card-name">Ford</div><span class="brand-card-badge badge-euro">Européenne</span></div>
+        </div>
+        <div class="brand-card-models"><strong>Modèles</strong>Fiesta · Focus · Kuga · Transit · Ranger</div>
+      </div>
+
+      <div class="brand-card">
+        <div class="brand-card-top">
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/opel/ffffff" alt="Opel"></div>
+          <div><div class="brand-card-name">Opel</div><span class="brand-card-badge badge-euro">Européenne</span></div>
+        </div>
+        <div class="brand-card-models"><strong>Modèles</strong>Corsa · Astra · Mokka · Zafira · Vivaro</div>
+      </div>
+
+      <div class="brand-card">
+        <div class="brand-card-top">
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/bmw/ffffff" alt="BMW"></div>
+          <div><div class="brand-card-name">BMW</div><span class="brand-card-badge badge-euro">Européenne</span></div>
+        </div>
+        <div class="brand-card-models"><strong>Modèles</strong>Série 1 · 3 · 5 · X1 · X3 · X5</div>
+      </div>
+
+      <div class="brand-card">
+        <div class="brand-card-top">
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/mercedesbenz/ffffff" alt="Mercedes"></div>
+          <div><div class="brand-card-name">Mercedes</div><span class="brand-card-badge badge-euro">Européenne</span></div>
+        </div>
+        <div class="brand-card-models"><strong>Modèles</strong>Classe A · B · C · E · GLC · Sprinter</div>
+      </div>
+
+      <div class="brand-card">
+        <div class="brand-card-top">
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/audi/ffffff" alt="Audi"></div>
+          <div><div class="brand-card-name">Audi</div><span class="brand-card-badge badge-euro">Européenne</span></div>
+        </div>
+        <div class="brand-card-models"><strong>Modèles</strong>A1 · A3 · A4 · A6 · Q3 · Q5</div>
+      </div>
+
+      <div class="brand-card">
+        <div class="brand-card-top">
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/seat/ffffff" alt="Seat"></div>
+          <div><div class="brand-card-name">Seat</div><span class="brand-card-badge badge-euro">Européenne</span></div>
+        </div>
+        <div class="brand-card-models"><strong>Modèles</strong>Ibiza · Leon · Arona · Ateca · Tarraco</div>
+      </div>
+
+      <div class="brand-card">
+        <div class="brand-card-top">
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/skoda/ffffff" alt="Skoda"></div>
+          <div><div class="brand-card-name">Skoda</div><span class="brand-card-badge badge-euro">Européenne</span></div>
+        </div>
+        <div class="brand-card-models"><strong>Modèles</strong>Fabia · Octavia · Superb · Karoq · Kodiaq</div>
+      </div>
+
+      <div class="brand-card">
+        <div class="brand-card-top">
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/fiat/ffffff" alt="Fiat"></div>
+          <div><div class="brand-card-name">Fiat</div><span class="brand-card-badge badge-euro">Européenne</span></div>
+        </div>
+        <div class="brand-card-models"><strong>Modèles</strong>500 · Panda · Tipo · Ducato · Doblo</div>
+      </div>
+
+      <div class="brand-card">
+        <div class="brand-card-top">
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/hyundai/ffffff" alt="Hyundai"></div>
+          <div><div class="brand-card-name">Hyundai</div><span class="brand-card-badge badge-korea">Coréenne</span></div>
+        </div>
+        <div class="brand-card-models"><strong>Modèles</strong>i20 · i30 · Tucson · Kona · Santa Fe</div>
+      </div>
+
+      <div class="brand-card">
+        <div class="brand-card-top">
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/kia/ffffff" alt="Kia"></div>
+          <div><div class="brand-card-name">Kia</div><span class="brand-card-badge badge-korea">Coréenne</span></div>
+        </div>
+        <div class="brand-card-models"><strong>Modèles</strong>Picanto · Ceed · Sportage · Sorento · Stonic</div>
+      </div>
+
+      <div class="brand-card">
+        <div class="brand-card-top">
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/volvo/ffffff" alt="Volvo"></div>
+          <div><div class="brand-card-name">Volvo</div><span class="brand-card-badge badge-euro">Européenne</span></div>
+        </div>
+        <div class="brand-card-models"><strong>Modèles</strong>S60 · V40 · V60 · XC40 · XC60 · XC90</div>
+      </div>
+
+      <div class="brand-card">
+        <div class="brand-card-top">
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/alfaromeo/ffffff" alt="Alfa Romeo"></div>
+          <div><div class="brand-card-name">Alfa Romeo</div><span class="brand-card-badge badge-euro">Européenne</span></div>
+        </div>
+        <div class="brand-card-models"><strong>Modèles</strong>Giulia · Stelvio · Giulietta · 147 · 156</div>
+      </div>
+
     </div>
   </div>
+  <div class="brands-swipe-hint"><i class="fa-solid fa-hand-pointer"></i> Faites glisser pour voir toutes les marques</div>
 </section>
 
 <section class="how-section">
