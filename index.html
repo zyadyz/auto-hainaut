@@ -224,9 +224,9 @@
     .slider-arrow:hover { background: #fff; }
     .slider-arrow.left { left: 12px; }
     .slider-arrow.right { right: 12px; }
-    .slider-dots { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 10; }
-    .slider-dots .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.5); transition: all 0.3s; cursor: pointer; }
-    .slider-dots .dot.active { background: #fff; width: 22px; border-radius: 4px; }
+    .photo-slider-wrap .slider-dots { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 10; }
+    .photo-slider-wrap .slider-dots .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.5); transition: all 0.3s; cursor: pointer; }
+    .photo-slider-wrap .slider-dots .dot.active { background: #fff; width: 22px; border-radius: 4px; }
     @media (min-width: 769px) {
       .photo-slide { aspect-ratio: 21/9; }
     }
@@ -423,8 +423,8 @@
             <a href="tel:+3271700795" class="btn btn-primary">
               <i class="fa-solid fa-phone"></i> Appeler maintenant
             </a>
-            <a href="#services" class="btn btn-outline">
-              <i class="fa-solid fa-car"></i> Voir nos véhicules
+            <a href="voitures.html" class="btn btn-outline">
+              <i class="fa-solid fa-car"></i> Voir nos véhicules en vente
             </a>
           </div>
           <div class="hero-trust">
@@ -578,7 +578,6 @@
 
         </div>
         <div class="services-swipe-hint"><i class="fa-solid fa-hand-pointer"></i> Faites glisser pour voir tous les services</div>
-        <div class="slider-dots" id="serviceDots"></div>
       </div>
     </section>
 
@@ -988,21 +987,6 @@
     closeBtn.addEventListener('click', closeMenu);
     mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
 
-    const servicesSlider = document.getElementById('servicesSlider');
-    const serviceDots = document.getElementById('serviceDots');
-    if (servicesSlider && serviceDots) {
-      const cards = servicesSlider.querySelectorAll('.service-card');
-      serviceDots.innerHTML = '';
-      cards.forEach((_, i) => {
-        const dot = document.createElement('span');
-        dot.className = 'dot' + (i === 0 ? ' active' : '');
-        serviceDots.appendChild(dot);
-      });
-      servicesSlider.addEventListener('scroll', () => {
-        const idx = Math.round(servicesSlider.scrollLeft / (servicesSlider.scrollWidth / cards.length));
-        serviceDots.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === idx));
-      }, { passive: true });
-    }
 
     function animateCounters() {
       document.querySelectorAll('.counter-number').forEach(el => {
