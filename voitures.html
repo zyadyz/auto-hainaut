@@ -966,10 +966,13 @@ document.getElementById('saveAdBtn').addEventListener('click', () => {
 // HEADER / NAV
 // ============================================================
 const header = document.getElementById('header');
+const filtersBar = document.getElementById('filtersBar');
 let lastY = 0;
 window.addEventListener('scroll', () => {
   const y = window.scrollY;
-  header.classList.toggle('hidden', y > lastY && y > 200);
+  const hiding = y > lastY && y > 200;
+  header.classList.toggle('hidden', hiding);
+  filtersBar.style.top = hiding ? '0px' : '96px';
   lastY = y;
 }, { passive: true });
 
