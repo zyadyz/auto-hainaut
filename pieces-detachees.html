@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Pièces détachées occasion Charleroi — Auto Hainaut, spécialiste pièces japonaises toutes marques. Chaussée de Bruxelles 44, 6042 Charleroi. 071.700.795 - 0477.680.867">
-  <meta name="keywords" content="pièces détachées occasion Charleroi, pièces japonaises Charleroi, Toyota Honda Nissan Mazda Mitsubishi Lexus Subaru Suzuki occasion Charleroi, casse auto Charleroi, moteur occasion Hainaut, pièces auto Hainaut">
-  <title>Pièces Détachées Occasion Charleroi — Spécialiste Japonaises | Auto Hainaut</title>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"AutoPartsStore","name":"Auto Hainaut Pièces Détachées","description":"Spécialiste pièces détachées occasion toutes marques Charleroi, expert pièces japonaises.","address":{"@type":"PostalAddress","streetAddress":"Chaussée de Bruxelles 44","addressLocality":"Charleroi","postalCode":"6042","addressCountry":"BE"},"telephone":["+3271700795","+32477680867"],"openingHours":"Mo-Sa 10:00-18:00"}</script>
+  <meta name="description" content="Pièces détachées occasion Lodelinsart — Auto Hainaut, spécialiste pièces japonaises toutes marques. Chaussée de Bruxelles 44, 6042 Lodelinsart. 071.700.795 - 0477.680.867">
+  <meta name="keywords" content="pièces détachées occasion Lodelinsart, pièces japonaises Lodelinsart, Toyota Honda Nissan Mazda Mitsubishi Lexus Subaru Suzuki occasion Lodelinsart, casse auto Lodelinsart, moteur occasion Hainaut, pièces auto Hainaut">
+  <title>Pièces Détachées Occasion Lodelinsart — Spécialiste Japonaises | Auto Hainaut</title>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"AutoPartsStore","name":"Auto Hainaut Pièces Détachées","description":"Spécialiste pièces détachées occasion toutes marques Lodelinsart, expert pièces japonaises.","address":{"@type":"PostalAddress","streetAddress":"Chaussée de Bruxelles 44","addressLocality":"Lodelinsart","postalCode":"6042","addressCountry":"BE"},"telephone":["+3271700795","+32477680867"],"openingHours":"Mo-Sa 10:00-18:00"}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
@@ -98,11 +98,28 @@
     .japan-seo-block h3{font-family:'Oswald',sans-serif;color:var(--blue);font-size:1.1rem;margin-bottom:12px}.japan-seo-block p{font-size:.88rem;color:rgba(255,255,255,.65);line-height:1.75}
     .pieces-section{padding:80px 1.5rem;background:var(--gray-light)}
     .pieces-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-    .piece-card{background:var(--white);border:1px solid var(--gray-mid);border-radius:var(--radius);padding:24px 20px;transition:all var(--transition)}
+    .piece-card{background:var(--white);border:1px solid var(--gray-mid);border-radius:var(--radius);padding:0;transition:all var(--transition);overflow:hidden;display:flex;flex-direction:column}
     .piece-card:hover{border-color:var(--blue-deeper);box-shadow:var(--shadow-md);transform:translateY(-3px)}
-    .piece-card-icon{width:50px;height:50px;border-radius:12px;background:rgba(147,197,253,.1);display:flex;align-items:center;justify-content:center;color:var(--blue-deeper);font-size:1.2rem;margin-bottom:14px}
+    .piece-card-img{width:100%;height:150px;object-fit:cover;display:block;transition:transform .45s ease}
+    .piece-card:hover .piece-card-img{transform:scale(1.05)}
+    .piece-card-content{padding:18px 18px 20px;flex:1;display:flex;flex-direction:column}
+    .piece-card-icon{width:44px;height:44px;border-radius:10px;background:rgba(147,197,253,.1);display:flex;align-items:center;justify-content:center;color:var(--blue-deeper);font-size:1.1rem;margin-bottom:12px}
     .piece-card h3{font-family:'Oswald',sans-serif;font-size:1rem;color:var(--navy);margin-bottom:6px}.piece-card p{font-size:.8rem;color:var(--text-muted);line-height:1.55}
     .piece-card-tag{display:inline-block;margin-top:10px;background:rgba(147,197,253,.12);color:var(--blue-deeper);font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:50px}
+    /* Mobile slider */
+    .pieces-slider-wrap{position:relative}
+    .pieces-nav{display:none;align-items:center;justify-content:center;gap:16px;margin-top:20px}
+    .pieces-nav-btn{width:44px;height:44px;border-radius:50%;background:var(--navy);border:none;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;transition:all .25s}
+    .pieces-nav-btn:hover{background:var(--blue-deeper)}
+    .pieces-nav-counter{font-size:.82rem;font-weight:700;color:var(--text-muted);min-width:50px;text-align:center}
+    @media(max-width:639px){
+      .pieces-section{padding:60px 0}
+      .pieces-section .section-header{padding:0 1.5rem;margin-bottom:24px}
+      .pieces-slider-wrap{overflow:hidden;padding:4px 1.5rem 4px}
+      .pieces-grid{display:flex;gap:14px;width:max-content;transition:transform .4s cubic-bezier(.4,0,.2,1)}
+      .piece-card{width:72vw;max-width:260px;flex-shrink:0}
+      .pieces-nav{display:flex}
+    }
     .brands-section{padding:70px 0 80px;background:#0d0d0d}
     .brands-section .section-header{padding:0 1.5rem}
     .brands-section .section-title{color:#fff}
@@ -114,8 +131,9 @@
     .brand-card{background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:22px 20px 20px;width:200px;flex-shrink:0;display:flex;flex-direction:column;gap:14px;transition:border-color .25s,transform .25s;cursor:default;scroll-snap-align:start}
     .brand-card:hover{border-color:rgba(147,197,253,.35);transform:translateY(-3px)}
     .brand-card-top{display:flex;align-items:center;gap:14px}
-    .brand-icon-wrap{width:52px;height:52px;background:rgba(255,255,255,.05);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-    .brand-icon-wrap img{width:32px;height:32px;object-fit:contain;filter:brightness(0) invert(1)}
+    .brand-icon-wrap{width:52px;height:52px;background:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
+    .brand-icon-wrap img{width:30px;height:30px;object-fit:contain}
+    .brand-icon-wrap svg{width:30px;height:30px}
     .brand-card-name{font-family:'Oswald',sans-serif;font-size:1.05rem;color:#fff;line-height:1.2}
     .brand-card-badge{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:50px;display:inline-block;margin-top:4px}
     .badge-japan{background:rgba(147,197,253,.15);color:#93c5fd;border:1px solid rgba(147,197,253,.25)}
@@ -123,13 +141,20 @@
     .badge-korea{background:rgba(251,146,60,.12);color:#fb923c;border:1px solid rgba(251,146,60,.2)}
     .brand-card-models{font-size:.75rem;color:rgba(255,255,255,.4);line-height:1.6;border-top:1px solid rgba(255,255,255,.07);padding-top:12px}
     .brand-card-models strong{color:rgba(255,255,255,.65);display:block;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
-    .brands-swipe-hint{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:14px;font-size:.75rem;color:rgba(255,255,255,.3);font-weight:600;padding:0 1.5rem}
-    .brands-swipe-hint i{color:#93c5fd;font-size:.7rem}
+    .brands-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:20px;padding:0 1.5rem}
+    .brands-nav-btn{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .25s;font-size:1rem;flex-shrink:0}
+    .brands-nav-btn:hover{background:rgba(147,197,253,.2);border-color:rgba(147,197,253,.5);color:#93c5fd}
+    .brands-nav-counter{font-size:.8rem;font-weight:700;color:rgba(255,255,255,.4);min-width:60px;text-align:center;letter-spacing:.05em}
     @media(min-width:768px){
       .brands-slider-outer{overflow-x:visible;padding:40px 1.5rem 0}
-      .brands-slider-inner{display:grid;grid-template-columns:repeat(4,1fr);width:100%;max-width:1200px;margin:0 auto}
+      .brands-slider-inner{display:grid;grid-template-columns:repeat(4,1fr);width:100%;max-width:1200px;margin:0 auto;transform:none!important;transition:none!important}
       .brand-card{width:auto}
-      .brands-swipe-hint{display:none}
+      .brands-nav{display:none}
+    }
+    @media(max-width:767px){
+      .brands-slider-outer{overflow:hidden;padding:40px 0 8px;cursor:grab}
+      .brands-slider-outer.dragging{cursor:grabbing}
+      .brands-slider-inner{gap:14px;transition:transform .4s cubic-bezier(.4,0,.2,1);user-select:none}
     }
     @media(min-width:1024px){.brands-slider-inner{grid-template-columns:repeat(5,1fr)}}
     .how-section{padding:80px 1.5rem;background:var(--gray-light)}.steps-grid{display:grid;grid-template-columns:1fr;gap:24px}
@@ -248,8 +273,8 @@
 <section class="hero">
   <div class="hero-inner container">
     <div class="hero-content">
-      <div class="hero-badge fade-up"><i class="fa-solid fa-screwdriver-wrench"></i> Pièces détachées occasion — Charleroi</div>
-      <h1 class="fade-up">Pièces auto occasion<br><span>Toutes marques</span><br>à Charleroi</h1>
+      <div class="hero-badge fade-up"><i class="fa-solid fa-screwdriver-wrench"></i> Pièces détachées occasion — Lodelinsart</div>
+      <h1 class="fade-up">Pièces auto occasion<br><span>Toutes marques</span><br>à Lodelinsart</h1>
       <p class="hero-subtitle fade-up">Spécialiste pièces japonaises · Stock permanent · Prix juste garanti</p>
       <p class="hero-desc fade-up">Auto Hainaut met à votre disposition un large stock de pièces détachées occasion pour toutes marques. Notre expertise reconnue dans les <strong style="color:#93C5FD">véhicules japonais</strong> — Toyota, Honda, Nissan, Mazda, Mitsubishi et plus — fait de nous la référence en province de Hainaut depuis plus de 25 ans.</p>
       <div class="hero-ctas fade-up">
@@ -266,7 +291,7 @@
     </div>
     <div class="hero-visual fade-up">
       <div class="hero-img-wrap">
-        <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=800&q=80" alt="Pièces détachées automobile occasion Charleroi" loading="eager">
+        <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=800&q=80" alt="Pièces détachées automobile occasion Lodelinsart" loading="eager">
         <div class="hero-float-card">
           <strong><i class="fa-solid fa-circle" style="color:#4ade80;font-size:.5rem"></i> Stock disponible</strong>
           <span>Consultation sur place ou par téléphone</span>
@@ -280,7 +305,7 @@
   <div class="trust-bar-inner">
     <div class="trust-item fade-up"><div class="trust-icon"><i class="fa-solid fa-check-double"></i></div><div><strong>Pièces contrôlées</strong><span>Qualité vérifiée avant vente</span></div></div>
     <div class="trust-item fade-up"><div class="trust-icon"><i class="fa-solid fa-tags"></i></div><div><strong>Prix compétitifs</strong><span>Jusqu'à -70% vs neuf</span></div></div>
-    <div class="trust-item fade-up"><div class="trust-icon"><i class="fa-solid fa-truck-fast"></i></div><div><strong>Disponibilité rapide</strong><span>Stock sur place à Charleroi</span></div></div>
+    <div class="trust-item fade-up"><div class="trust-icon"><i class="fa-solid fa-truck-fast"></i></div><div><strong>Disponibilité rapide</strong><span>Stock sur place à Lodelinsart</span></div></div>
     <div class="trust-item fade-up"><div class="trust-icon"><i class="fa-solid fa-headset"></i></div><div><strong>Conseil expert</strong><span>Notre équipe vous guide</span></div></div>
   </div>
 </div>
@@ -290,21 +315,11 @@
     <div class="japan-header section-header fade-up">
       <div class="section-tag"><i class="fa-solid fa-star"></i> Notre spécialité</div>
       <h2 class="section-title">Expert en pièces<br><span style="color:var(--blue)">japonaises occasion</span></h2>
-      <p class="section-subtitle">Depuis plus de 25 ans, Auto Hainaut est reconnu comme le spécialiste des pièces détachées occasion pour véhicules japonais à Charleroi et dans toute la province de Hainaut. Fiabilité, stock étoffé, prix imbattables.</p>
-    </div>
-    <div class="japan-brands fade-up">
-      <div class="japan-brand-card"><div class="japan-brand-icon"><i class="fa-solid fa-car"></i></div><div><strong>Toyota</strong><span>Yaris, Corolla, RAV4, Prius, Aygo, Hilux...</span></div></div>
-      <div class="japan-brand-card"><div class="japan-brand-icon"><i class="fa-solid fa-car-side"></i></div><div><strong>Honda</strong><span>Civic, Jazz, CR-V, HR-V, Accord...</span></div></div>
-      <div class="japan-brand-card"><div class="japan-brand-icon"><i class="fa-solid fa-car-rear"></i></div><div><strong>Nissan</strong><span>Micra, Qashqai, Juke, Note, Navara...</span></div></div>
-      <div class="japan-brand-card"><div class="japan-brand-icon"><i class="fa-solid fa-gauge-high"></i></div><div><strong>Mazda</strong><span>Mazda2, Mazda3, CX-3, CX-5, MX-5...</span></div></div>
-      <div class="japan-brand-card"><div class="japan-brand-icon"><i class="fa-solid fa-bolt"></i></div><div><strong>Mitsubishi</strong><span>Colt, ASX, Outlander, L200...</span></div></div>
-      <div class="japan-brand-card"><div class="japan-brand-icon"><i class="fa-solid fa-star"></i></div><div><strong>Lexus</strong><span>IS, ES, NX, RX, CT200h...</span></div></div>
-      <div class="japan-brand-card"><div class="japan-brand-icon"><i class="fa-solid fa-mountain-sun"></i></div><div><strong>Suzuki</strong><span>Swift, Vitara, Jimny, SX4...</span></div></div>
-      <div class="japan-brand-card"><div class="japan-brand-icon"><i class="fa-solid fa-road"></i></div><div><strong>Subaru</strong><span>Impreza, Forester, Outback, XV...</span></div></div>
-    </div>
-    <div class="japan-seo-block fade-up">
-      <h3><i class="fa-solid fa-circle-info"></i> Pourquoi choisir des pièces japonaises occasion ?</h3>
-      <p>Les véhicules japonais sont réputés pour leur <strong style="color:rgba(255,255,255,.85)">fiabilité et leur longévité exceptionnelles</strong>. Leurs pièces détachées occasion conservent une qualité irréprochable même à kilométrage élevé. Chez Auto Hainaut à Charleroi, nous sélectionnons rigoureusement nos pièces issues de véhicules accidentes ou mis en fin de vie afin de vous garantir des composants <strong style="color:rgba(255,255,255,.85)">fonctionnels, fiables et au juste prix</strong> — moteurs, boîtes de vitesses, trains roulants, carrosseries, optiques et bien plus encore.</p>
+      <p class="section-subtitle">Depuis plus de 25 ans, Auto Hainaut est reconnu comme le spécialiste des pièces détachées occasion pour véhicules japonais à Lodelinsart et dans toute la province de Hainaut. Fiabilité, stock étoffé, prix imbattables.</p>
+      <div class="japan-seo-block fade-up" style="margin-top:1.5rem;">
+        <h3><i class="fa-solid fa-circle-info"></i> Pourquoi choisir des pièces japonaises occasion ?</h3>
+        <p>Les véhicules japonais sont réputés pour leur <strong style="color:rgba(255,255,255,.85)">fiabilité et leur longévité exceptionnelles</strong>. Leurs pièces détachées occasion conservent une qualité irréprochable même à kilométrage élevé. Chez Auto Hainaut à Lodelinsart, nous sélectionnons rigoureusement nos pièces issues de véhicules accidentes ou mis en fin de vie afin de vous garantir des composants <strong style="color:rgba(255,255,255,.85)">fonctionnels, fiables et au juste prix</strong> — moteurs, boîtes de vitesses, trains roulants, carrosseries, optiques et bien plus encore.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -316,15 +331,95 @@
       <h2 class="section-title">Toutes catégories<br>de <span>pièces disponibles</span></h2>
       <p class="section-subtitle">Du moteur à la carrosserie, en passant par l'électronique — nous couvrons l'ensemble des pièces dont vous avez besoin.</p>
     </div>
-    <div class="pieces-grid">
-      <div class="piece-card fade-up"><div class="piece-card-icon"><i class="fa-solid fa-cog"></i></div><h3>Moteurs complets</h3><p>Moteurs occasion testés et garantis, toutes cylindrées, essence et diesel.</p><span class="piece-card-tag">Japonaises et toutes marques</span></div>
-      <div class="piece-card fade-up"><div class="piece-card-icon"><i class="fa-solid fa-gears"></i></div><h3>Boîtes de vitesses</h3><p>Boîtes manuelles, automatiques et CVT en bon état de fonctionnement.</p><span class="piece-card-tag">Stock permanent</span></div>
-      <div class="piece-card fade-up"><div class="piece-card-icon"><i class="fa-solid fa-car-bump"></i></div><h3>Carrosserie</h3><p>Portes, ailes, capots, pare-chocs, toits — livrés peints ou bruts selon besoin.</p><span class="piece-card-tag">Toutes couleurs</span></div>
-      <div class="piece-card fade-up"><div class="piece-card-icon"><i class="fa-solid fa-eye"></i></div><h3>Optiques et feux</h3><p>Phares avant, feux arrière, clignotants, rétroviseurs occasion.</p><span class="piece-card-tag">Garantie fonctionnement</span></div>
-      <div class="piece-card fade-up"><div class="piece-card-icon"><i class="fa-solid fa-microchip"></i></div><h3>Electronique</h3><p>Calculateurs, capteurs, tableaux de bord, modules BSI et ABS.</p><span class="piece-card-tag">Testés avant vente</span></div>
-      <div class="piece-card fade-up"><div class="piece-card-icon"><i class="fa-solid fa-wind"></i></div><h3>Climatisation</h3><p>Compresseurs, condenseurs, évaporateurs, souffleries et kits complets.</p><span class="piece-card-tag">Contrôle systématique</span></div>
-      <div class="piece-card fade-up"><div class="piece-card-icon"><i class="fa-solid fa-circle-dot"></i></div><h3>Train roulant</h3><p>Suspensions, amortisseurs, triangles, roulements, cardans et biellettes.</p><span class="piece-card-tag">Sécurité vérifiée</span></div>
-      <div class="piece-card fade-up"><div class="piece-card-icon"><i class="fa-solid fa-droplet"></i></div><h3>Refroidissement</h3><p>Radiateurs, thermostats, pompes à eau, ventilateurs de refroidissement.</p><span class="piece-card-tag">Toutes marques</span></div>
+    <div class="pieces-slider-wrap">
+      <div class="pieces-grid" id="piecesSlider">
+
+        <div class="piece-card fade-up">
+          <img class="piece-card-img" src="img-moteurs.png" alt="Moteurs complets" loading="lazy">
+          <div class="piece-card-content">
+            <div class="piece-card-icon"><i class="fa-solid fa-cog"></i></div>
+            <h3>Moteurs complets</h3>
+            <p>Moteurs occasion testés et garantis, toutes cylindrées, essence et diesel.</p>
+            <span class="piece-card-tag">Japonaises et toutes marques</span>
+          </div>
+        </div>
+
+        <div class="piece-card fade-up">
+          <img class="piece-card-img" src="https://images.unsplash.com/photo-1625047509168-a7026f36de04?w=400&q=80" alt="Boîtes de vitesses" loading="lazy">
+          <div class="piece-card-content">
+            <div class="piece-card-icon"><i class="fa-solid fa-gears"></i></div>
+            <h3>Boîtes de vitesses</h3>
+            <p>Boîtes manuelles, automatiques et CVT en bon état de fonctionnement.</p>
+            <span class="piece-card-tag">Stock permanent</span>
+          </div>
+        </div>
+
+        <div class="piece-card fade-up">
+          <img class="piece-card-img" src="img-carrosserie.png" alt="Carrosserie" loading="lazy">
+          <div class="piece-card-content">
+            <div class="piece-card-icon"><i class="fa-solid fa-car-side"></i></div>
+            <h3>Carrosserie</h3>
+            <p>Portes, ailes, capots, pare-chocs, toits — livrés peints ou bruts selon besoin.</p>
+            <span class="piece-card-tag">Toutes couleurs</span>
+          </div>
+        </div>
+
+        <div class="piece-card fade-up">
+          <img class="piece-card-img" src="img-optiques.png" alt="Optiques et feux" loading="lazy">
+          <div class="piece-card-content">
+            <div class="piece-card-icon"><i class="fa-solid fa-eye"></i></div>
+            <h3>Optiques et feux</h3>
+            <p>Phares avant, feux arrière, clignotants, rétroviseurs occasion.</p>
+            <span class="piece-card-tag">Garantie fonctionnement</span>
+          </div>
+        </div>
+
+        <div class="piece-card fade-up">
+          <img class="piece-card-img" src="img-electronique.png" alt="Electronique auto" loading="lazy">
+          <div class="piece-card-content">
+            <div class="piece-card-icon"><i class="fa-solid fa-microchip"></i></div>
+            <h3>Electronique</h3>
+            <p>Calculateurs, capteurs, tableaux de bord, modules BSI et ABS.</p>
+            <span class="piece-card-tag">Testés avant vente</span>
+          </div>
+        </div>
+
+        <div class="piece-card fade-up">
+          <img class="piece-card-img" src="img-climatisation.png" alt="Climatisation auto" loading="lazy">
+          <div class="piece-card-content">
+            <div class="piece-card-icon"><i class="fa-solid fa-wind"></i></div>
+            <h3>Climatisation</h3>
+            <p>Compresseurs, condenseurs, évaporateurs, souffleries et kits complets.</p>
+            <span class="piece-card-tag">Contrôle systématique</span>
+          </div>
+        </div>
+
+        <div class="piece-card fade-up">
+          <img class="piece-card-img" src="img-train-roulant.png" alt="Train roulant" loading="lazy">
+          <div class="piece-card-content">
+            <div class="piece-card-icon"><i class="fa-solid fa-circle-dot"></i></div>
+            <h3>Train roulant</h3>
+            <p>Suspensions, amortisseurs, triangles, roulements, cardans et biellettes.</p>
+            <span class="piece-card-tag">Sécurité vérifiée</span>
+          </div>
+        </div>
+
+        <div class="piece-card fade-up">
+          <img class="piece-card-img" src="img-refroidissement.png" alt="Refroidissement moteur" loading="lazy">
+          <div class="piece-card-content">
+            <div class="piece-card-icon"><i class="fa-solid fa-droplet"></i></div>
+            <h3>Refroidissement</h3>
+            <p>Radiateurs, thermostats, pompes à eau, ventilateurs de refroidissement.</p>
+            <span class="piece-card-tag">Toutes marques</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="pieces-nav">
+      <button class="pieces-nav-btn" id="piecesPrev" aria-label="Précédent"><i class="fa-solid fa-chevron-left"></i></button>
+      <span class="pieces-nav-counter" id="piecesCounter">1 / 8</span>
+      <button class="pieces-nav-btn" id="piecesNext" aria-label="Suivant"><i class="fa-solid fa-chevron-right"></i></button>
     </div>
   </div>
 </section>
@@ -340,7 +435,7 @@
 
       <div class="brand-card">
         <div class="brand-card-top">
-          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/toyota/ffffff" alt="Toyota"></div>
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/toyota" alt="Toyota"></div>
           <div><div class="brand-card-name">Toyota</div><span class="brand-card-badge badge-japan">Spécialité</span></div>
         </div>
         <div class="brand-card-models"><strong>Modèles</strong>Yaris · Corolla · RAV4 · Prius · Aygo · Hilux</div>
@@ -348,7 +443,7 @@
 
       <div class="brand-card">
         <div class="brand-card-top">
-          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/honda/ffffff" alt="Honda"></div>
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/honda" alt="Honda"></div>
           <div><div class="brand-card-name">Honda</div><span class="brand-card-badge badge-japan">Spécialité</span></div>
         </div>
         <div class="brand-card-models"><strong>Modèles</strong>Civic · Jazz · CR-V · HR-V · Accord</div>
@@ -356,7 +451,7 @@
 
       <div class="brand-card">
         <div class="brand-card-top">
-          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/nissan/ffffff" alt="Nissan"></div>
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/nissan" alt="Nissan"></div>
           <div><div class="brand-card-name">Nissan</div><span class="brand-card-badge badge-japan">Spécialité</span></div>
         </div>
         <div class="brand-card-models"><strong>Modèles</strong>Micra · Qashqai · Juke · Note · Navara</div>
@@ -364,7 +459,7 @@
 
       <div class="brand-card">
         <div class="brand-card-top">
-          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/mazda/ffffff" alt="Mazda"></div>
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/mazda" alt="Mazda"></div>
           <div><div class="brand-card-name">Mazda</div><span class="brand-card-badge badge-japan">Spécialité</span></div>
         </div>
         <div class="brand-card-models"><strong>Modèles</strong>Mazda2 · Mazda3 · CX-3 · CX-5 · MX-5</div>
@@ -372,7 +467,7 @@
 
       <div class="brand-card">
         <div class="brand-card-top">
-          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/mitsubishi/ffffff" alt="Mitsubishi"></div>
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/mitsubishi" alt="Mitsubishi"></div>
           <div><div class="brand-card-name">Mitsubishi</div><span class="brand-card-badge badge-japan">Spécialité</span></div>
         </div>
         <div class="brand-card-models"><strong>Modèles</strong>Colt · ASX · Outlander · L200 · Eclipse</div>
@@ -380,7 +475,7 @@
 
       <div class="brand-card">
         <div class="brand-card-top">
-          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/lexus/ffffff" alt="Lexus"></div>
+          <div class="brand-icon-wrap"><svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="50" cy="50" rx="47" ry="47" stroke="#8B0000" stroke-width="4"/><text x="50" y="66" font-family="Georgia,serif" font-size="42" font-weight="bold" fill="#8B0000" text-anchor="middle">L</text></svg></div>
           <div><div class="brand-card-name">Lexus</div><span class="brand-card-badge badge-japan">Spécialité</span></div>
         </div>
         <div class="brand-card-models"><strong>Modèles</strong>IS · ES · NX · RX · CT200h · UX</div>
@@ -388,7 +483,7 @@
 
       <div class="brand-card">
         <div class="brand-card-top">
-          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/suzuki/ffffff" alt="Suzuki"></div>
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/suzuki" alt="Suzuki"></div>
           <div><div class="brand-card-name">Suzuki</div><span class="brand-card-badge badge-japan">Spécialité</span></div>
         </div>
         <div class="brand-card-models"><strong>Modèles</strong>Swift · Vitara · Jimny · SX4 · Ignis</div>
@@ -396,7 +491,7 @@
 
       <div class="brand-card">
         <div class="brand-card-top">
-          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/subaru/ffffff" alt="Subaru"></div>
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/subaru" alt="Subaru"></div>
           <div><div class="brand-card-name">Subaru</div><span class="brand-card-badge badge-japan">Spécialité</span></div>
         </div>
         <div class="brand-card-models"><strong>Modèles</strong>Impreza · Forester · Outback · XV · BRZ</div>
@@ -404,7 +499,7 @@
 
       <div class="brand-card">
         <div class="brand-card-top">
-          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/volkswagen/ffffff" alt="Volkswagen"></div>
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/volkswagen" alt="Volkswagen"></div>
           <div><div class="brand-card-name">Volkswagen</div><span class="brand-card-badge badge-euro">Européenne</span></div>
         </div>
         <div class="brand-card-models"><strong>Modèles</strong>Golf · Polo · Passat · Tiguan · T-Roc</div>
@@ -412,7 +507,7 @@
 
       <div class="brand-card">
         <div class="brand-card-top">
-          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/peugeot/ffffff" alt="Peugeot"></div>
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/peugeot" alt="Peugeot"></div>
           <div><div class="brand-card-name">Peugeot</div><span class="brand-card-badge badge-euro">Européenne</span></div>
         </div>
         <div class="brand-card-models"><strong>Modèles</strong>208 · 308 · 3008 · 5008 · 508</div>
@@ -420,7 +515,7 @@
 
       <div class="brand-card">
         <div class="brand-card-top">
-          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/renault/ffffff" alt="Renault"></div>
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/renault" alt="Renault"></div>
           <div><div class="brand-card-name">Renault</div><span class="brand-card-badge badge-euro">Européenne</span></div>
         </div>
         <div class="brand-card-models"><strong>Modèles</strong>Clio · Mégane · Kadjar · Captur · Trafic</div>
@@ -428,7 +523,7 @@
 
       <div class="brand-card">
         <div class="brand-card-top">
-          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/citroen/ffffff" alt="Citroën"></div>
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/citroen" alt="Citroën"></div>
           <div><div class="brand-card-name">Citroën</div><span class="brand-card-badge badge-euro">Européenne</span></div>
         </div>
         <div class="brand-card-models"><strong>Modèles</strong>C3 · C4 · C5 · Berlingo · Jumper</div>
@@ -436,7 +531,7 @@
 
       <div class="brand-card">
         <div class="brand-card-top">
-          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/ford/ffffff" alt="Ford"></div>
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/ford" alt="Ford"></div>
           <div><div class="brand-card-name">Ford</div><span class="brand-card-badge badge-euro">Européenne</span></div>
         </div>
         <div class="brand-card-models"><strong>Modèles</strong>Fiesta · Focus · Kuga · Transit · Ranger</div>
@@ -444,7 +539,7 @@
 
       <div class="brand-card">
         <div class="brand-card-top">
-          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/opel/ffffff" alt="Opel"></div>
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/opel" alt="Opel"></div>
           <div><div class="brand-card-name">Opel</div><span class="brand-card-badge badge-euro">Européenne</span></div>
         </div>
         <div class="brand-card-models"><strong>Modèles</strong>Corsa · Astra · Mokka · Zafira · Vivaro</div>
@@ -452,7 +547,7 @@
 
       <div class="brand-card">
         <div class="brand-card-top">
-          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/bmw/ffffff" alt="BMW"></div>
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/bmw" alt="BMW"></div>
           <div><div class="brand-card-name">BMW</div><span class="brand-card-badge badge-euro">Européenne</span></div>
         </div>
         <div class="brand-card-models"><strong>Modèles</strong>Série 1 · 3 · 5 · X1 · X3 · X5</div>
@@ -460,7 +555,7 @@
 
       <div class="brand-card">
         <div class="brand-card-top">
-          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/mercedesbenz/ffffff" alt="Mercedes"></div>
+          <div class="brand-icon-wrap"><svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="47" stroke="#9ca3af" stroke-width="4"/><circle cx="50" cy="50" r="36" stroke="#c8c8c8" stroke-width="2"/><path d="M50 3 L50 50" stroke="#9ca3af" stroke-width="4" stroke-linecap="round"/><path d="M50 50 L86 71" stroke="#9ca3af" stroke-width="4" stroke-linecap="round"/><path d="M50 50 L14 71" stroke="#9ca3af" stroke-width="4" stroke-linecap="round"/></svg></div>
           <div><div class="brand-card-name">Mercedes</div><span class="brand-card-badge badge-euro">Européenne</span></div>
         </div>
         <div class="brand-card-models"><strong>Modèles</strong>Classe A · B · C · E · GLC · Sprinter</div>
@@ -468,7 +563,7 @@
 
       <div class="brand-card">
         <div class="brand-card-top">
-          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/audi/ffffff" alt="Audi"></div>
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/audi" alt="Audi"></div>
           <div><div class="brand-card-name">Audi</div><span class="brand-card-badge badge-euro">Européenne</span></div>
         </div>
         <div class="brand-card-models"><strong>Modèles</strong>A1 · A3 · A4 · A6 · Q3 · Q5</div>
@@ -476,7 +571,7 @@
 
       <div class="brand-card">
         <div class="brand-card-top">
-          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/seat/ffffff" alt="Seat"></div>
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/seat" alt="Seat"></div>
           <div><div class="brand-card-name">Seat</div><span class="brand-card-badge badge-euro">Européenne</span></div>
         </div>
         <div class="brand-card-models"><strong>Modèles</strong>Ibiza · Leon · Arona · Ateca · Tarraco</div>
@@ -484,7 +579,7 @@
 
       <div class="brand-card">
         <div class="brand-card-top">
-          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/skoda/ffffff" alt="Skoda"></div>
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/skoda" alt="Skoda"></div>
           <div><div class="brand-card-name">Skoda</div><span class="brand-card-badge badge-euro">Européenne</span></div>
         </div>
         <div class="brand-card-models"><strong>Modèles</strong>Fabia · Octavia · Superb · Karoq · Kodiaq</div>
@@ -492,7 +587,7 @@
 
       <div class="brand-card">
         <div class="brand-card-top">
-          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/fiat/ffffff" alt="Fiat"></div>
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/fiat" alt="Fiat"></div>
           <div><div class="brand-card-name">Fiat</div><span class="brand-card-badge badge-euro">Européenne</span></div>
         </div>
         <div class="brand-card-models"><strong>Modèles</strong>500 · Panda · Tipo · Ducato · Doblo</div>
@@ -500,7 +595,7 @@
 
       <div class="brand-card">
         <div class="brand-card-top">
-          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/hyundai/ffffff" alt="Hyundai"></div>
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/hyundai" alt="Hyundai"></div>
           <div><div class="brand-card-name">Hyundai</div><span class="brand-card-badge badge-korea">Coréenne</span></div>
         </div>
         <div class="brand-card-models"><strong>Modèles</strong>i20 · i30 · Tucson · Kona · Santa Fe</div>
@@ -508,7 +603,7 @@
 
       <div class="brand-card">
         <div class="brand-card-top">
-          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/kia/ffffff" alt="Kia"></div>
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/kia" alt="Kia"></div>
           <div><div class="brand-card-name">Kia</div><span class="brand-card-badge badge-korea">Coréenne</span></div>
         </div>
         <div class="brand-card-models"><strong>Modèles</strong>Picanto · Ceed · Sportage · Sorento · Stonic</div>
@@ -516,7 +611,7 @@
 
       <div class="brand-card">
         <div class="brand-card-top">
-          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/volvo/ffffff" alt="Volvo"></div>
+          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/volvo" alt="Volvo"></div>
           <div><div class="brand-card-name">Volvo</div><span class="brand-card-badge badge-euro">Européenne</span></div>
         </div>
         <div class="brand-card-models"><strong>Modèles</strong>S60 · V40 · V60 · XC40 · XC60 · XC90</div>
@@ -524,7 +619,7 @@
 
       <div class="brand-card">
         <div class="brand-card-top">
-          <div class="brand-icon-wrap"><img src="https://cdn.simpleicons.org/alfaromeo/ffffff" alt="Alfa Romeo"></div>
+          <div class="brand-icon-wrap"><svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="5" width="80" height="90" rx="8" fill="#DB0A24"/><rect x="10" y="5" width="38" height="90" rx="8" fill="#DB0A24"/><rect x="48" y="5" width="42" height="90" rx="4" fill="#fff"/><path d="M10 50 H90" stroke="#DB0A24" stroke-width="3"/><path d="M50 5 V95" stroke="#DB0A24" stroke-width="3"/><circle cx="29" cy="35" r="10" stroke="#fff" stroke-width="3" fill="none"/><path d="M23 55 Q29 48 35 55" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/><text x="62" y="42" font-family="serif" font-size="22" font-weight="bold" fill="#DB0A24">AR</text></svg></div>
           <div><div class="brand-card-name">Alfa Romeo</div><span class="brand-card-badge badge-euro">Européenne</span></div>
         </div>
         <div class="brand-card-models"><strong>Modèles</strong>Giulia · Stelvio · Giulietta · 147 · 156</div>
@@ -532,7 +627,11 @@
 
     </div>
   </div>
-  <div class="brands-swipe-hint"><i class="fa-solid fa-hand-pointer"></i> Faites glisser pour voir toutes les marques</div>
+  <div class="brands-nav">
+    <button class="brands-nav-btn" id="brandsPrev" aria-label="Précédent"><i class="fa-solid fa-chevron-left"></i></button>
+    <span class="brands-nav-counter" id="brandsCounter">1 / 20</span>
+    <button class="brands-nav-btn" id="brandsNext" aria-label="Suivant"><i class="fa-solid fa-chevron-right"></i></button>
+  </div>
 </section>
 
 <section class="how-section">
@@ -558,7 +657,7 @@
         <div class="step-num">03</div>
         <div class="step-icon"><i class="fa-solid fa-handshake"></i></div>
         <h3>Venez récupérer</h3>
-        <p>Passez directement à notre garage Chaussée de Bruxelles 44, Charleroi. Paiement sur place, conseil inclus.</p>
+        <p>Passez directement à notre garage Chaussée de Bruxelles 44, Lodelinsart. Paiement sur place, conseil inclus.</p>
       </div>
     </div>
   </div>
@@ -574,25 +673,25 @@
       <div class="why-card fade-up"><i class="fa-solid fa-medal"></i><h3>25 ans d'expérience</h3><p>Spécialistes reconnus des pièces japonaises occasion en Hainaut depuis plus d'un quart de siècle.</p></div>
       <div class="why-card fade-up"><i class="fa-solid fa-circle-check"></i><h3>Pièces contrôlées</h3><p>Chaque pièce est inspectée et testée avant d'intégrer notre stock. Qualité garantie sur tous les articles.</p></div>
       <div class="why-card fade-up"><i class="fa-solid fa-tags"></i><h3>Prix juste et transparent</h3><p>Nos prix sont clairs, compétitifs et sans frais cachés — jusqu'à 70% moins cher que le neuf.</p></div>
-      <div class="why-card fade-up"><i class="fa-solid fa-location-dot"></i><h3>Basé à Charleroi</h3><p>Garage physique ouvert 6j/7. Venez consulter notre stock en personne, Chaussée de Bruxelles 44.</p></div>
+      <div class="why-card fade-up"><i class="fa-solid fa-location-dot"></i><h3>Basé à Lodelinsart</h3><p>Garage physique ouvert 6j/7. Venez consulter notre stock en personne, Chaussée de Bruxelles 44.</p></div>
     </div>
   </div>
 </section>
 
 <section class="cta-band">
   <h2>Vous cherchez une pièce précise ?</h2>
-  <p>Appelez-nous directement — réponse immédiate sur la disponibilité de votre pièce à Charleroi.</p>
+  <p>Appelez-nous directement — réponse immédiate sur la disponibilité de votre pièce à Lodelinsart.</p>
   <div class="cta-phones">
     <a href="tel:+3271700795" class="cta-phone-btn primary"><i class="fa-solid fa-phone"></i> 071.700.795</a>
     <a href="tel:+32477680867" class="cta-phone-btn secondary"><i class="fa-solid fa-mobile-screen"></i> 0477.680.867</a>
   </div>
-  <p class="cta-address"><i class="fa-solid fa-location-dot"></i> Chaussée de Bruxelles 44, 6042 Charleroi &middot; Lun-Sam 10h-18h</p>
+  <p class="cta-address"><i class="fa-solid fa-location-dot"></i> Chaussée de Bruxelles 44, 6042 Lodelinsart &middot; Lun-Sam 10h-18h</p>
 </section>
 
 <section class="seo-section">
   <div class="seo-inner">
-    <h2>Pièces détachées occasion à Charleroi — Spécialiste japonaises depuis 25 ans</h2>
-    <p>Auto Hainaut est votre référence en matière de <strong>pièces détachées occasion à Charleroi</strong> et dans toute la province de Hainaut. Situé Chaussée de Bruxelles 44 à 6042 Charleroi, notre garage dispose d'un stock permanent de pièces auto occasion pour toutes marques, avec une <strong>spécialisation reconnue dans les pièces pour véhicules japonais</strong>.</p>
+    <h2>Pièces détachées occasion à Lodelinsart — Spécialiste japonaises depuis 25 ans</h2>
+    <p>Auto Hainaut est votre référence en matière de <strong>pièces détachées occasion à Lodelinsart</strong> et dans toute la province de Hainaut. Situé Chaussée de Bruxelles 44 à 6042 Lodelinsart, notre garage dispose d'un stock permanent de pièces auto occasion pour toutes marques, avec une <strong>spécialisation reconnue dans les pièces pour véhicules japonais</strong>.</p>
     <h3>Spécialiste pièces japonaises occasion en province de Hainaut</h3>
     <p>Les <strong>pièces japonaises occasion</strong> représentent notre cœur de métier. Toyota, Honda, Nissan, Mazda, Mitsubishi, Subaru, Suzuki, Lexus — nous stockons en permanence une large gamme de composants pour ces marques, connues pour leur fiabilité. Que vous soyez un particulier ou un professionnel, Auto Hainaut vous garantit <strong>qualité et prix compétitif</strong>.</p>
     <h3>Toutes marques, toutes pièces</h3>
@@ -606,13 +705,13 @@
   <div class="container">
     <div class="section-header center fade-up">
       <div class="section-tag"><i class="fa-solid fa-phone"></i> Nous trouver</div>
-      <h2 class="section-title">Venez nous voir<br>à <span>Charleroi</span></h2>
+      <h2 class="section-title">Venez nous voir<br>à <span>Lodelinsart</span></h2>
     </div>
     <div class="contact-inner">
       <div class="contact-info">
         <div class="contact-block fade-up">
           <h4>Coordonnées</h4>
-          <div class="contact-item"><i class="fa-solid fa-location-dot"></i><span>Chaussée de Bruxelles 44<br>6042 Charleroi, Belgique</span></div>
+          <div class="contact-item"><i class="fa-solid fa-location-dot"></i><span>Chaussée de Bruxelles 44<br>6042 Lodelinsart, Belgique</span></div>
           <div class="contact-item"><i class="fa-solid fa-phone"></i><a href="tel:+3271700795">071.700.795</a></div>
           <div class="contact-item"><i class="fa-solid fa-mobile-screen"></i><a href="tel:+32477680867">0477.680.867</a></div>
         </div>
@@ -625,7 +724,7 @@
           </div>
         </div>
         <div class="map-wrap fade-up">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2534.2!2d4.4385!3d50.4095!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c22429e82c8b07%3A0x1d7c76e97e2a7a28!2sAuto%20Hainaut!5e0!3m2!1sfr!2sbe!4v1714000000000!5m2!1sfr!2sbe" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Auto Hainaut Charleroi"></iframe>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2534.2!2d4.4385!3d50.4095!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c22429e82c8b07%3A0x1d7c76e97e2a7a28!2sAuto%20Hainaut!5e0!3m2!1sfr!2sbe!4v1714000000000!5m2!1sfr!2sbe" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Auto Hainaut Lodelinsart"></iframe>
         </div>
       </div>
       <div class="contact-form fade-up">
@@ -670,7 +769,7 @@
       <div class="faq-item fade-up"><div class="faq-question"><span class="faq-question-text">Proposez-vous des pièces pour véhicules japonais anciens ?</span><div class="faq-icon"><i class="fa-solid fa-plus"></i></div></div><div class="faq-answer">Absolument. Notre spécialité dans les véhicules japonais nous permet de trouver des pièces pour des modèles parfois introuvables ailleurs. Appelez-nous, nous ferons le maximum.</div></div>
       <div class="faq-item fade-up"><div class="faq-question"><span class="faq-question-text">Comment savoir si une pièce est disponible en stock ?</span><div class="faq-icon"><i class="fa-solid fa-plus"></i></div></div><div class="faq-answer">La façon la plus rapide est de nous appeler directement au 071.700.795 ou au 0477.680.867. Vous pouvez aussi utiliser notre formulaire de demande.</div></div>
       <div class="faq-item fade-up"><div class="faq-question"><span class="faq-question-text">Êtes-vous ouverts le samedi ?</span><div class="faq-icon"><i class="fa-solid fa-plus"></i></div></div><div class="faq-answer">Oui, nous sommes ouverts du lundi au samedi de 10h00 à 18h00. Fermés le dimanche.</div></div>
-      <div class="faq-item fade-up"><div class="faq-question"><span class="faq-question-text">Travaillez-vous avec des professionnels de l'auto ?</span><div class="faq-icon"><i class="fa-solid fa-plus"></i></div></div><div class="faq-answer">Oui. Nous travaillons avec de nombreux garages et carrossiers de la région de Charleroi et du Hainaut. Contactez-nous pour des tarifs professionnels.</div></div>
+      <div class="faq-item fade-up"><div class="faq-question"><span class="faq-question-text">Travaillez-vous avec des professionnels de l'auto ?</span><div class="faq-icon"><i class="fa-solid fa-plus"></i></div></div><div class="faq-answer">Oui. Nous travaillons avec de nombreux garages et carrossiers de la région de Lodelinsart et du Hainaut. Contactez-nous pour des tarifs professionnels.</div></div>
     </div>
   </div>
 </section>
@@ -678,11 +777,10 @@
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-brand">
-      <div class="footer-logo-text"><i class="fa-solid fa-car" style="color:var(--blue)"></i> AUTO HAINAUT</div>
-      <p>Votre spécialiste en pièces détachées occasion à Charleroi. Expert japonaises depuis 25 ans.</p>
+      <div class="footer-logo-text"><img src="logo.png" alt="Auto Hainaut" style="height:56px;width:auto;display:block;"></div>
+      <p>Votre spécialiste en pièces détachées occasion à Lodelinsart. Expert japonaises depuis 25 ans.</p>
       <div class="footer-socials">
         <a href="#" class="footer-social" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-        <a href="#" class="footer-social" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
         <a href="#" class="footer-social" aria-label="Google"><i class="fa-brands fa-google"></i></a>
       </div>
     </div>
@@ -710,12 +808,12 @@
       <h4>Contact</h4>
       <div class="footer-contact-item"><i class="fa-solid fa-phone"></i><a href="tel:+3271700795">071.700.795</a></div>
       <div class="footer-contact-item"><i class="fa-solid fa-mobile-screen"></i><a href="tel:+32477680867">0477.680.867</a></div>
-      <div class="footer-contact-item"><i class="fa-solid fa-location-dot"></i><span>Chaussée de Bruxelles 44<br>6042 Charleroi, Belgique</span></div>
+      <div class="footer-contact-item"><i class="fa-solid fa-location-dot"></i><span>Chaussée de Bruxelles 44<br>6042 Lodelinsart, Belgique</span></div>
       <div class="footer-horaires"><strong>Horaires</strong>Lun – Sam : 10h00 – 18h00<br>Dimanche : Fermé</div>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>&copy; 2025 Auto Hainaut — Pièces Détachées Occasion Charleroi</p>
+    <p>&copy; 2025 Auto Hainaut — Pièces Détachées Occasion Lodelinsart</p>
     <div class="footer-legal"><a href="index.html">Site principal</a><a href="mentions-legales.html">Mentions légales</a><a href="mentions-legales.html#cgv">CGV</a><a href="mentions-legales.html#confidentialite">Confidentialité</a></div>
   </div>
 </footer>
@@ -733,6 +831,121 @@
   const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);}});},{threshold:0.1});
   document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
   function handleForm(e){e.preventDefault();const btn=e.target.querySelector('.form-submit');btn.innerHTML='<i class="fa-solid fa-check"></i> Demande envoyée !';btn.style.background='#16a34a';setTimeout(()=>{btn.innerHTML='<i class="fa-solid fa-paper-plane"></i> Envoyer ma demande';btn.style.background='';e.target.reset();},3000);}
+
+  // ── PIECES SLIDER (mobile only) ──
+  (function(){
+    var wrap = document.querySelector('.pieces-slider-wrap');
+    var grid = document.getElementById('piecesSlider');
+    var prevBtn = document.getElementById('piecesPrev');
+    var nextBtn = document.getElementById('piecesNext');
+    var counter = document.getElementById('piecesCounter');
+    if(!wrap || !grid || !prevBtn) return;
+    var cards = Array.from(grid.querySelectorAll('.piece-card'));
+    var total = cards.length;
+    var current = 0;
+    function isMobile(){ return window.innerWidth < 640; }
+    function getCardW(){ return cards[0] ? cards[0].offsetWidth + 14 : 0; }
+    function updateCounter(){ if(counter) counter.textContent = (current+1) + ' / ' + total; }
+    function goTo(idx){
+      if(!isMobile()) return;
+      if(idx < 0) idx = total - 1;
+      if(idx >= total) idx = 0;
+      current = idx;
+      grid.style.transform = 'translateX(' + (-current * getCardW()) + 'px)';
+      updateCounter();
+    }
+    prevBtn.addEventListener('click', function(){ goTo(current - 1); });
+    nextBtn.addEventListener('click', function(){ goTo(current + 1); });
+    var tStartX = 0;
+    wrap.addEventListener('touchstart', function(e){ if(!isMobile()) return; tStartX = e.touches[0].clientX; grid.style.transition = 'none'; }, {passive:true});
+    wrap.addEventListener('touchmove', function(e){ if(!isMobile()) return; var dx = e.touches[0].clientX - tStartX; grid.style.transform = 'translateX(' + ((-current * getCardW()) + dx) + 'px)'; }, {passive:true});
+    wrap.addEventListener('touchend', function(e){ if(!isMobile()) return; grid.style.transition = 'transform .4s cubic-bezier(.4,0,.2,1)'; var dx = e.changedTouches[0].clientX - tStartX; Math.abs(dx) > 50 ? (dx < 0 ? goTo(current+1) : goTo(current-1)) : goTo(current); }, {passive:true});
+    window.addEventListener('resize', function(){ if(!isMobile()){ grid.style.transform = ''; grid.style.transition = ''; } else { goTo(current); }});
+    if(isMobile()) goTo(0);
+    updateCounter();
+  })();
+
+  // ── BRANDS SLIDER (mobile only) ──
+  (function(){
+    var outer = document.querySelector('.brands-slider-outer');
+    var inner = document.querySelector('.brands-slider-inner');
+    var prevBtn = document.getElementById('brandsPrev');
+    var nextBtn = document.getElementById('brandsNext');
+    var counter = document.getElementById('brandsCounter');
+    if(!outer || !inner || !prevBtn) return;
+
+    var cards = Array.from(inner.querySelectorAll('.brand-card'));
+    var total = cards.length;
+    var current = 0;
+    var isDesktop = window.innerWidth >= 768;
+
+    function getCardW(){
+      return cards[0] ? cards[0].offsetWidth + 14 : 214;
+    }
+
+    function updateCounter(){
+      if(counter) counter.textContent = (current + 1) + ' / ' + total;
+    }
+
+    function goTo(idx, animate){
+      if(isDesktop) return;
+      if(idx < 0) idx = total - 1;
+      if(idx >= total) idx = 0;
+      current = idx;
+      inner.style.transition = animate === false ? 'none' : 'transform .4s cubic-bezier(.4,0,.2,1)';
+      inner.style.transform = 'translateX(' + (-current * getCardW()) + 'px)';
+      updateCounter();
+    }
+
+    function checkDesktop(){
+      isDesktop = window.innerWidth >= 768;
+      if(isDesktop){
+        inner.style.transform = '';
+        inner.style.transition = '';
+      } else {
+        goTo(current, false);
+      }
+    }
+
+    window.addEventListener('resize', checkDesktop);
+
+    prevBtn.addEventListener('click', function(){ goTo(current - 1); });
+    nextBtn.addEventListener('click', function(){ goTo(current + 1); });
+
+    // Touch swipe
+    var touchStartX = 0, touchStartY = 0, dragging = false;
+    outer.addEventListener('touchstart', function(e){
+      if(isDesktop) return;
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+      dragging = true;
+      inner.style.transition = 'none';
+    }, {passive:true});
+
+    outer.addEventListener('touchmove', function(e){
+      if(!dragging || isDesktop) return;
+      var dx = e.touches[0].clientX - touchStartX;
+      var dy = e.touches[0].clientY - touchStartY;
+      if(Math.abs(dx) > Math.abs(dy)){
+        inner.style.transform = 'translateX(' + ((-current * getCardW()) + dx) + 'px)';
+      }
+    }, {passive:true});
+
+    outer.addEventListener('touchend', function(e){
+      if(!dragging || isDesktop) return;
+      dragging = false;
+      var dx = e.changedTouches[0].clientX - touchStartX;
+      if(Math.abs(dx) > 50){
+        dx < 0 ? goTo(current + 1) : goTo(current - 1);
+      } else {
+        goTo(current);
+      }
+    }, {passive:true});
+
+    // Init
+    if(!isDesktop) goTo(0, false);
+    updateCounter();
+  })();
 </script>
 </body>
 </html>
