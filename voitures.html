@@ -9,6 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; font-size: 16px; }
@@ -626,11 +628,11 @@
           <textarea id="fDesc" placeholder="Décrivez le véhicule : état, options, historique entretien…"></textarea>
         </div>
         <div class="form-group">
-          <label>Photos (max 15)</label>
+          <label>Photos (max 10)</label>
           <div class="photo-upload-area" id="photoUploadArea">
             <i class="fa-solid fa-camera"></i>
             <p>Cliquez ou glissez vos photos ici</p>
-            <small>JPG, PNG — max 15 photos</small>
+            <small>JPG, PNG — max 10 photos</small>
             <input type="file" id="photoInput" multiple accept="image/*">
           </div>
           <div class="photos-preview" id="photosPreview"></div>
@@ -648,14 +650,78 @@
 // ============================================================
 // DATA LAYER
 // ============================================================
-const STORAGE_KEY = 'ah_listings';
 const ADMIN_PASS = 'autohainaut44';
 
-function getListings() {
-  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; } catch { return []; }
-}
-function saveListings(arr) { localStorage.setItem(STORAGE_KEY, JSON.stringify(arr)); }
+firebase.initializeApp({
+  apiKey: "AIzaSyArkFYXhXyFe5mUEd1jrKPA9CqALshXojk",
+  authDomain: "auto-hainaut.firebaseapp.com",
+  projectId: "auto-hainaut",
+  storageBucket: "auto-hainaut.firebasestorage.app",
+  messagingSenderId: "723229610456",
+  appId: "1:723229610456:web:6a5857429be087103122ad"
+});
+const db = firebase.firestore();
+
+let _cache = [];
+function getListings() { return _cache; }
 function genId() { return Date.now().toString(36) + Math.random().toString(36).slice(2); }
+
+function docToCar(doc) {
+  const d = doc.data();
+  return { id: doc.id, brand: d.brand, model: d.model, year: d.year, km: d.km||'', fuel: d.fuel||'Diesel', gear: d.gear||'Manuelle', power: d.power||'', color: d.color||'', price: d.price, desc: d.description||'', photos: d.photos||[], active: d.active !== false, createdAt: d.createdAt||Date.now() };
+}
+
+async function loadListings() {
+  const snap = await db.collection('listings').orderBy('createdAt','desc').get();
+  if (snap.empty) {
+    const batch = db.batch();
+    DEMO.forEach(c => {
+      batch.set(db.collection('listings').doc(c.id), { brand:c.brand, model:c.model, year:c.year, km:c.km, fuel:c.fuel, gear:c.gear, power:c.power, color:c.color, price:c.price, description:c.desc, photos:[], active:true, createdAt:Date.now() });
+    });
+    await batch.commit();
+    _cache = DEMO.map(c => ({...c}));
+  } else {
+    _cache = snap.docs.map(docToCar);
+  }
+}
+
+async function upsertListing(car) {
+  await db.collection('listings').doc(car.id).set({ brand:car.brand, model:car.model, year:car.year, km:car.km, fuel:car.fuel, gear:car.gear, power:car.power, color:car.color, price:car.price, description:car.desc, photos:car.photos, active:car.active, createdAt:car.createdAt });
+  const idx = _cache.findIndex(c => c.id === car.id);
+  if (idx !== -1) _cache[idx] = car; else _cache.unshift(car);
+}
+
+async function patchListing(id, updates) {
+  await db.collection('listings').doc(id).update(updates.active !== undefined ? { active: updates.active } : updates);
+  const idx = _cache.findIndex(c => c.id === id);
+  if (idx !== -1) _cache[idx] = { ..._cache[idx], ...updates };
+}
+
+async function removeListing(id) {
+  await db.collection('listings').doc(id).delete();
+  _cache = _cache.filter(c => c.id !== id);
+}
+
+function compressImage(file) {
+  return new Promise(resolve => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = new Image();
+      img.onload = () => {
+        const MAX = 1000;
+        let w = img.width, h = img.height;
+        if (w > MAX) { h = Math.round(h * MAX / w); w = MAX; }
+        if (h > MAX) { w = Math.round(w * MAX / h); h = MAX; }
+        const canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        resolve(canvas.toDataURL('image/jpeg', 0.72));
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
 
 // DEMO DATA — loaded if localStorage is empty
 const DEMO = [
@@ -673,11 +739,7 @@ const DEMO = [
   { id:'d12', brand:'Skoda', model:'Octavia 2.0 TDI', year:2018, km:'105 000 km', fuel:'Diesel', gear:'Manuelle', power:'150 ch', color:'Vert forêt', price:11200, desc:"Skoda Octavia robuste et spacieuse. Diesel puissant, idéal grandes distances. GPS, attelage, coffre XXL.", photos:[], active:true },
 ];
 
-function initDemo() {
-  const existing = getListings();
-  if (existing.length === 0) { saveListings(DEMO); }
-}
-initDemo();
+// Demo data seeded via loadListings() on init
 
 // ============================================================
 // PUBLIC GALLERY
@@ -912,20 +974,17 @@ function renderAdminTable() {
   }).join('');
 }
 
-function toggleListing(id) {
-  const arr = getListings();
-  const idx = arr.findIndex(c => c.id === id);
-  if (idx === -1) return;
-  arr[idx].active = !arr[idx].active;
-  saveListings(arr);
+async function toggleListing(id) {
+  const car = _cache.find(c => c.id === id);
+  if (!car) return;
+  await patchListing(id, { active: !car.active });
   renderAdminTable();
   renderListings();
 }
 
-function deleteListing(id) {
+async function deleteListing(id) {
   if (!confirm('Supprimer cette annonce définitivement ?')) return;
-  const arr = getListings().filter(c => c.id !== id);
-  saveListings(arr);
+  await removeListing(id);
   renderAdminTable();
   renderListings();
 }
@@ -963,15 +1022,15 @@ function resetAddForm() {
 }
 
 // Photo upload
-document.getElementById('photoInput').addEventListener('change', function() {
+document.getElementById('photoInput').addEventListener('change', async function() {
   const files = Array.from(this.files);
-  const remaining = 15 - editingPhotos.length;
+  const remaining = 10 - editingPhotos.length;
   const toAdd = files.slice(0, remaining);
-  toAdd.forEach(file => {
-    const reader = new FileReader();
-    reader.onload = e => { editingPhotos.push(e.target.result); renderPhotoPreviews(); };
-    reader.readAsDataURL(file);
-  });
+  for (const file of toAdd) {
+    const compressed = await compressImage(file);
+    editingPhotos.push(compressed);
+    renderPhotoPreviews();
+  }
   this.value = '';
 });
 
@@ -983,13 +1042,13 @@ function renderPhotoPreviews() {
       <div class="remove-photo" onclick="removePhoto(${i})"><i class="fa-solid fa-xmark"></i></div>
     </div>`).join('');
   const uploadArea = document.getElementById('photoUploadArea');
-  uploadArea.style.display = editingPhotos.length >= 15 ? 'none' : 'block';
+  uploadArea.style.display = editingPhotos.length >= 10 ? 'none' : 'block';
 }
 
 function removePhoto(i) { editingPhotos.splice(i, 1); renderPhotoPreviews(); }
 
 // SAVE
-document.getElementById('saveAdBtn').addEventListener('click', () => {
+document.getElementById('saveAdBtn').addEventListener('click', async () => {
   const brand = document.getElementById('fBrand').value.trim();
   const model = document.getElementById('fModel').value.trim();
   const year = document.getElementById('fYear').value.trim();
@@ -997,7 +1056,10 @@ document.getElementById('saveAdBtn').addEventListener('click', () => {
 
   if (!brand || !model || !year || !price) { alert('Remplissez les champs obligatoires : Marque, Modèle, Année, Prix.'); return; }
 
-  const arr = getListings();
+  const saveBtn = document.getElementById('saveAdBtn');
+  saveBtn.disabled = true;
+  saveBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Enregistrement…';
+
   const editId = document.getElementById('editId').value;
   const car = {
     id: editId || genId(),
@@ -1012,21 +1074,21 @@ document.getElementById('saveAdBtn').addEventListener('click', () => {
     desc: document.getElementById('fDesc').value.trim(),
     photos: [...editingPhotos],
     active: true,
-    createdAt: editId ? (arr.find(c => c.id === editId)?.createdAt || Date.now()) : Date.now()
+    createdAt: editId ? (_cache.find(c => c.id === editId)?.createdAt || Date.now()) : Date.now()
   };
 
-  if (editId) {
-    const idx = arr.findIndex(c => c.id === editId);
-    if (idx !== -1) arr[idx] = car; else arr.unshift(car);
-  } else {
-    arr.unshift(car);
+  try {
+    await upsertListing(car);
+    renderAdminTable();
+    renderListings();
+    resetAddForm();
+    switchTab('list');
+  } catch(e) {
+    alert('Erreur lors de l\'enregistrement : ' + e.message);
+  } finally {
+    saveBtn.disabled = false;
+    saveBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Enregistrer l\'annonce';
   }
-
-  saveListings(arr);
-  renderAdminTable();
-  renderListings();
-  resetAddForm();
-  switchTab('list');
 });
 
 // ============================================================
@@ -1046,7 +1108,13 @@ document.getElementById('closeMenu').addEventListener('click', () => {
 // ============================================================
 // INIT
 // ============================================================
-renderListings();
+loadListings().then(() => {
+  renderListings();
+}).catch(err => {
+  console.error('Erreur chargement Firestore:', err);
+  _cache = DEMO.map(c => ({...c}));
+  renderListings();
+});
 </script>
 </body>
 </html>
